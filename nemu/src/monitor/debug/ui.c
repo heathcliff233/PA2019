@@ -3,6 +3,7 @@
 #include "monitor/watchpoint.h"
 #include "nemu.h"
 #include "cpu/exec.h"
+#include "../../isa/riscv32/reg.c"
 
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -42,6 +43,8 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args);
 
+static int cmd_info(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -50,13 +53,16 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "exec once, pass an integer to circle, default to 1", cmd_si },
+  { "si", "Exec once, pass an integer to circle, default to 1", cmd_si },
+  { "info", "Print out the desired information", cmd_info },
 
   /* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+
+/* start of cmd_si */
 
 CPU_state cpu;
 rtlreg_t s0, s1, t0, t1, ir;
@@ -70,6 +76,7 @@ vaddr_t exec_one(void) {
 
   return decinfo.seq_pc;
 }
+
 
 static int cmd_si(char *args) {
 	/* extract the first argument */
@@ -93,6 +100,22 @@ static int cmd_si(char *args) {
 	return 0;
 }
 
+/* end of cmd_si */
+
+static int cmd_info(char *args){
+	/* extract argument */
+	char *arg = strtok(NULL, " ");
+	if(arg == NULL){
+		printf("Pass an arg you little bitch");
+	}else if(strcmp(arg , "r")==0){
+		isa_reg_display();
+	}else if(strcmp(arg , "w")==0){
+		printf("Nothing yet");
+	}else{
+	    printf("Invalid arg, try -r or -w instead");
+	}
+	return 0;
+}
 
 static int cmd_help(char *args) {
   /* extract the first argument */
