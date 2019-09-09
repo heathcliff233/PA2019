@@ -112,7 +112,8 @@ const char *regsl_c[] = {
 
 void isa_reg_display_c(){
 	for(int i=0 ; i<32 ; i++){
-	    printf("%s",regsl_c[i]);
+	    uint32_t a = reg_l(i);
+		printf("%s:0x%08x ",regsl_c[i],a);
 	}
 }
 
