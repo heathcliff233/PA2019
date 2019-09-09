@@ -57,7 +57,18 @@ static struct {
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
-vaddr_t exec_once(void);
+CPU_state cpu;
+rtlreg_t s0, s1, t0, t1, ir;
+DecodeInfo decinfo;
+void isa_exec(vaddr_t *pc);
+ 
+vaddr_t exec_once(void) {
+  decinfo.seq_pc = cpu.pc;
+  isa_exec(&decinfo.seq_pc);
+  update_pc();
+
+  return decinfo.seq_pc;
+}
 
 static int cmd_si(char *args) {
 	/* extract the first argument */
@@ -79,19 +90,6 @@ static int cmd_si(char *args) {
 		}
 	}
 	return 0;
-}
-
-CPU_state cpu;
-rtlreg_t s0, s1, t0, t1, ir;
-DecodeInfo decinfo;
-void isa_exec(vaddr_t *pc);
-
-vaddr_t exec_once(void) {
-  decinfo.seq_pc = cpu.pc;
-  isa_exec(&decinfo.seq_pc);
-  update_pc();
-
-  return decinfo.seq_pc;
 }
 
 
