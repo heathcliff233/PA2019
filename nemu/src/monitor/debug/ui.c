@@ -2,6 +2,7 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
+#include "../../cpu/cpu.c"
 
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -38,6 +39,8 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -46,12 +49,35 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
+  { "si", "exec once, pass an integer to circle, default to 1", cmd_si },
 
   /* TODO: Add more commands */
 
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
+
+static int cmd_si(char *args) {
+	/* extract the first argument */
+	char *arg = strtok(NULL, " ");
+	int circle ;
+	if (arg == NULL) {
+		/* no argument given */
+		exec_once();
+
+	}else{
+		circle = atoi(arg);
+		if (circle <= 0){
+			printf("fuck you test bitch");
+			return 0;
+		}
+		for (int i=0 ; i<circle ; i++){
+			exec_once();
+
+		}
+	}
+	return 0;
+}
 
 static int cmd_help(char *args) {
   /* extract the first argument */
