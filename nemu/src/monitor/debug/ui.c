@@ -45,6 +45,8 @@ static int cmd_si(char *args);
 
 static int cmd_info(char *args);
 
+static int cmd_x(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -55,6 +57,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Exec once, pass an integer to circle, default to 1", cmd_si },
   { "info", "Print out the desired information", cmd_info },
+  { "x", "Scan the memory", cmd_x },
 
   /* TODO: Add more commands */
 
@@ -64,19 +67,7 @@ static struct {
 
 /* start of cmd_si */
 
-CPU_state cpu;
-rtlreg_t s0, s1, t0, t1, ir;
-DecodeInfo decinfo;
-void isa_exec(vaddr_t *pc);
- 
-vaddr_t exec_one(void) {
-  decinfo.seq_pc = cpu.pc;
-  isa_exec(&decinfo.seq_pc);
-  update_pc();
-
-  return decinfo.seq_pc;
-}
-
+vaddr_t exec_once(void);
 
 static int cmd_si(char *args) {
 	/* extract the first argument */
@@ -84,7 +75,7 @@ static int cmd_si(char *args) {
 	int circle ;
 	if (arg == NULL) {
 		/* no argument given */
-		exec_one();
+		exec_once();
 
 	}else{
 		circle = atoi(arg);
@@ -93,7 +84,7 @@ static int cmd_si(char *args) {
 			return 0;
 		}
 		for (int i=0 ; i< circle ; i++){
-			exec_one();
+			exec_once();
 
 		}
 	}
@@ -102,7 +93,7 @@ static int cmd_si(char *args) {
 
 /* end of cmd_si */
 
-/* start of cmd_info */
+/* start of cmd_info 
 const char *regsl_c[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
   "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
@@ -120,7 +111,9 @@ void isa_reg_display_c(){
 uint32_t isa_reg_str2val_c(const char *s, bool *success) {
   return 0;
 }
+*/
 
+void isa_reg_display();
 
 static int cmd_info(char *args){
 	/* extract argument */
@@ -128,7 +121,7 @@ static int cmd_info(char *args){
 	if(arg == NULL){
 		printf("Pass an arg you little bitch");
 	}else if(strcmp(arg , "r")==0){
-		isa_reg_display_c();
+		isa_reg_display();
 	}else if(strcmp(arg , "w")==0){
 		printf("Nothing yet");
 	}else{
@@ -138,6 +131,14 @@ static int cmd_info(char *args){
 }
 
 /*  end of cmd_info */
+
+/*  start of cmd_x */
+
+static int cmd_x(char *args){
+    return 0;    
+}
+
+/*  end of cmd_x */
 
 static int cmd_help(char *args) {
   /* extract the first argument */
