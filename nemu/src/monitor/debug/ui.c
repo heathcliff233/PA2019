@@ -2,7 +2,7 @@
 #include "monitor/expr.h"
 #include "monitor/watchpoint.h"
 #include "nemu.h"
-#include "../../cpu/cpu.c"
+#include "cpu/exec.h"
 
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -57,6 +57,8 @@ static struct {
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
+vaddr_t exec_once(void);
+
 static int cmd_si(char *args) {
 	/* extract the first argument */
 	char *arg = strtok(NULL, " ");
@@ -71,13 +73,27 @@ static int cmd_si(char *args) {
 			printf("fuck you test bitch");
 			return 0;
 		}
-		for (int i=0 ; i<circle ; i++){
+		for (int i=0 ; i< circle ; i++){
 			exec_once();
 
 		}
 	}
 	return 0;
 }
+
+CPU_state cpu;
+rtlreg_t s0, s1, t0, t1, ir;
+DecodeInfo decinfo;
+void isa_exec(vaddr_t *pc);
+
+vaddr_t exec_once(void) {
+  decinfo.seq_pc = cpu.pc;
+  isa_exec(&decinfo.seq_pc);
+  update_pc();
+
+  return decinfo.seq_pc;
+}
+
 
 static int cmd_help(char *args) {
   /* extract the first argument */
