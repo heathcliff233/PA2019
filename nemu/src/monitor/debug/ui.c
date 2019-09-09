@@ -103,17 +103,20 @@ static int cmd_si(char *args) {
 /* end of cmd_si */
 
 /* start of cmd_info */
-const char *regsl[] = {
+const char *regsl_c[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
   "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
   "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
   "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
 };
 
-void isa_reg_display() {
+void isa_reg_display_c(){
+	for(int i=0 ; i<32 ; i++){
+	    printf("%s",regsl_c[i]);
+	}
 }
 
-uint32_t isa_reg_str2val(const char *s, bool *success) {
+uint32_t isa_reg_str2val_c(const char *s, bool *success) {
   return 0;
 }
 
@@ -124,7 +127,7 @@ static int cmd_info(char *args){
 	if(arg == NULL){
 		printf("Pass an arg you little bitch");
 	}else if(strcmp(arg , "r")==0){
-		isa_reg_display();
+		isa_reg_display_c();
 	}else if(strcmp(arg , "w")==0){
 		printf("Nothing yet");
 	}else{
