@@ -23,6 +23,7 @@ static char* rl_gets() {
 
   if (line_read && *line_read) {
     add_history(line_read);
+
   }
 
   return line_read;
@@ -62,7 +63,7 @@ rtlreg_t s0, s1, t0, t1, ir;
 DecodeInfo decinfo;
 void isa_exec(vaddr_t *pc);
  
-vaddr_t exec_once(void) {
+vaddr_t exec_one(void) {
   decinfo.seq_pc = cpu.pc;
   isa_exec(&decinfo.seq_pc);
   update_pc();
@@ -76,7 +77,7 @@ static int cmd_si(char *args) {
 	int circle ;
 	if (arg == NULL) {
 		/* no argument given */
-		exec_once();
+		exec_one();
 
 	}else{
 		circle = atoi(arg);
@@ -85,7 +86,7 @@ static int cmd_si(char *args) {
 			return 0;
 		}
 		for (int i=0 ; i< circle ; i++){
-			exec_once();
+			exec_one();
 
 		}
 	}
