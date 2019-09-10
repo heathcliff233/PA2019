@@ -4,6 +4,7 @@
 #include "nemu.h"
 #include "cpu/exec.h"
 #include "nemu.h"
+#include "memory/memory.h"
 
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -93,25 +94,7 @@ static int cmd_si(char *args) {
 
 /* end of cmd_si */
 
-/* start of cmd_info 
-const char *regsl_c[] = {
-  "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
-  "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
-  "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
-  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
-};
-
-void isa_reg_display_c(){
-	for(int i=0 ; i<32 ; i++){
-	    uint32_t a = reg_l(i);
-		printf("%s:0x%08x\n",regsl_c[i],a);
-	}
-}
-
-uint32_t isa_reg_str2val_c(const char *s, bool *success) {
-  return 0;
-}
-*/
+/* start of cmd_info */
 
 void isa_reg_display();
 
@@ -134,8 +117,14 @@ static int cmd_info(char *args){
 
 /*  start of cmd_x */
 
+uint32_t paddr_read(paddr_t addr, int len);
+
 static int cmd_x(char *args){
-    return 0;    
+/*    char *num = strtok(NULL, " ");
+	int nu = atoi(num);
+	char *args = strtok(NULL, " ");
+*/
+	return 0;    
 }
 
 /*  end of cmd_x */
