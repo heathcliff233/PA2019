@@ -83,7 +83,6 @@ char* get_mainargs(void) {
 
 int init_monitor(int argc, char *argv[]) {
   /* Perform some global initialization. */
-  get_mainargs();
 
   /* Parse arguments. */
   parse_args(argc, argv);
