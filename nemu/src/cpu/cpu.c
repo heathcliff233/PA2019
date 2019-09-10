@@ -17,6 +17,7 @@ vaddr_t exec_once(void) {
   decinfo.seq_pc = cpu.pc;
   isa_exec(&decinfo.seq_pc);
   update_pc();
+  display_inv_msg(decinfo.seq_pc);
 
   return decinfo.seq_pc;
 }
