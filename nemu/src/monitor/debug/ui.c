@@ -114,7 +114,7 @@ static int cmd_info(char *args){
 
 /*  start of cmd_x */
 
-uint32_t paddr_read(paddr_t addr, int len);
+uint32_t vaddr_read(vaddr_t addr, int len);
 
 static int cmd_x(char *args){
     char *num = strtok(NULL, " ");
@@ -123,11 +123,11 @@ static int cmd_x(char *args){
 	int addre = 0;
 	sscanf(args,"%x",&addre);
     while(nu > 4){
-	    printf("0x%08x\n",paddr_read(addre,4));
+	    printf("0x%08x\n",vaddr_read(addre,4));
 		nu-=4;
 	}
 	if(nu>0){
-	    printf("0x%08x\n",paddr_read(addre,nu));
+	    printf("0x%08x\n",vaddr_read(addre,nu));
 	}
 	return 0;    
 }
