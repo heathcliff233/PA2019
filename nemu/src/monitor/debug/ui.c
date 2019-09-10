@@ -119,14 +119,16 @@ uint32_t paddr_read(paddr_t addr, int len);
 static int cmd_x(char *args){
     char *num = strtok(NULL, " ");
 	int nu = atoi(num);
-	*args = *strtok(NULL, " ");
-	unsigned int *addre = 0;
-	sscanf(args,"%08x",addre);
-	unsigned int adre = *addre;
-    for (int i=0 ; i<nu ; i++){
-	    paddr_read(adre , 4);
+	args = strtok(NULL, " ");
+	int addre = 0;
+	sscanf(args,"%x",&addre);
+    while(nu > 4){
+	    printf("0x%08x\n",paddr_read(addre,4));
+		nu-=4;
 	}
-
+	if(nu>0){
+	    printf("0x%08x\n",paddr_read(addre,nu));
+	}
 	return 0;    
 }
 
