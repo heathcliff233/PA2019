@@ -127,7 +127,7 @@ static int cmd_x(char *args){
 		nu-=4;
 	}
 	if(nu>0){
-	    printf("0x%08x\n",vaddr_read(addre,nu));
+	    printf("0x%x\n",vaddr_read(addre,nu));
 	}
 	return 0;    
 }
