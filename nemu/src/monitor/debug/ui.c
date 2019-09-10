@@ -76,18 +76,15 @@ static int cmd_si(char *args) {
 	int circle ;
 	if (arg == NULL) {
 		/* no argument given */
-		exec_once();
-
+        cpu_exec(1);
 	}else{
 		circle = atoi(arg);
 		if (circle <= 0){
 			printf("fuck you test bitch");
 			return 0;
 		}
-		for (int i=0 ; i< circle ; i++){
-			exec_once();
+		cpu_exec(circle);
 
-		}
 	}
 	return 0;
 }
