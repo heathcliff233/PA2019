@@ -122,7 +122,10 @@ static int cmd_x(char *args){
 	args = strtok(NULL, " ");
 	int addre = 0;
 	sscanf(args,"%x",&addre);
-    while(nu > 4){
+    if(addre<0x80000000){
+	    addre += 0x80000000;
+	}
+	while(nu > 4){
 	    printf("0x%08x\n",vaddr_read(addre,4));
 		nu-=4;
 	}
