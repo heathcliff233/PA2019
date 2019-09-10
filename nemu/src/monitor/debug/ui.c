@@ -117,10 +117,16 @@ static int cmd_info(char *args){
 uint32_t paddr_read(paddr_t addr, int len);
 
 static int cmd_x(char *args){
-/*    char *num = strtok(NULL, " ");
+    char *num = strtok(NULL, " ");
 	int nu = atoi(num);
-	char *args = strtok(NULL, " ");
-*/
+	*args = *strtok(NULL, " ");
+	unsigned int *addre = 0;
+	sscanf(args,"%08x",addre);
+	unsigned int adre = *addre;
+    for (int i=0 ; i<nu ; i++){
+	    paddr_read(adre , 4);
+	}
+
 	return 0;    
 }
 
