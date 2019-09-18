@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ
+  TK_NOTYPE = 256, /*TK_EQ,*/ TK_PLS = 1,TK_MIN = 2,TK_MUL = 3,TK_DIV = 4,TK_LFP = 5,TK_RTP = 6,TK_NUM = 0
 
   /* TODO: Add more token types */
 
@@ -21,10 +21,24 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
-  {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
-  {"==", TK_EQ}         // equal
+  {"\/", TK_DIV},         // division
+  {"\-", TK_MIN},         // minus
+  {"\*", TK_MUL},         // multiply
+  {" +", TK_NOTYPE},      // spaces
+  {"\\+", TK_PLS},        // plus
+  {"(", TK_LFP},          // left parentheses
+  {")", TK_RtP},          // right parenttheses
+  {"0", TK_NUM},
+  {"1", TK_NUM}, 
+  {"2", TK_NUM},
+  {"3", TK_NUM},
+  {"4", TK_NUM},
+  {"5", TK_NUM},
+  {"6", TK_NUM},
+  {"7", TK_NUM},
+  {"8", TK_NUM},
+  {"9", TK_NUM}, 
+//  {"==", TK_EQ}           // equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -69,6 +83,7 @@ static bool make_token(char *e) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
+		nr_token ++;
 
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
@@ -80,7 +95,15 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: TODO();
+			case 1 : tokens[nr_token-1].type = TK_PLS; break;
+			case 2 : tokens[nr_token-1].type = TK_MIN; break;
+			case 3 : tokens[nr_token-1].type = TK_MUL; break;
+			case 4 : tokens[nr_token-1].type = TK_DIV; break;
+			case 5 : tokens[nr_token-1].type = TK_LFP; break;
+		    case 6 : tokens[nr_token-2].type = TK_RTP; break;
+			case 0 : tokens[nr_token-1].type = TK_NUM; tokens[nr_token-1].str = re[i]; break;
+
+            default: TODO();
         }
 
         break;
