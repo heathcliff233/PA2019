@@ -48,6 +48,8 @@ static int cmd_info(char *args);
 
 static int cmd_x(char *args);
 
+static int cmd_p(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -115,7 +117,21 @@ static int cmd_info(char *args){
 
 /*	start of cmd_p */
 
-static uint32_t cmd_p()
+static uint32_t cmd_p(char *args){
+	if(args == NULL){
+		printf("no args");
+		return 0 ;
+	}
+
+	bool success=1 ;
+	uint32_t val = expr(args, &success);
+	if(!success){
+		printf("invalid expression");
+	}else{
+		printf("%d",val);
+	}
+	return 0 ;
+}
 
 /*	end of cmd_p */
 

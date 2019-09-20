@@ -58,6 +58,18 @@ typedef struct token {
   char str[32];
 } Token;
 
+static struct Node {
+  int oprat ;
+  int prior ;
+}op_table[] = {
+	{'*', 1},
+	{'/', 1},
+	{'+', 2},
+	{'-', 2},
+}
+
+int len_optb = sizeof(op_table) / sizeof(op_table[0]);
+
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
@@ -127,6 +139,13 @@ uint32_t expr(char *e, bool *success) {
 }
 
 bool check_parentheses(int p, int q);
+bool is_op(int i){
+	if(i != NOTYPE && i != NUM){
+		return true ;
+	}else{
+		return false ;
+	}
+}
 
 uint32_t eval(p, q, bool *success){
 	if (p > q){
@@ -149,9 +168,41 @@ uint32_t eval(p, q, bool *success){
 		return eval(p+1, q-1, success);
 	}
 	else{
-		op = p+1 ;
-		val1 = eval(p, op-1, success);
-	    val2 = eval(op+1, q, success);
+		int op = -1 ;
+		int op_priority = 0 ;
+		int i ;
+		for(i=p; i<+q; i++){
+			if(tokens[i].type=='('){
+				int k=1 ;
+				while(k>=0){
+					i++ ;
+					if(tokens[i].type=='('){
+						k++ ;
+					}else{
+						k-- ;
+					}
+				}
+
+				if(k<0){
+					*success = false ;
+					return 0 ;
+				}
+			}else if(is_op(i)){
+				int j ;
+				for(j=0; j<num_optb; j++){
+					if(tokens[i].type == op_table[j].oprat){
+						break ;
+					}
+				}
+
+				if(op_table[j].prior >= op_priority){
+					op_priority = op_table[j].prior ;
+					op = i ;
+				}
+			}
+		}
+		uint32_t val1 = eval(p, op-1, success);
+	    uint32_t val2 = eval(op+1, q, success);
 
 		switch(tokens[op].type){
 			case '+' : return val1 + val2 ;
