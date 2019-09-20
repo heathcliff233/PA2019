@@ -173,7 +173,7 @@ uint32_t eval(int p, int q, bool *success){
 		int op = -1 ;
 		int op_priority = 0 ;
 		int i ;
-		for(i=p; i<+q; i++){
+		for(i=p; i<=q; i++){
 			if(tokens[i].type=='('){
 				int k=1 ;
 				while(k>=0){
