@@ -123,7 +123,7 @@ static int cmd_p(char *args){
 		return 0 ;
 	}
 
-	bool success=1 ;
+	bool success=true ;
 	uint32_t val = expr(args, &success);
 	if(!success){
 		printf("invalid expression");
