@@ -128,7 +128,7 @@ static int cmd_p(char *args){
 	if(!success){
 		printf("invalid expression");
 	}else{
-		printf("%d",val);
+		printf("%d\n",val);
 	}
 	return 0 ;
 }
