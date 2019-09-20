@@ -212,9 +212,10 @@ uint32_t eval(int p, int q, bool *success){
 			case '*' : return val1 * val2 ; break;
 			case '/' : return val1 / val2 ; break;
 
-			default : assert(0); 
+			default : break; //assert(0); 
 		}
 	}
+	return 0 ;
 }
 
 bool check_parentheses(int p , int q){
