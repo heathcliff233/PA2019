@@ -219,22 +219,27 @@ uint32_t eval(int p, int q, bool *success){
 
 bool check_parentheses(int p , int q){
 	int score = 0 ;
-	if(tokens[p].type != 5 || tokens[q].type != 6){
-		return false ;
-	}
-
-	while(p < q){
-		p++ ;
-		if(tokens[p].type == 5){
+	int i = p ;
+	while(i < q){
+		
+		if(tokens[i].type == '('){
 			score++ ;
-		}else if(tokens[p].type == 6){
+		}else if(tokens[i].type == ')'){
 			score-- ;
 		}
 
-		if(score < 0){
+		if(score == 0){
 			return false ;
 		}
+		i++ ;
 	}
-
-	return true ;
+	if(tokens[q].type==')'){
+		score-- ;
+	}
+	
+	if(score==0 && tokens[p].type == '(' && tokens[q].type == ')'){
+		return true ;
+	}else{
+		return false ;
+	}
 }
