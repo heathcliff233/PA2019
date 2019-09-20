@@ -209,7 +209,7 @@ uint32_t eval(int p, int q, bool *success){
 			case '*' : return val1 * val2 ; break;
 			case '/' : return val1 / val2 ; break;
 
-			default : break; //assert(0); 
+			default :assert(0); 
 		}
 	}
 	return 0 ;
