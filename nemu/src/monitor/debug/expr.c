@@ -183,7 +183,7 @@ uint32_t eval(int p, int q, bool *success){
 						k-- ;
 					}
 				}
-			}else if(is_op(i)){
+			}else if(is_op(tokens[i].type)){
 				int j ;
 				for(j=0; j<len_optb; j++){
 					if(tokens[i].type == op_table[j].oprat){
