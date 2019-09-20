@@ -180,14 +180,9 @@ uint32_t eval(int p, int q, bool *success){
 					i++ ;
 					if(tokens[i].type=='('){
 						k++ ;
-					}else{
+					}else if(tokens[i].type==')'){
 						k-- ;
 					}
-				}
-
-				if(k<0){
-					*success = false ;
-					return 0 ;
 				}
 			}else if(is_op(i)){
 				int j ;
