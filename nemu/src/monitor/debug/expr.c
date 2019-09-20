@@ -151,7 +151,7 @@ bool is_op(int i){
 uint32_t eval(int p, int q, bool *success){
 	if (p > q){
 		*success = false ;
-		printf("false expression fuck you");
+		printf("false expression fuck you\n");
 		return 0 ;
 	}
 	else if(p == q){
@@ -160,7 +160,7 @@ uint32_t eval(int p, int q, bool *success){
 			sscanf(tokens[p].str , "%d" , &value) ;
 		}else{
 			*success = false ;
-			printf("fuck you test bitch");
+			printf("fuck you test bitch\n");
 			return 0 ;
 		}
 		return value ;
@@ -200,7 +200,6 @@ uint32_t eval(int p, int q, bool *success){
 
 		}
 		uint32_t val1 = eval(p, op-1, success);
-		printf("%d\n",op) ;
 		printf("%d  %d\n",op,tokens[op].type);
 	    uint32_t val2 = eval(op+1, q, success);
 
