@@ -199,6 +199,7 @@ uint32_t eval(int p, int q, bool *success){
 			}
 		}
 		uint32_t val1 = eval(p, op-1, success);
+		printf("shit");
 		printf("%d",op) ;
 		printf("%d  %d",op,tokens[op].type);
 	    uint32_t val2 = eval(op+1, q, success);
