@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, /*TK_EQ,*/ TK_PLS = 1,TK_MIN = 2,TK_MUL = 3,TK_DIV = 4,TK_LFP = 5,TK_RTP = 6,TK_NUM = 0
+  TK_NOTYPE = 256 , NUM 
 
   /* TODO: Add more token types */
 
@@ -21,23 +21,14 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {"\/", TK_DIV},         // division
-  {"\-", TK_MIN},         // minus
-  {"\*", TK_MUL},         // multiply
-  {" +", TK_NOTYPE},      // spaces
-  {"\\+", TK_PLS},        // plus
-  {"(", TK_LFP},          // left parentheses
-  {")", TK_RtP},          // right parenttheses
-  {"0", TK_NUM},
-  {"1", TK_NUM}, 
-  {"2", TK_NUM},
-  {"3", TK_NUM},
-  {"4", TK_NUM},
-  {"5", TK_NUM},
-  {"6", TK_NUM},
-  {"7", TK_NUM},
-  {"8", TK_NUM},
-  {"9", TK_NUM}, 
+  {"\/", '/'},         // division
+  {"\\-", '-'},         // minus
+  {"\\*", '*'},         // multiply
+  {" +", NOTYPE},      // spaces
+  {"\\+", '+'},       // plus
+  {"\\(", '('},          // left parentheses
+  {"\\)", ')'},          // right parenttheses
+  {"[0-9]+", NUM}
 //  {"==", TK_EQ}           // equal
 };
 
@@ -93,17 +84,19 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
+		
+		int j ;
         switch (rules[i].token_type) {
-			case 1 : tokens[nr_token-1].type = TK_PLS; break;
-			case 2 : tokens[nr_token-1].type = TK_MIN; break;
-			case 3 : tokens[nr_token-1].type = TK_MUL; break;
-			case 4 : tokens[nr_token-1].type = TK_DIV; break;
-			case 5 : tokens[nr_token-1].type = TK_LFP; break;
-		    case 6 : tokens[nr_token-2].type = TK_RTP; break;
-			case 0 : tokens[nr_token-1].type = TK_NUM; tokens[nr_token-1].str = re[i]; break;
+			case NOTYPE : break ;
+			case NUM :
+						  for(j = 0 ; j < substr_len ; j++){
+						      tokens[nr_token].str[j] = *(substr_start+j);
+						  }
+						  tokens[nr_token].str[j]='\0';
 
-            default: TODO();
+            default:
+						  tokens[nr_token].type = rules[i].token_type;
+						  nr_token++ ;
         }
 
         break;
@@ -119,6 +112,8 @@ static bool make_token(char *e) {
   return true;
 }
 
+uint32_t eval(p, q, bool *success);
+
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -128,5 +123,65 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
-  return 0;
+  return eval(0, nr_token-1, success);
+}
+
+bool check_parentheses(int p, int q);
+
+uint32_t eval(p, q, bool *success){
+	if (p > q){
+		*success = false ;
+		printf("false expression fuck you");
+		return 0 ;
+	}
+	else if(p == q){
+		uint32_t value=0 ;
+		if(tokens[p].type==NUM){
+			sscanf(tokens[p].str , "%d" , &value) ;
+		}else{
+			*success = false ;
+			printf("fuck you test bitch");
+			return 0 ;
+		}
+		return value ;
+	}
+	else if(check_parentheses(p,q)==true){
+		return eval(p+1, q-1, success);
+	}
+	else{
+		op = p+1 ;
+		val1 = eval(p, op-1, success);
+	    val2 = eval(op+1, q, success);
+
+		switch(tokens[op].type){
+			case '+' : return val1 + val2 ;
+			case '-' : return val1 - val2 ;
+			case '*' : return val1 * val2 ;
+			case '/' : return val1 / val2 ;
+
+			default : assert(0); 
+		}
+	}
+}
+
+bool check_parentheses(int p , int q){
+	int score = 0 ;
+	if(tokens[p].type != 5 || tokens[q].type != 6){
+		return false ;
+	}
+
+	while(p < q){
+		p++ ;
+		if(tokens[p].type == 5){
+			count++ ;
+		}else if(tokens[p].type == 6){
+			count-- ;
+		}
+
+		if(score < 0){
+			return false ;
+		}
+	}
+
+	return true ;
 }

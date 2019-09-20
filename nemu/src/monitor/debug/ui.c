@@ -59,6 +59,7 @@ static struct {
   { "si", "Exec once, pass an integer to circle, default to 1", cmd_si },
   { "info", "Print out the desired information", cmd_info },
   { "x", "Scan the memory", cmd_x },
+  { "p", "process the expression", cmd_p},
 
   /* TODO: Add more commands */
 
@@ -111,6 +112,12 @@ static int cmd_info(char *args){
 }
 
 /*  end of cmd_info */
+
+/*	start of cmd_p */
+
+static uint32_t cmd_p()
+
+/*	end of cmd_p */
 
 /*  start of cmd_x */
 
