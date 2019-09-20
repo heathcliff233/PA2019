@@ -117,7 +117,7 @@ static int cmd_info(char *args){
 
 /*	start of cmd_p */
 
-static uint32_t cmd_p(char *args){
+static int cmd_p(char *args){
 	if(args == NULL){
 		printf("no args");
 		return 0 ;

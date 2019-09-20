@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256 , NUM 
+  NOTYPE = 256 , NUM 
 
   /* TODO: Add more token types */
 
@@ -21,7 +21,7 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {"\/", '/'},         // division
+  {"\\/", '/'},         // division
   {"\\-", '-'},         // minus
   {"\\*", '*'},         // multiply
   {" +", NOTYPE},      // spaces
@@ -66,7 +66,7 @@ static struct Node {
 	{'/', 1},
 	{'+', 2},
 	{'-', 2},
-}
+};
 
 int len_optb = sizeof(op_table) / sizeof(op_table[0]);
 
@@ -124,7 +124,7 @@ static bool make_token(char *e) {
   return true;
 }
 
-uint32_t eval(p, q, bool *success);
+uint32_t eval(int p, int q, bool *success);
 
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
@@ -147,7 +147,7 @@ bool is_op(int i){
 	}
 }
 
-uint32_t eval(p, q, bool *success){
+uint32_t eval(int p, int q, bool *success){
 	if (p > q){
 		*success = false ;
 		printf("false expression fuck you");
@@ -189,7 +189,7 @@ uint32_t eval(p, q, bool *success){
 				}
 			}else if(is_op(i)){
 				int j ;
-				for(j=0; j<num_optb; j++){
+				for(j=0; j<len_optb; j++){
 					if(tokens[i].type == op_table[j].oprat){
 						break ;
 					}
@@ -224,9 +224,9 @@ bool check_parentheses(int p , int q){
 	while(p < q){
 		p++ ;
 		if(tokens[p].type == 5){
-			count++ ;
+			score++ ;
 		}else if(tokens[p].type == 6){
-			count-- ;
+			score-- ;
 		}
 
 		if(score < 0){
