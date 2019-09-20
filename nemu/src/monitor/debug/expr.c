@@ -190,6 +190,7 @@ uint32_t eval(int p, int q, bool *success){
 						break ;
 					}
 				}
+				printf("%d  ,  %d\n",tokens[i].type,i);
 
 				if(op_table[j].prior >= op_priority){
 					op_priority = op_table[j].prior ;
