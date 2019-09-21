@@ -70,7 +70,7 @@ static struct Node {
 
 int len_optb = sizeof(op_table) / sizeof(op_table[0]);
 
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[128] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -158,12 +158,10 @@ uint32_t eval(int p, int q, bool *success){
 		uint32_t value=0 ;
 		if(tokens[p].type==NUM){
 			sscanf(tokens[p].str , "%d" , &value) ;
+			return value ;
 		}else{
-			*success = false ;
-			printf("fuck you test bitch\n");
 			return 0 ;
 		}
-		return value ;
 	}
 	else if(check_parentheses(p,q)==true){
 		return eval(p+1, q-1, success);
@@ -175,7 +173,7 @@ uint32_t eval(int p, int q, bool *success){
 		for(i=p; i<=q; i++){
 			if(tokens[i].type=='('){
 				int k=1 ;
-				while(k>=0){
+				while(k!=0){
 					i++ ;
 					if(tokens[i].type=='('){
 						k++ ;
@@ -210,13 +208,13 @@ uint32_t eval(int p, int q, bool *success){
 			default :assert(0); 
 		}
 	}
-	return 0 ;
+//	return 0 ;
 }
 
 bool check_parentheses(int p , int q){
 	int score = 0 ;
-	int i = p ;
-	while(i < q){
+	int i ;
+	for(i=p; i<q; i++){
 		
 		if(tokens[i].type == '('){
 			score++ ;
