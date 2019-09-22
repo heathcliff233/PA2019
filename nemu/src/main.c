@@ -58,10 +58,10 @@ int main(int argc, char *argv[]) {
 		val[p] = line[p];
 		p++;
 	}
-	line[p]='\0';
+	val[p]='\0';
 	p++;
 	base = p;
-	while(line[p]!='\0'){
+	while(line[p]!='\n'){
 		exp[p-base] = line[p];
 		p++;
 	}
