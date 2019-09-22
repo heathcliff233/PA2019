@@ -1,7 +1,6 @@
-#ifndef _EXPR_C_
-#define _EXPR_C_
-#include "monitor/debug/expr.c"
-#endif
+#include <stdio.h>
+#include <stdlib.h>
+#include "monitor/expr.h"
 
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
