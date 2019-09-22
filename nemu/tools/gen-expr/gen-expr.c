@@ -23,6 +23,16 @@ static inline void gen_num(){
 	idx++;
 }
 
+static inline void gen_nozero(){
+	extern int idx;
+	int nu = rand()%9;
+	char pu = nu + '1';
+	buf[idx] = pu;
+	idx++;
+}
+
+static inline void gen_rand_expr();
+
 static inline void gen_rand_op(){
     extern int idx;
 	int nu = random()%4;
@@ -30,6 +40,14 @@ static inline void gen_rand_op(){
 	char pu = lst[nu];
 	buf[idx] = pu;
 	idx++;
+
+	/* evil approach to not generating 0 after \/ */
+
+	if(nu == 3){
+		gen_nozero();
+	}else{
+		gen_rand_expr();
+	}
 }
 
 static inline void gen(char sig){
@@ -44,7 +62,7 @@ static inline void gen_rand_expr() {
   switch(choose(3)){
 	case 0 : gen_num(); break;
 	case 1 : gen('('); gen_rand_expr(); gen(')'); break;
-	case 2 : gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
+	case 2 : gen_rand_expr(); gen_rand_op();/* gen_rand_expr(); */ break;
   }
 }
 
