@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
 //  ui_mainloop(is_batch_mode);
   
   /* Compare the expression and the value. */
-  char line[200];
-  char exp[200];
+  char line[65536];
+  char exp[65536];
   char val[10];
   int i;
   int p;
@@ -35,7 +35,8 @@ int main(int argc, char *argv[]) {
 	memset(exp, 0, sizeof(exp));
 	memset(val, 0, sizeof(val));
 	printf("shit\n");
-	fgets(line, 200, cp);
+//	fgets(line, 65536, cp);
+	printf("%d",sig);
 	printf("ass");
 	printf("%s\n",line);
 	while(line[p]!=' '){
