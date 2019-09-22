@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
   }
 */  
   for(i=0; i<100; i++){
-	printf("NO. %d ",i);
+	printf("NO.%d\n ",i);
 	p = 0;
 	base = 0;
 	tr_val = 0;
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 	}else{
 		fgets(line, 65536, fp);
 	}
-	printf("%s\n",line);
+	printf("\n%s\n",line);
 	while(line[p]!=' '){
 		val[p] = line[p];
 		p++;
