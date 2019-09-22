@@ -14,35 +14,31 @@ int main(int argc, char *argv[]) {
 //  ui_mainloop(is_batch_mode);
   
   /* Compare the expression and the value. */
-//  char line[65536];
+  char line[65536];
   char exp[65536];
-//  char val[10];
-//  int i;
-//  int p;
-//  int base;
-//  int tr_val;
+  char val[10];
+  int i;
+  int p;
+  int base;
+  int tr_val;
   bool sig;
   
-  char *ex=(char*)malloc(65536);
-  char va;
-  unsigned int sc=0;
+//  char *ex=(char*)malloc(65536);
+//  char va;
+//  unsigned int sc=0;
   FILE *fp = NULL;
   fp = fopen("/home/bright/ics2019/nemu/tools/gen-expr/input", "r");
-  uint32_t tr;
-  while(fscanf(fp,"%d %[\n]%s",&sc,exp,&va)!=EOF){
+//  uint32_t tr;
+/*  while(fscanf(fp,"%d %[\n]%s",&sc,exp,&va)!=EOF){
 	sig = true;
-//	va = strtok(line," ");
-//	ex = strtok(NULL," ");
 	ex = exp;
 	tr = expr(ex, &sig);
-//	memset(line, 0, sizeof(line));
 	memset(exp, 0, sizeof(exp));
-//	memset(val, 0, sizeof(va));
 	fgetc(fp);
 	printf("%u %d\n",sc,tr);
   }
-  
-/*  for(i=0; i<100; i++){
+*/  
+  for(i=0; i<100; i++){
 	printf("%d\n",i);
 	p = 0;
 	base = 0;
@@ -51,15 +47,12 @@ int main(int argc, char *argv[]) {
 	memset(line, 0, sizeof(line));
 	memset(exp, 0, sizeof(exp));
 	memset(val, 0, sizeof(val));
-	printf("shit\n");
 	if(fp==NULL){
 		perror("invalid\n");
 		return (-1);
 	}else{
 		fgets(line, 65536, fp);
 	}
-	printf("%d",sig);
-	printf("ass");
 	printf("%s\n",line);
 	while(line[p]!=' '){
 		val[p] = line[p];
@@ -80,7 +73,7 @@ int main(int argc, char *argv[]) {
 		printf("false\n");
 	}
   }
-*/  fclose(fp);
+  fclose(fp);
   
     /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
