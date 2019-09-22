@@ -23,8 +23,8 @@ int main(int argc, char *argv[]) {
   int tr_val;
   bool sig;
 
-  FILE *cp = NULL;
-  cp = fopen("../tools/gen-expr/input", "r");
+  FILE *fp = NULL;
+  fp = fopen("../tools/gen-expr/input", "r");
   for(i=0; i<100; i++){
 	printf("%d\n",i);
 	p = 0;
@@ -35,7 +35,12 @@ int main(int argc, char *argv[]) {
 	memset(exp, 0, sizeof(exp));
 	memset(val, 0, sizeof(val));
 	printf("shit\n");
-//	fgets(line, 65536, cp);
+	if(fp==NULL){
+		perror("invalid\n");
+		return (-1);
+	}else{
+		fgets(line, 65536, fp);
+	}
 	printf("%d",sig);
 	printf("ass");
 	printf("%s\n",line);
@@ -58,7 +63,7 @@ int main(int argc, char *argv[]) {
 		printf("false\n");
 	}
   }
-  fclose(cp);
+  fclose(fp);
   
     /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
