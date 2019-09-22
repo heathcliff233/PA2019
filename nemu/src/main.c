@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
   FILE *fp = NULL;
   fp = fopen("/home/bright/ics2019/nemu/tools/gen-expr/input", "r");
   uint32_t tr;
-  while(fscanf(fp,"%d %[\n]%c",&sc,exp,&va)!=EOF){
+  while(fscanf(fp,"%d %[\n]%s",&sc,exp,&va)!=EOF){
 	sig = true;
 //	va = strtok(line," ");
 //	ex = strtok(NULL," ");
