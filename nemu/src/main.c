@@ -10,8 +10,6 @@ int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
   int is_batch_mode = init_monitor(argc, argv);
 
-  /* Receive commands from user. */
-//  ui_mainloop(is_batch_mode);
   
   /* Compare the expression and the value. */
   char line[65536];
@@ -39,7 +37,7 @@ int main(int argc, char *argv[]) {
   }
 */  
   for(i=0; i<100; i++){
-	printf("%d\n",i);
+	printf("NO. %d ",i);
 	p = 0;
 	base = 0;
 	tr_val = 0;
@@ -67,15 +65,16 @@ int main(int argc, char *argv[]) {
 	}
 	exp[p-base] = '\0';
 	sscanf(val, "%d", &tr_val);
+	printf("%u  %u\n",tr_val,expr(exp,&sig));
 	if(tr_val == expr(exp, &sig)){
-		printf("true\n");
+		printf("true\n\n");
 	}else{
 		printf("false\n");
 	}
   }
   fclose(fp);
   
-    /* Receive commands from user. */
+  /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
  
 
