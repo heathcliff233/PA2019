@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
   
   char *ex=(char*)malloc(65536);
   char va;
-  int sc=0;
+  unsigned int sc=0;
   FILE *fp = NULL;
   fp = fopen("/home/bright/ics2019/nemu/tools/gen-expr/input", "r");
   uint32_t tr;
