@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 //  int tr_val;
   bool sig;
   
-//  char *ex=(char*)malloc(65536);
+  char *ex=(char*)malloc(65536);
   char va;
   unsigned int sc=0;
   FILE *fp = NULL;
@@ -33,9 +33,10 @@ int main(int argc, char *argv[]) {
 	sig = true;
 //	va = strtok(line," ");
 //	ex = strtok(NULL," ");
-	tr = expr(exp, &sig);
+	ex = exp;
+	tr = expr(ex, &sig);
 //	memset(line, 0, sizeof(line));
-//	memset(exp, 0, sizeof(ex));
+	memset(exp, 0, sizeof(exp));
 //	memset(val, 0, sizeof(va));
 	fgetc(fp);
 	printf("%u %d\n",sc,tr);
