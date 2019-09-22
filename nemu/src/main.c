@@ -35,6 +35,7 @@ int main(int argc, char *argv[]) {
 	memset(exp, 0, sizeof(exp));
 	memset(val, 0, sizeof(val));
 	fgets(line, 65536, cp);
+	printf("%s\n",line);
 	while(line[p]!=' '){
 		val[p] = line[p];
 		p++;
