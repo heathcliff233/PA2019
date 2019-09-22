@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "monitor/expr.h"
 
-uint32_t expr(char *e, bool *success);
-
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
 uint32_t expr(char *e, bool *success);
@@ -16,6 +14,7 @@ int main(int argc, char *argv[]) {
 //  ui_mainloop(is_batch_mode);
   
   /* Compare the expression and the value. */
+  printf("shit\n");
   char line[65536];
   char exp[65536];
   char val[10];
