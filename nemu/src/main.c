@@ -22,11 +22,11 @@ int main(int argc, char *argv[]) {
   int base;
   int tr_val;
   bool sig;
-  printf("shit\n");
 
   FILE *cp = NULL;
   cp = fopen("../tools/gen-expr/input", "r");
   for(i=0; i<100; i++){
+	printf("%d\n",i);
 	p = 0;
 	base = 0;
 	tr_val = 0;
