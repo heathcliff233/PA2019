@@ -24,12 +24,12 @@ int main(int argc, char *argv[]) {
   bool sig;
   
   char *ex=(char*)malloc(65536);
-//  char *va;
+  char va;
   int sc=0;
   FILE *fp = NULL;
   fp = fopen("/home/bright/ics2019/nemu/tools/gen-expr/input", "r");
   uint32_t tr;
-  while(fscanf(fp,"%d %c",&sc,ex)!=EOF){
+  while(fscanf(fp,"%d %[\n]%c",&sc,ex,&va)!=EOF){
 	sig = true;
 //	va = strtok(line," ");
 //	ex = strtok(NULL," ");
