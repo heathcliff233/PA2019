@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
   bool sig;
 
   FILE *fp = NULL;
-  fp = fopen("gen-expr/input", "r");
+  fp = fopen("~/ics2019/nemu/tools/gen-expr/input", "r");
   for(i=0; i<100; i++){
 	printf("%d\n",i);
 	p = 0;
