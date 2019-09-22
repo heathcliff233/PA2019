@@ -70,7 +70,7 @@ static struct Node {
 
 int len_optb = sizeof(op_table) / sizeof(op_table[0]);
 
-static Token tokens[128] __attribute__((used)) = {};
+static Token tokens[65536] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {

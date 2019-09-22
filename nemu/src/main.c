@@ -1,5 +1,8 @@
+#include</monitor/debug/expr.c>
+
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
+uint32_t expr(char *e, bool *success);
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
@@ -7,6 +10,44 @@ int main(int argc, char *argv[]) {
 
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
+  
+  /* Compare the expression and the value. */
+  char line[65536];
+  char exp[65536];
+  char val[10];
+  int i;
+  int p;
+  int base;
+  int tr_val;
+  bool sig;
+  FILE *cp = fopen("../tools/gen-expr/input", "r");
+  for(i=0; i<100; i++){
+	p = 0;
+	base = 0;
+	memset(line, 0, sizeof(line));
+	memset(exp, 0, sizeof(exp));
+	memset(val, 0, sizeof(val));
+	fgets(line, 65536, cp);
+	while(line[p]!=' '){
+		val[p] = line[p];
+		p++;
+	}
+	line[p]='\0';
+	p++;
+	base = p;
+	while(line[p]!='\0'){
+		exp[p-base] = line[p];
+		p++;
+	}
+	exp[p-base] = '\0';
+	sscanf(val, "%d", tr_val);
+	if(tr_val == expr(exp, sig)){
+		printf("true\n");
+	}else{
+		printf("false\n");
+	}
+  }
+  fclose(cp);
 
   return 0;
 }
