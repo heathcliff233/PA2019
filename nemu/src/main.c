@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
 //	memset(line, 0, sizeof(line));
 //	memset(exp, 0, sizeof(ex));
 //	memset(val, 0, sizeof(va));
+	fgetc(fp);
 	printf("%u %d\n",sc,tr);
   }
   
