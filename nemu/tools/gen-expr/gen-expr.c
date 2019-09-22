@@ -31,7 +31,21 @@ static inline void gen_nozero(){
 	idx++;
 }
 
+static inline void gen(char sig);
+
 static inline void gen_rand_expr();
+
+static inline void gen_rand_op();
+
+static inline void gen_nozero_expr() {
+//  buf[0] = '\0';
+  extern int idx; 
+  switch(choose(3)){
+	case 0 : gen_nozero(); break;
+	case 1 : gen('('); gen_rand_expr(); gen('+'); gen('1'); gen(')'); break;
+	case 2 : gen_rand_expr(); gen_rand_op();/* gen_rand_expr(); */ break;
+  }
+}
 
 static inline void gen_rand_op(){
     extern int idx;
@@ -44,7 +58,7 @@ static inline void gen_rand_op(){
 	/* evil approach to not generating 0 after \/ */
 
 	if(nu == 3){
-		gen_nozero();
+		gen_nozero_expr();
 	}else{
 		gen_rand_expr();
 	}
