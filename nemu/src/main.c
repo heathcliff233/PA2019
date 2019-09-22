@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
   int is_batch_mode = init_monitor(argc, argv);
 
   /* Receive commands from user. */
-  ui_mainloop(is_batch_mode);
+//  ui_mainloop(is_batch_mode);
   
   /* Compare the expression and the value. */
   char line[65536];
@@ -52,6 +52,10 @@ int main(int argc, char *argv[]) {
 	}
   }
   fclose(cp);
+  
+    /* Receive commands from user. */
+  ui_mainloop(is_batch_mode);
+ 
 
   return 0;
 }
