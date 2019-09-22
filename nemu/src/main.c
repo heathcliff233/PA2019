@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
 //  ui_mainloop(is_batch_mode);
   
   /* Compare the expression and the value. */
-  char line[65536];
-  char exp[65536];
+  char line[200];
+  char exp[200];
   char val[10];
   int i;
   int p;
