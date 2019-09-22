@@ -59,6 +59,7 @@ static char *code_format =
 
 
 int main(int argc, char *argv[]) {
+  extern int idx;
   extern char buf[];
   extern char code_buf[];
   int seed = time(0);
@@ -69,15 +70,13 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
+	idx = 0;
 	memset(buf, 0, sizeof(buf));
 	memset(code_buf, 0, sizeof(code_buf));
-
     gen_rand_expr();
 /*  add an end here  */	
-    buf[idx] = '\0';
-    printf("%s\n",buf);
+	buf[idx] = '\0';
 	sprintf(code_buf, code_format, buf);
-	printf("%s\n",code_buf);
     FILE *fp = fopen("/tmp/.code.c", "w");
     assert(fp != NULL);
     fputs(code_buf, fp);
