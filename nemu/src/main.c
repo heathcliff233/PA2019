@@ -14,7 +14,6 @@ int main(int argc, char *argv[]) {
 //  ui_mainloop(is_batch_mode);
   
   /* Compare the expression and the value. */
-  printf("shit\n");
   char line[65536];
   char exp[65536];
   char val[10];
@@ -23,7 +22,10 @@ int main(int argc, char *argv[]) {
   int base;
   int tr_val;
   bool sig;
-  FILE *cp = fopen("../tools/gen-expr/input", "r");
+  printf("shit\n");
+
+  FILE *cp = NULL;
+  cp = fopen("../tools/gen-expr/input", "r");
   for(i=0; i<100; i++){
 	p = 0;
 	base = 0;
