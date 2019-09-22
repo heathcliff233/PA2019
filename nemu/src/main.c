@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "monitor/expr.h"
 
+uint32_t expr(char *e, bool *success);
+
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
 uint32_t expr(char *e, bool *success);

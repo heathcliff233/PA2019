@@ -58,7 +58,7 @@ static inline void gen_rand_op(){
 	/* evil approach to not generating 0 after \/ */
 
 	if(nu == 3){
-		gen_nozero_expr();
+		gen_nozero();
 	}else{
 		gen_rand_expr();
 	}
