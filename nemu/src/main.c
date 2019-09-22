@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 	memset(exp, 0, sizeof(exp));
 	memset(val, 0, sizeof(val));
 	printf("shit\n");
-	fgets(line, 65536,(FILE*) cp);
+	fgets(line, 200, cp);
 	printf("ass");
 	printf("%s\n",line);
 	while(line[p]!=' '){
