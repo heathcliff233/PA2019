@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
   
   /* Compare the expression and the value. */
 //  char line[65536];
-//  char exp[65536];
+  char exp[65536];
 //  char val[10];
 //  int i;
 //  int p;
@@ -23,17 +23,17 @@ int main(int argc, char *argv[]) {
 //  int tr_val;
   bool sig;
   
-  char *ex=(char*)malloc(65536);
+//  char *ex=(char*)malloc(65536);
   char va;
   unsigned int sc=0;
   FILE *fp = NULL;
   fp = fopen("/home/bright/ics2019/nemu/tools/gen-expr/input", "r");
   uint32_t tr;
-  while(fscanf(fp,"%d %[\n]%c",&sc,ex,&va)!=EOF){
+  while(fscanf(fp,"%d %[\n]%c",&sc,exp,&va)!=EOF){
 	sig = true;
 //	va = strtok(line," ");
 //	ex = strtok(NULL," ");
-	tr = expr(ex, &sig);
+	tr = expr(exp, &sig);
 //	memset(line, 0, sizeof(line));
 //	memset(exp, 0, sizeof(ex));
 //	memset(val, 0, sizeof(va));
