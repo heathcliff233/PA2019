@@ -1,4 +1,4 @@
-#include</monitor/debug/expr.c>
+#include "monitor/debug/expr.c"
 
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
@@ -24,6 +24,8 @@ int main(int argc, char *argv[]) {
   for(i=0; i<100; i++){
 	p = 0;
 	base = 0;
+	tr_val = 0;
+	sig = true;
 	memset(line, 0, sizeof(line));
 	memset(exp, 0, sizeof(exp));
 	memset(val, 0, sizeof(val));
@@ -40,8 +42,8 @@ int main(int argc, char *argv[]) {
 		p++;
 	}
 	exp[p-base] = '\0';
-	sscanf(val, "%d", tr_val);
-	if(tr_val == expr(exp, sig)){
+	sscanf(val, "%d", &tr_val);
+	if(tr_val == expr(exp, &sig)){
 		printf("true\n");
 	}else{
 		printf("false\n");
