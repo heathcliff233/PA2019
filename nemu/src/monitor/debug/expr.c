@@ -34,7 +34,7 @@ static struct rule {
   {"0[xX][0-9a-fA-F]+", HEX},  
   {"&&", AND},
   {"\\|\\|", OR},
-  {"[\\$,a,g,r,s,t][0-9]+", REG}  //register
+  {"[\\$,a,g,r,s,t][a-z0-9]+", REG}  //register
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
