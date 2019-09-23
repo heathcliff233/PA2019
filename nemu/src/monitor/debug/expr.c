@@ -145,7 +145,7 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  for(i=0; i<nr_token; i++){
+  for(int i=0; i<nr_token; i++){
 	if(tokens[i].type=='*' && (i==0 || is_op(i-1))){
 		tokens[i].type = DEREF;
 	}
@@ -160,7 +160,7 @@ uint32_t expr(char *e, bool *success) {
 
 bool check_parentheses(int p, int q);
 bool is_op(int i){
-	return (tokens[i].type!=NOTYPE)&&(tokens[i].type!=NUM)&&(tokens[i].type!=HEX)&&(tokens[i].type!='(')&&(tokens[i].type!='(')
+	return (tokens[i].type!=NOTYPE)&&(tokens[i].type!=NUM)&&(tokens[i].type!=HEX)&&(tokens[i].type!='(')&&(tokens[i].type!='(');
 }
 
 uint32_t eval(int p, int q, bool *success){
@@ -176,7 +176,7 @@ uint32_t eval(int p, int q, bool *success){
 			return value ;
 		}else if(tokens[p].type==HEX){
 			sscanf(tokens[p].str , "%x" , &value);
-			return valie ;
+			return value ;
 		}else{
 			return 0 ;
 		}
@@ -214,8 +214,9 @@ uint32_t eval(int p, int q, bool *success){
 			}
 
 		}
+		uint32_t val1=0;
 		if(tokens[op].type!=DEREF && tokens[op].type!=NEG){
-			uint32_t val1 = eval(p, op-1, success);
+			val1 = eval(p, op-1, success);
 		}
 		uint32_t val2 = eval(op+1, q, success);
 
@@ -230,12 +231,10 @@ uint32_t eval(int p, int q, bool *success){
 			case OR  : return val1 || val2 ; break;
             case DEREF : return *(pmem+val2) ; break;
 
-			default : return 0;
-
 			default :assert(0); 
 		}
 	}
-//	return 0 ;
+	return 0 ;
 }
 
 bool check_parentheses(int p , int q){
