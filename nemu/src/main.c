@@ -10,8 +10,7 @@ int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
   int is_batch_mode = init_monitor(argc, argv);
 
-  
-  /* Compare the expression and the value. */
+/*  
   char line[65536];
   char exp[65536];
   char val[10];
@@ -21,22 +20,7 @@ int main(int argc, char *argv[]) {
   int tr_val;
   bool sig;
   
-//  char *ex=(char*)malloc(65536);
-//  char va;
-//  unsigned int sc=0;
   FILE *fp = NULL;
-  fp = fopen("/home/bright/ics2019/nemu/tools/gen-expr/input", "r");
-//  uint32_t tr;
-/*  while(fscanf(fp,"%d %[\n]%s",&sc,exp,&va)!=EOF){
-	sig = true;
-	ex = exp;
-	tr = expr(ex, &sig);
-	memset(exp, 0, sizeof(exp));
-	fgetc(fp);
-	printf("%u %d\n",sc,tr);
-  }
-*/  
-  for(i=0; i<100; i++){
 	printf("NO.%d\n ",i);
 	p = 0;
 	base = 0;
@@ -73,7 +57,9 @@ int main(int argc, char *argv[]) {
 	}
   }
   fclose(fp);
-  
+
+*/
+
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);
  
