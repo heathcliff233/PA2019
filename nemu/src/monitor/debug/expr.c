@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  NOTYPE = 256 , NUM 
+  NOTYPE = 256, NUM, HEX, REG, EQ, NEQ, AND, OR, DEREF, NEG 
 
   /* TODO: Add more token types */
 
@@ -28,8 +28,13 @@ static struct rule {
   {"\\+", '+'},       // plus
   {"\\(", '('},          // left parentheses
   {"\\)", ')'},          // right parenttheses
-  {"[0-9]+", NUM}
-//  {"==", TK_EQ}           // equal
+  {"[0-9]+", NUM},
+  {"==", EQ},           // equal
+  {"!=", NEQ},          // not equal
+  {"0[xX][0-9a-fA-F]+", HEX},  
+  {"&&", AND},
+  {"\\|\\|", OR},
+  {"[\\$,a,g,r,s,t][0-9]+", REG}  //register
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -62,10 +67,16 @@ static struct Node {
   int oprat ;
   int prior ;
 }op_table[] = {
-	{'*', 1},
-	{'/', 1},
-	{'+', 2},
-	{'-', 2},
+	{DEREF, 2},
+	{NEG, 2},
+	{'*', 3},
+	{'/', 3},
+	{'+', 4},
+	{'-', 4},
+	{EQ, 7},
+	{NEQ, 7},
+	{AND, 9},
+	{OR, 9},
 };
 
 int len_optb = sizeof(op_table) / sizeof(op_table[0]);
@@ -134,18 +145,22 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  
+  for(i=0; i<nr_token; i++){
+	if(tokens[i].type=='*' && (i==0 || is_op(i-1))){
+		tokens[i].type = DEREF;
+	}
+
+	else if(tokens[i].type=='-' && (i==0 || is_op(i-1))){
+		tokens[i].type = NEG;
+	}
+  }
 
   return eval(0, nr_token-1, success);
 }
 
 bool check_parentheses(int p, int q);
 bool is_op(int i){
-	if(i != NOTYPE && i != NUM){
-		return true ;
-	}else{
-		return false ;
-	}
+	return (tokens[i].type!=NOTYPE)&&(tokens[i].type!=NUM)&&(tokens[i].type!=HEX)&&(tokens[i].type!='(')&&(tokens[i].type!='(')
 }
 
 uint32_t eval(int p, int q, bool *success){
@@ -157,8 +172,11 @@ uint32_t eval(int p, int q, bool *success){
 	else if(p == q){
 		uint32_t value=0 ;
 		if(tokens[p].type==NUM){
-			sscanf(tokens[p].str , "%d" , &value) ;
+			sscanf(tokens[p].str , "%d" , &value);
 			return value ;
+		}else if(tokens[p].type==HEX){
+			sscanf(tokens[p].str , "%x" , &value);
+			return valie ;
 		}else{
 			return 0 ;
 		}
@@ -181,7 +199,7 @@ uint32_t eval(int p, int q, bool *success){
 						k-- ;
 					}
 				}
-			}else if(is_op(tokens[i].type)){
+			}else if(is_op(i)){
 				int j ;
 				for(j=0; j<len_optb; j++){
 					if(tokens[i].type == op_table[j].oprat){
@@ -196,14 +214,23 @@ uint32_t eval(int p, int q, bool *success){
 			}
 
 		}
-		uint32_t val1 = eval(p, op-1, success);
-	    uint32_t val2 = eval(op+1, q, success);
+		if(tokens[op].type!=DEREF && tokens[op].type!=NEG){
+			uint32_t val1 = eval(p, op-1, success);
+		}
+		uint32_t val2 = eval(op+1, q, success);
 
 		switch(tokens[op].type){
 			case '+' : return val1 + val2 ; break;
 			case '-' : return val1 - val2 ; break;
 			case '*' : return val1 * val2 ; break;
 			case '/' : return val1 / val2 ; break;
+			case EQ  : return val1 == val2 ; break;
+			case NEQ : return val1 != val2 ; break;
+			case AND : return val1 && val2 ; break;
+			case OR  : return val1 || val2 ; break;
+            case DEREF : return *(pmem+val2) ; break;
+
+			default : return 0;
 
 			default :assert(0); 
 		}
