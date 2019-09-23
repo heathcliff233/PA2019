@@ -185,7 +185,8 @@ uint32_t eval(int p, int q, bool *success){
 			sscanf(tokens[p].str , "%x" , &value);
 			return value ;
 		}else if(tokens[p].type==REG){
-			return isa_reg_str2val(tokens[p].str, success);
+			value = isa_reg_str2val(tokens[p].str, success);
+			return value;
 		}else{
 			return 0 ;
 		}
