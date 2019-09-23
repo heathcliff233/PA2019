@@ -16,6 +16,7 @@ void isa_reg_display() {
 
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
+	*success = true;
 	int i=0;
 	while(!strcmp(regsl[i], s)){
 		if(i==31){

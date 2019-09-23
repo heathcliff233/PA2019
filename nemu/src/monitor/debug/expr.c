@@ -110,6 +110,8 @@ static bool make_token(char *e) {
 		int j ;
         switch (rules[i].token_type) {
 			case NOTYPE : break ;
+			case REG :
+			case HEX :
 			case NUM :
 						  for(j = 0 ; j < substr_len ; j++){
 						      tokens[nr_token].str[j] = *(substr_start+j);
@@ -163,6 +165,8 @@ bool is_op(int i){
 	return (tokens[i].type!=NOTYPE)&&(tokens[i].type!=NUM)&&(tokens[i].type!=HEX)&&(tokens[i].type!='(')&&(tokens[i].type!='(');
 }
 
+uint32_t isa_reg_str2val(const char *s, bool *success);
+
 uint32_t eval(int p, int q, bool *success){
 	if (p > q){
 		*success = false ;
@@ -177,6 +181,8 @@ uint32_t eval(int p, int q, bool *success){
 		}else if(tokens[p].type==HEX){
 			sscanf(tokens[p].str , "%x" , &value);
 			return value ;
+		}else if(tokens[p].type==REG){
+			return isa_reg_str2val(tokens[p].str, success);
 		}else{
 			return 0 ;
 		}
