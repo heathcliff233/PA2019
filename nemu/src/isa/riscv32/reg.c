@@ -21,6 +21,7 @@ uint32_t isa_reg_str2val(const char *s, bool *success) {
 	while(!strcmp(regsl[i], s)){
 		if(i==31){
 			*success = false;
+			printf("oh shit!");
 			return 0;
 		}
 		i++;
