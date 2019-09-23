@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 	}else{
 		fgets(line, 65536, fp);
 	}
-	printf("\n%s\n",line);
+	printf("%s\n",line);
 	while(line[p]!=' '){
 		val[p] = line[p];
 		p++;
