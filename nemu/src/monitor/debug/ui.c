@@ -50,6 +50,10 @@ static int cmd_x(char *args);
 
 static int cmd_p(char *args);
 
+static int cmd_w(char *args);
+
+static int cmd_d(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -62,7 +66,8 @@ static struct {
   { "info", "Print out the desired information", cmd_info },
   { "x", "Scan the memory", cmd_x },
   { "p", "process the expression", cmd_p},
-
+  { "w", "insert a watchpoint", cmd_w},
+  { "d", "delete a watchpoint", cmd_p},
   /* TODO: Add more commands */
 
 };
@@ -106,7 +111,7 @@ static int cmd_info(char *args){
 	}else if(strcmp(arg , "r")==0){
 		isa_reg_display();
 	}else if(strcmp(arg , "w")==0){
-		printf("Nothing yet");
+		list_watchpoints();
 	}else{
 	    printf("Invalid arg, try -r or -w instead");
 	}
@@ -144,7 +149,9 @@ static int cmd_x(char *args){
 	int nu = atoi(num);
 	args = strtok(NULL, " ");
 	int addre = 0;
-	sscanf(args,"%x",&addre);
+//	sscanf(args,"%x",&addre);
+	bool *success = true;
+	addre = expr(args,success);
 
     register_pmem(addre);
 	while(nu > 4){
