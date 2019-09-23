@@ -28,11 +28,11 @@ static struct rule {
   {"\\+", '+'},       // plus
   {"\\(", '('},          // left parentheses
   {"\\)", ')'},          // right parenttheses
-  {"[0-9]+", NUM},
   {"==", EQ},           // equal
   {"!=", NEQ},          // not equal
   {"0[xX][0-9a-fA-F]+", HEX},  
   {"&&", AND},
+  {"[0-9]+", NUM},
   {"\\|\\|", OR},
   {"[\\$,a,g,r,s,t][a-z0-9]+", REG}  //register
 };
