@@ -116,9 +116,11 @@ static bool make_token(char *e) {
 						  for(j = 0 ; j < substr_len ; j++){
 						      tokens[nr_token].str[j] = *(substr_start+j);
 						  }
+						  printf("get");
 						  tokens[nr_token].str[j]='\0';
 
             default:
+						  printf("ass");
 						  tokens[nr_token].type = rules[i].token_type;
 						  nr_token++ ;
         }
