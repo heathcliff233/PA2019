@@ -189,7 +189,7 @@ uint32_t eval(int p, int q, bool *success){
 		}
 	}
 	else if(check_parentheses(p,q)==true){
-		printf("p:%d q%d\n",p,q);
+//		printf("p:%d q%d\n",p,q);
 		return eval(p+1, q-1, success);
 	}
 	else{
