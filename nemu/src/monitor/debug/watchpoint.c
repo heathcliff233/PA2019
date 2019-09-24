@@ -46,7 +46,7 @@ void list_watchpoints(){
 		printf("no breakpoints set");
 		return;
 	}
-	printf("%8s\t%8s\t%8s","NO","Address","Value");
+	printf("%8s\t%8s\t%8s\n","NO","Address","Value");
 	WP *wp;
 	for(wp=head; wp!=NULL; wp=wp->next){
 		printf("%8d\t%#08x\t%8d\n",wp->NO,wp->addr,wp->old_value);
@@ -75,9 +75,9 @@ bool del_watchpoint(int NO){
 int set_watchpoint(char *e){
 	uint32_t val = 0;
 	bool success;
-	printf("exp: %s\n",e);
+//	printf("exp: %s\n",e);
 	val = expr(e,&success);
-	printf("%d\n",val);
+//	printf("%d\n",val);
 	if(!success){
 		printf("wrong expression fuck you");
 		return -1;
