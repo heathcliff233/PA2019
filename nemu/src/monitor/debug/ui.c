@@ -67,7 +67,7 @@ static struct {
   { "x", "Scan the memory", cmd_x },
   { "p", "process the expression", cmd_p},
   { "w", "insert a watchpoint", cmd_w},
-  { "d", "delete a watchpoint", cmd_p},
+  { "d", "delete a watchpoint", cmd_d},
   /* TODO: Add more commands */
 
 };
@@ -150,8 +150,8 @@ static int cmd_x(char *args){
 	args = strtok(NULL, " ");
 	int addre = 0;
 //	sscanf(args,"%x",&addre);
-	bool *success = true;
-	addre = expr(args,success);
+	bool success = true;
+	addre = expr(args,&success);
 
     register_pmem(addre);
 	while(nu > 4){
@@ -195,7 +195,7 @@ static int cmd_d(char *args){
 		printf("give the id");
 	}
 	int NO = 0;
-	sscanf(args, "%d", NO);
+	sscanf(args, "%d", &NO);
 	bool res = del_watchpoint(NO);
 	if(res){
 		printf("successfully delete watchpoint NO.%d\n",NO);

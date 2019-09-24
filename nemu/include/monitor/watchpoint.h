@@ -15,4 +15,13 @@ typedef struct watchpoint {
   bool active;
 } WP;
 
+void init_wp_pool();
+WP* new_wp();
+void free_wp(WP* wp);
+void list_watchpoints();
+bool del_watchpoint(int NO);
+int set_watchpoint(char* e);
+WP* scan_wp();
+
+
 #endif
