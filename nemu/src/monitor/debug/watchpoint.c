@@ -75,7 +75,9 @@ bool del_watchpoint(int NO){
 int set_watchpoint(char *e){
 	uint32_t val = 0;
 	bool success;
+	printf("exp: %s\n",e);
 	val = expr(e,&success);
+	printf("%d\n",val);
 	if(!success){
 		printf("wrong expression fuck you");
 		return -1;
