@@ -59,6 +59,13 @@ void cpu_exec(uint64_t n) {
   }
 
     /* TODO: check watchpoints here. */
+  
+  WP *wp = scan_wp();
+  if(wp != NULL){
+	printf("Hit watch point NO.%d at address %x with expression %s\n",wp->NO,wp->addr,wp->expr);
+	printf("old value: %d\tnew value: %d\n",wp->old_val,wp->new_val);
+	nemu_state = NEMU_STOP;
+  }
 
 #endif
 

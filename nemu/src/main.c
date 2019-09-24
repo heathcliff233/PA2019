@@ -5,11 +5,12 @@
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
 uint32_t expr(char *e, bool *success);
+void init_wp_pool();
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
   int is_batch_mode = init_monitor(argc, argv);
-
+  init_wp_pool();
 /*  
   char line[65536];
   char exp[65536];
