@@ -51,7 +51,26 @@ static void list_watchpoints(){
 	}
 }
 
-static int set_watch point(char *e){
+static bool del_watchpoint(int NO){
+	WP *wp, *pwp = NULL;
+	for(wp=head; wp!=NULL; pwp=wp, wp=wp->next){
+		if(wp->NO == NO) break;
+	}
+	if(wp==NULL){
+		printf("no match");
+		return false;
+	}
+	if(pwp==NULL){
+		head = wp->next;
+		free_wp(wp);
+		return true;
+	}
+	pwp->next = wp->next;
+	free_wp(pwp);
+	return true;
+}
+
+static int set_watchpoint(char *e){
 	uint32_t val = 0;
 	bool *success = true;
 	val = expr(e,success);
@@ -72,3 +91,13 @@ static int set_watch point(char *e){
 	return wp->NO;
 }
 
+WP *scan_wp(){
+	WP *wp;
+	for(wp=head; wp!=NULL; wp=wp->next){
+		bool success=true;
+		wp->new_val = expr(wp->expr,success);
+		if(wp->old_val != wp->new_val) return wp;
+
+	}
+	return NULL;
+}

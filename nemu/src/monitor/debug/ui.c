@@ -166,6 +166,48 @@ static int cmd_x(char *args){
 
 /*  end of cmd_x */
 
+/*  start of cmd_w */
+
+static int cmd_w(char *args){
+	args = strtok(NULL," ");
+	if(args == NULL){
+		printf("please enter an expression\n");
+		return 0;
+	}
+
+	int NO = set_watchpoint(args);
+	if(NO == -1){
+		printf("invalid expression\n");
+		return 0;
+	}
+	printf("set watchpoint %d\n", NO);
+	return 0;
+
+}
+
+/*  end of cmd_w  */
+
+/*	start of cmd_d  */
+
+static int cmd_d(char *args){
+	args = strtok(NULL, " ");
+	if(args==NULL){
+		printf("give the id");
+	}
+	int NO = 0;
+	sscanf(args, "%d", NO);
+	bool res = del_watchpoint(NO);
+	if(res){
+		printf("successfully delete watchpoint NO.%d\n",NO);
+		return 0;
+	}else{
+		printf("invalid expression");
+		return 0;
+	}
+}
+
+/*	end of cmd_d  */
+
 static int cmd_help(char *args) {
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
