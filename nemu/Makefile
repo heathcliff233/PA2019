@@ -80,10 +80,10 @@ gdb: run-env
 	$(call git_commit, "gdb")
 	gdb -s $(BINARY) --args $(NEMU_EXEC)
 
-#current_lines := $(shell find . -name "*.c" or "*.h" | xargs grep -Ev "^$$" wc -l)
+current_lines := $(shell find . -name "*.c" -or -name "*.h" | xargs grep -Ev "^$$" | wc -l)
 
-#count: run-count
-#	@echo In total $(current_lines) lines of code in this branch
+count: 
+	@echo In total $(current_lines) lines of code in this branch
 
 clean:
 	-rm -rf $(BUILD_DIR)
