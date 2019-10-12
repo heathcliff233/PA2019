@@ -5,28 +5,28 @@ make_EHelper(lui) {
   print_asm_template2(lui);
 }
 
-make_Ehelper(auipc){
-  rtl_add(&id_dest->reg, &cpu.pc, id_src->val); 
+make_EHelper(auipc){
+  rtl_add(&id_dest->reg, &cpu.pc, &id_src->val); 
   print_asm_template2(aupic);
 }
 
 /*
-make_Ehelper(addi){
+make_EHelper(addi){
   rtl_add(&id_dest->reg, &id_src->reg, id_src->val); 
   print_asm_template2(aupic);
 }
 */
 
-make_Ehelper(sw){
+make_EHelper(sw){
   rtl_sm(&id_src->addr,&id_src2->val,4);
 }
 
-make_Ehelper(ret){
-  rtl_jr(&cpu.ra);
+make_EHelper(ret){
+  rtl_jr(&cpu.gpr[1]._32);
 }
 
-make_Ehelper(jal){
-  rtl_add(&id_dest->reg, &cpu.pc, 4);
+make_EHelper(jal){
+  rtl_addi(&id_dest->reg, &cpu.pc, 4);
   rtl_j(id_src->val);
 }
 
