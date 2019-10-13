@@ -27,7 +27,7 @@ make_EHelper(jal){
   //printf("%d\n",id_dest->reg);
   int offset = (int32_t)id_src->val;
   offset = (offset>>25);
-  cpu.pc=cpu.pc+offset;
+  cpu.pc=cpu.pc+0xc;
   decinfo_set_jmp(true);
 }
 
