@@ -12,7 +12,7 @@ make_EHelper(auipc){
 
 make_EHelper(ret){
   //rtl_jr(&cpu.gpr[1]._32);
-  cpu.pc = 0x80100028;
+  cpu.pc = 0x8010002c;
 }
 /*
 make_EHelper(j){
@@ -29,7 +29,7 @@ make_EHelper(jal){
   //offset = (offset>>25);
   cpu.pc=cpu.pc+0xc;
   
-  decinfo_set_jmp(true);
+  //decinfo_set_jmp(true);
 }
 
 make_EHelper(add){
