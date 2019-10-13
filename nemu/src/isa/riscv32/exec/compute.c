@@ -35,8 +35,7 @@ make_EHelper(jal){
   else{
     id_src->val=id_src->val | 0xfff00000;
 	int32_t offset = (int32_t)id_src->val;
-	cpu.pc = cpu.pc + offset/* -1*/;
-	//cpu.pc = 0x80100010;
+	cpu.pc = cpu.pc + offset;
   }
   
   decinfo_set_jmp(true);
