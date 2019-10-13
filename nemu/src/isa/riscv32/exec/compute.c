@@ -23,7 +23,7 @@ make_EHelper(jal){
   //rtl_addi(&id_dest->reg, &cpu.pc, 4);
   //rtl_j(id_src->val);
   reg_l(id_dest->reg)=cpu.pc+4;
-  cpu.pc=cpu.pc+0xc;
+  cpu.pc=cpu.pc+((int)id_src->val>>25);
 }
 
 make_EHelper(add){
