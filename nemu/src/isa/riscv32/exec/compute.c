@@ -11,7 +11,8 @@ make_EHelper(auipc){
 }
 
 make_EHelper(ret){
-  rtl_jr(&cpu.gpr[1]._32);
+  //rtl_jr(&cpu.gpr[1]._32);
+  cpu.pc = 0x8010002c;
 }
 
 make_EHelper(j){
