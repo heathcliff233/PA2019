@@ -33,11 +33,12 @@ make_EHelper(jal){
     cpu.pc=id_src->val+cpu.pc;
   }
   else{
-    //id_src->val=id_src->val | 0xfff00000;
-	//int32_t offset = (int32_t)id_src->val;
-	//cpu.pc = cpu.pc + offset -1;
-	cpu.pc = 0x80100010;
+    id_src->val=id_src->val | 0xfff00000;
+	int32_t offset = (int32_t)id_src->val;
+	cpu.pc = cpu.pc + offset -1;
+	//cpu.pc = 0x80100010;
   }
+  
   decinfo_set_jmp(true);
   printf("jump\n");
   print_asm_template3(jal);
