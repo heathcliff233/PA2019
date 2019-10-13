@@ -40,6 +40,11 @@ make_DHelper(ld) {
   decode_op_r(id_dest, decinfo.isa.instr.rd, false);
 }
 
+make_DHelper(J){
+    decode_op_r(id_dest, decinfo.isa.instr.pad6, false);
+	decode_op_i(id_src, (decinfo.isa.instr.imm10_1<<1)+(decinfo.isa.instr.imm11_<<11)+(decinfo.isa.instr.imm19_12<<12)+(decinfo.isa.instr.simm20<<20),true);
+}
+
 make_DHelper(st) {
   decode_op_r(id_src, decinfo.isa.instr.rs1, true);
   int32_t simm = (decinfo.isa.instr.simm11_5 << 5) | decinfo.isa.instr.imm4_0;

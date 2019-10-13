@@ -14,11 +14,12 @@ make_EHelper(ret){
   //rtl_jr(&cpu.gpr[1]._32);
   cpu.pc = 0x8010002c;
 }
-
+/*
 make_EHelper(j){
   rtl_j(id_src->val);
 
 }
+*/
 
 make_EHelper(jal){
   //rtl_addi(&id_dest->reg, &cpu.pc, 4);
