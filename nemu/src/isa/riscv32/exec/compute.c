@@ -10,23 +10,22 @@ make_EHelper(auipc){
   print_asm_template2(aupic);
 }
 
-/*
-make_EHelper(addi){
-  rtl_add(&id_dest->reg, &id_src->reg, id_src->val); 
-  print_asm_template2(aupic);
-}
-*/
-
-make_EHelper(sw){
-  rtl_sm(&id_src->addr,&id_src2->val,4);
-}
-
 make_EHelper(ret){
   rtl_jr(&cpu.gpr[1]._32);
 }
 
-make_EHelper(jal){
-  rtl_addi(&id_dest->reg, &cpu.pc, 4);
+make_EHelper(j){
   rtl_j(id_src->val);
+
 }
 
+make_EHelper(jal){
+  //rtl_addi(&id_dest->reg, &cpu.pc, 4);
+  //rtl_j(id_src->val);
+  reg_l(id_dest->reg)=cpu.pc+4;
+  cpu.pc+=id_src->val;
+}
+
+make_EHelper(add){
+  rtl_addi(&id_dest->reg,&id_src->val,id_src2->val);
+}
