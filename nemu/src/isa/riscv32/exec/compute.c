@@ -23,7 +23,10 @@ make_EHelper(jal){
   //rtl_addi(&id_dest->reg, &cpu.pc, 4);
   //rtl_j(id_src->val);
   reg_l(id_dest->reg)=cpu.pc+4;
-  cpu.pc=cpu.pc+((int)id_src->val>>25);
+
+  int offset = (int32_t)id_src->val;
+  offset = (offset>>25);
+  cpu.pc=cpu.pc+offset;
   decinfo_set_jmp(true);
 }
 
