@@ -1,12 +1,12 @@
 #include "cpu/exec.h"
 
 make_EHelper(lui) {
-  rtl_sr(id_dest->reg, &id_src->val, 4);
+  rtl_sr(/*id_dest->reg*/0, &id_src->val, 4);
   print_asm_template2(lui);
 }
 
 make_EHelper(auipc){
-  rtl_add(&reg_l(id_dest->reg), &cpu.pc, &id_src->val); 
+  rtl_add(&reg_l(/*id_dest->reg*/2), &cpu.pc, &id_src->val); 
   print_asm_template2(aupic);
 }
 
