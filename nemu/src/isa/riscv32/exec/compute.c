@@ -37,6 +37,7 @@ make_EHelper(jal){
 	cpu.pc = cpu.pc + offset -1;
   }
   decinfo_set_jmp(true);
+  printf("jump\n");
   print_asm_template3(jal);
 }
 
