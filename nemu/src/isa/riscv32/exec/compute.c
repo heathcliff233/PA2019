@@ -6,7 +6,7 @@ make_EHelper(lui) {
 }
 
 make_EHelper(auipc){
-  rtl_add(&id_dest->reg, &cpu.pc, &id_src->val); 
+  rtl_add(&reg_l(id_dest->reg), &cpu.pc, &id_src->val); 
   print_asm_template2(aupic);
 }
 
