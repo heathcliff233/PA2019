@@ -56,4 +56,5 @@ make_DHelper(U);
 make_DHelper(ld);
 make_DHelper(st);
 make_DHelper(J);
+make_DHelper(Addi);
 #endif
