@@ -42,7 +42,7 @@ make_EHelper(jal){
 
 make_EHelper(add){
   //rtl_addi(&id_dest->reg,&id_src->val,id_src2->val);
-  rtl_addi(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src->val);
+  rtl_addi(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
   //rtl_addi(&cpu.gpr[id_dest->reg]._32,&cpu.gpr[id_src->reg]._32,id_src->val);
 
 }
