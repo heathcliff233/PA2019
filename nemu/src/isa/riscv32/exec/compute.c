@@ -22,8 +22,8 @@ make_EHelper(j){
 make_EHelper(jal){
   //rtl_addi(&id_dest->reg, &cpu.pc, 4);
   //rtl_j(id_src->val);
-  reg_l(id_dest->reg)=cpu.pc+4;
-  printf("%d\n",id_dest->reg);
+  cpu.gpr[id_dest->reg]._32=cpu.pc+4;
+  //printf("%d\n",id_dest->reg);
   int offset = (int32_t)id_src->val;
   offset = (offset>>25);
   cpu.pc=cpu.pc+offset;
