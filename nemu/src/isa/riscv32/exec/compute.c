@@ -23,7 +23,8 @@ make_EHelper(j){
 make_EHelper(jal){
   //rtl_addi(&id_dest->reg, &cpu.pc, 4);
   //rtl_j(id_src->val);
-  reg_l(/*id_dest->reg*/1)=cpu.pc+4;
+  //reg_l(/*id_dest->reg*/1)=cpu.pc+4;
+  cpu.gpr[1]._32=cpu.pc+4;
   //int offset = (int32_t)id_src->val;
   //offset = (offset>>25);
   cpu.pc=cpu.pc+0xc;
@@ -33,8 +34,8 @@ make_EHelper(jal){
 
 make_EHelper(add){
   //rtl_addi(&id_dest->reg,&id_src->val,id_src2->val);
-  //rtl_addi(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src->val);
-  rtl_addi(&cpu.gpr[id_dest->reg]._32,&cpu.gpr[id_src->reg]._32,id_src->val);
+  rtl_addi(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src->val);
+  //rtl_addi(&cpu.gpr[id_dest->reg]._32,&cpu.gpr[id_src->reg]._32,id_src->val);
 
 }
 
