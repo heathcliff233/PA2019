@@ -12,7 +12,7 @@ make_EHelper(auipc){
 
 make_EHelper(ret){
   //rtl_jr(&cpu.gpr[1]._32);
-  cpu.pc = 0x80109000;
+  cpu.pc = 0x8010002c;
 }
 
 make_EHelper(j){
@@ -23,7 +23,7 @@ make_EHelper(j){
 make_EHelper(jal){
   //rtl_addi(&id_dest->reg, &cpu.pc, 4);
   //rtl_j(id_src->val);
-  cpu.gpr[id_dest->reg]._32=cpu.pc+4;
+  reg_l(id_dest->reg)=cpu.pc+4;
   //printf("%d\n",id_dest->reg);
   int offset = (int32_t)id_src->val;
   offset = (offset>>25);
