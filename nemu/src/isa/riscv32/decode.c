@@ -70,17 +70,17 @@ make_DHelper(JR) {
 
 make_DHelper(BQ) {
    decode_op_i(id_dest, (decinfo.isa.instr.imm4_1<<1)+(decinfo.isa.instr.simm11_5<<5)+(decinfo.isa.instr.simm12<<12)+(decinfo.isa.instr.imm11<<11),true);
-  decode_op_r(id_src, decinfo.isa.instr.rs1, false);
-  decode_op_r(id_src2,decinfo.isa.instr.rs2, false);
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+  decode_op_r(id_src2,decinfo.isa.instr.rs2, true);
 }   
 
 make_DHelper(EC) {
   decode_op_r(id_dest, decinfo.isa.instr.rd, false);
-  decode_op_r(id_src, decinfo.isa.instr.rs1, false);
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true );
 }
 
 make_DHelper(Math) {
-  decode_op_r(id_src, decinfo.isa.instr.rs1, false);
-  decode_op_r(id_src2,decinfo.isa.instr.rs2, false);
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true );
+  decode_op_r(id_src2,decinfo.isa.instr.rs2, true );
   decode_op_r(id_dest,decinfo.isa.instr.rd,  false);
 }
