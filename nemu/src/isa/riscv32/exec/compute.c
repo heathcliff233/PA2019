@@ -39,7 +39,7 @@ make_EHelper(jal){
   }
   
   decinfo_set_jmp(true);
-  printf("jump\n");
+  //printf("jump\n");
   print_asm_template3(jal);
 }
 
