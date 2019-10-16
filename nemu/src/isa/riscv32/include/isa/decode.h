@@ -57,4 +57,8 @@ make_DHelper(ld);
 make_DHelper(st);
 make_DHelper(J);
 make_DHelper(Addi);
+make_DHelper(JR);
+make_DHelper(BQ);
+make_DHelper(EC);
+make_DHelper(Math);
 #endif

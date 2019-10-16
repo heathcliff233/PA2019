@@ -43,10 +43,29 @@ make_EHelper(jal){
   print_asm_template3(jal);
 }
 
-make_EHelper(add){
+make_EHelper(addi){
   //rtl_addi(&id_dest->reg,&id_src->val,id_src2->val);
   rtl_addi(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
   //rtl_addi(&cpu.gpr[id_dest->reg]._32,&cpu.gpr[id_src->reg]._32,id_src->val);
 
+}
+
+make_EHelper(bq) {
+  int sign =(int) (id_src->val ==id_src2->val);
+  cpu.pc = cpu.pc+sign*id_dest->val;  
+}
+
+make_EHelper(jr) {
+  reg_l(id_dest->reg)=cpu.pc+4;
+  cpu.pc = id_src->val + (id_src2->val&(~0x1));
+  decinfo_set_jmp(true);
+
+}
+
+make_EHelper(ec){
+}
+
+make_EHelper(math){
+  id_dest->val = id_src->val + id_src2->val;
 }
 
