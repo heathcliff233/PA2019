@@ -64,8 +64,15 @@ make_EHelper(jr) {
 
 make_EHelper(ec){
 }
-
+/*
 make_EHelper(math){
   id_dest->val = id_src->val + id_src2->val;
 }
+*/
 
+make_EHelper(add){
+  switch(decinfo.isa.instr.funct7>>5){
+    case 0: rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+	case 1: rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  }
+}

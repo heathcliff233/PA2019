@@ -13,6 +13,16 @@ static make_EHelper(load) {
 static OpcodeEntry store_table [8] = {
   EMPTY, EMPTY, EXW(st, 4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
 };
+
+static OpcodeEntry math_table [8] = {
+  EXW(add,4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
+};
+
+static make_EHelper(math) {
+  //decinfo.width = math_table[decinfo.isa.instr.func3].width;
+  idex(pc, &math_table[decinfo.isa.instr.funct3]);
+}
+
 /*
 static OpcodeEntry jmp_table [8] = {
   EXW(j,4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EXW(jal,4)
