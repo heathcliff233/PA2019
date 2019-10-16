@@ -9,13 +9,13 @@ make_EHelper(auipc){
   reg_l(id_dest->reg)=cpu.pc+((int32_t)id_src->val);
   print_asm_template2(aupic);
 }
-
+/*
 make_EHelper(ret){
   //rtl_jr(&cpu.gpr[1]._32);
   cpu.pc = reg_l(1);
   decinfo_set_jmp(true);
 }
-/*
+
 make_EHelper(j){
   rtl_j(id_src->val);
 }
@@ -71,8 +71,10 @@ make_EHelper(math){
 */
 
 make_EHelper(add){
-  switch(decinfo.isa.instr.funct7>>5){
-    case 0: rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
-	case 1: rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  if(decinfo.isa.instr.funct7 == 0){
+	  rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  }else{
+	  rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
   }
 }
+
