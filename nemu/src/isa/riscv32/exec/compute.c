@@ -81,9 +81,16 @@ make_EHelper(add){
 
 make_EHelper(sr) {
   if(decinfo.isa.instr.funct7 == 0) {
-    reg_l(id_dest->reg)=(int32_t)((uint32_t)reg_l(id_src->reg))>>reg_l(id_src2->reg);
+    rtl_shr(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
   }else{
-    reg_l(id_dest->reg)=((int32_t)reg_l(id_src->reg))>>reg_l(id_src2->reg); 
+    rtl_sar(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg)); 
   }
 }
 
+make_EHelper(div) {
+  if(decinfo.isa.instr.funct7 == 0) {
+	rtl_xor(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  }else{
+	rtl_idiv_q(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  }
+}

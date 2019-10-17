@@ -11,6 +11,7 @@ make_EHelper(nemu_trap);
 make_EHelper(add);
 make_EHelper(sub);
 make_EHelper(sr);
+make_EHelper(div);
 
 make_EHelper(auipc);
 make_EHelper(ret);
