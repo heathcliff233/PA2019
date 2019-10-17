@@ -41,7 +41,7 @@ static make_EHelper(store) {
 
 static OpcodeEntry opcode_table [32] = {
   /* b00 */ IDEX(ld, load), EMPTY, EMPTY, EMPTY, IDEX(Addi,addi), IDEX(U,auipc), EMPTY, EMPTY,
-  /* b01 */ IDEX(st, store), EMPTY, IDEX(Math,math), EMPTY, EMPTY, IDEX(U, lui), EMPTY, EMPTY,
+  /* b01 */ IDEX(st, store), EMPTY, EMPTY, EMPTY, IDEX(Math,math), IDEX(U, lui), EMPTY, EMPTY,
   /* b10 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b11 */ IDEX(BQ,bq), IDEX(JR, jr), EX(nemu_trap), IDEX(J,jal),IDEX(EC,ec), EMPTY, EMPTY, EMPTY,
 };
