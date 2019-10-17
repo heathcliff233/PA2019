@@ -71,11 +71,19 @@ make_EHelper(math){
 */
 
 make_EHelper(add){
-  printf("shit");
+  //printf("shit");
   if(decinfo.isa.instr.funct7 == 0){
 	  rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
   }else{
 	  rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  }
+}
+
+make_EHelper(sr) {
+  if(decinfo.isa.instr.funct7 == 0) {
+    reg_l(id_dest->reg)=(int32_t)((uint32_t)reg_l(id_src->reg))>>reg_l(id_src2->reg);
+  }else{
+    reg_l(id_dest->reg)=((int32_t)reg_l(id_src->reg))>>reg_l(id_src2->reg); 
   }
 }
 
