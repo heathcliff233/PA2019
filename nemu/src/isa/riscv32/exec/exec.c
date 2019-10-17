@@ -15,12 +15,12 @@ static OpcodeEntry store_table [8] = {
 };
 
 static OpcodeEntry math_table [8] = {
-  EXW(add,4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
+  EXW(add,4), EMPTY, EMPTY, EMPTY, EMPTY, EXW(sr,4), EMPTY, EMPTY
 };
 
 static make_EHelper(math) {
   //decinfo.width = math_table[decinfo.isa.instr.func3].width;
-  printf("%d",decinfo.isa.instr.funct3);
+  //printf("%d",decinfo.isa.instr.funct3);
   idex(pc, &math_table[decinfo.isa.instr.funct3]);
 }
 
