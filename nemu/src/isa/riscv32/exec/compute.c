@@ -71,7 +71,7 @@ make_EHelper(math){
 */
 
 make_EHelper(add){
-  printf("%d",decinfo.isa.instr.funct7);
+  printf("shit");
   if(decinfo.isa.instr.funct7 == 0){
 	  rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
   }else{
