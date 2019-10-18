@@ -22,7 +22,7 @@ make_EHelper(j){
 */
 
 make_EHelper(jal){
-  rtl_addi(&id_dest->reg, &cpu.pc, 4);
+  rtl_addi(&reg_l(id_dest->reg), &cpu.pc, 4);
   //rtl_j(id_src->val);
   //reg_l(/*id_dest->reg*/1)=cpu.pc+4;
   //reg_l(id_dest->reg)=cpu.pc+4;
@@ -30,7 +30,8 @@ make_EHelper(jal){
   //offset = (offset>>25);
   
   //reg_l(id_dest->reg)=cpu.pc+4;
-  
+
+/*  
   if(!(id_src->val&0x100000)){
     cpu.pc=(id_src->val+cpu.pc)&(~1);
   }
@@ -39,7 +40,9 @@ make_EHelper(jal){
 	int32_t offset = (int32_t)id_src->val;
 	cpu.pc = (cpu.pc + offset)&(~1);
   }
-  
+*/  
+  cpu.pc = (uint32_t) reg_l(id_src->reg)+(((int32_t)id_src->val)<<20>>20);
+
   decinfo_set_jmp(true);
   //printf("jump\n");
   print_asm_template3(jal);
