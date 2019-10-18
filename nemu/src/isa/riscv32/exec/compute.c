@@ -24,7 +24,7 @@ make_EHelper(addi){
 }
 
 make_EHelper(bq) {
-  int sign =(int) (reg_l(id_src->val) == reg_l(id_src2->reg));
+  int sign =(int) (reg_l(id_src->reg) == reg_l(id_src2->reg));
   cpu.pc = cpu.pc+sign*id_dest->val;  
 }
 
