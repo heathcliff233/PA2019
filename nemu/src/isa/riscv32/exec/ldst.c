@@ -22,3 +22,9 @@ make_EHelper(st) {
     default: assert(0);
   }
 }
+
+make_EHelper(lbu) {
+  rtl_lm(&s0, &id_src->addr, decinfo.width);
+  rtl_sr(id_dest->reg, &s0, 1);
+
+}
