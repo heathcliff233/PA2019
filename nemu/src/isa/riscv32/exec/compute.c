@@ -100,3 +100,9 @@ make_EHelper(div) {
 make_EHelper(rem) {
   rtl_div_r(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
 }
+
+make_EHelper(sltu) {
+  rtl_sub(&s0,&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  if(s0<0) reg_l(id_dest->reg)=1;
+  else reg_l(id_dest->reg)=0;
+}
