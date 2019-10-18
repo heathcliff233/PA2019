@@ -90,7 +90,11 @@ make_EHelper(sr) {
 }
 
 make_EHelper(sl) {
-  rtl_shl(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  if(decinfo.isa.instr.funct7==0x1){
+	rtl_shl(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  }else if(decinfo.isa.instr.funct7==0x1){
+    rtl_mul_hi(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  }
 }
 
 make_EHelper(div) {
