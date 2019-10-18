@@ -89,6 +89,10 @@ make_EHelper(sr) {
   }
 }
 
+make_EHelper(sl) {
+  rtl_shl(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+}
+
 make_EHelper(div) {
   if(decinfo.isa.instr.funct7 == 0) {
 	rtl_xor(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
