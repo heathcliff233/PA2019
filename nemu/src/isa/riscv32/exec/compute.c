@@ -22,20 +22,22 @@ make_EHelper(j){
 */
 
 make_EHelper(jal){
-  //rtl_addi(&id_dest->reg, &cpu.pc, 4);
+  rtl_addi(&id_dest->reg, &cpu.pc, 4);
   //rtl_j(id_src->val);
   //reg_l(/*id_dest->reg*/1)=cpu.pc+4;
   //reg_l(id_dest->reg)=cpu.pc+4;
   //int offset = (int32_t)id_src->val;
   //offset = (offset>>25);
-  reg_l(id_dest->reg)=cpu.pc+4;
+  
+  //reg_l(id_dest->reg)=cpu.pc+4;
+  
   if(!(id_src->val&0x100000)){
-    cpu.pc=id_src->val+cpu.pc;
+    cpu.pc=(id_src->val+cpu.pc)&~1;
   }
   else{
     id_src->val=id_src->val | 0xfff00000;
 	int32_t offset = (int32_t)id_src->val;
-	cpu.pc = cpu.pc + offset;
+	cpu.pc = (cpu.pc + offset)&~1;
   }
   
   decinfo_set_jmp(true);
