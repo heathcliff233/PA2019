@@ -41,6 +41,10 @@ make_EHelper(sltiu){
   else reg_l(id_dest->reg)=0;
 }
 
+make_EHelper(andi){
+  rtl_andi(&reg_l(id_dest->reg), &reg_l(id_src->reg),id_src2->val);
+}
+
 make_EHelper(bq) {
   int sign =(int) (reg_l(id_src->reg) == reg_l(id_src2->reg));
   cpu.pc = cpu.pc+sign*id_dest->val;  

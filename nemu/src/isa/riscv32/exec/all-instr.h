@@ -21,11 +21,14 @@ make_EHelper(sltu);
 make_EHelper(auipc);
 make_EHelper(ret);
 make_EHelper(jal);
+
 make_EHelper(addi);
 make_EHelper(slli);
 make_EHelper(srli);
 make_EHelper(slti);
 make_EHelper(sltiu);
+make_EHelper(andi);
+
 make_EHelper(jr);
 make_EHelper(bq);
 make_EHelper(ec);
