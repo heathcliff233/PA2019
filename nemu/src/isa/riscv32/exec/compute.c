@@ -43,7 +43,7 @@ make_EHelper(add){
 	  case 0 : rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
 	  case 1 : rtl_mul_lo(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
 	  case 32: rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
-      default: assert(0);
+      //default: assert(0);
   }
 }
 
