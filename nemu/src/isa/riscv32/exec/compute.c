@@ -23,6 +23,10 @@ make_EHelper(addi){
   rtl_addi(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
 }
 
+make_EHelper(slli){
+  rtl_shli(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
+}
+
 make_EHelper(bq) {
   int sign =(int) (reg_l(id_src->reg) == reg_l(id_src2->reg));
   cpu.pc = cpu.pc+sign*id_dest->val;  
