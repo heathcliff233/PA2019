@@ -32,12 +32,12 @@ make_EHelper(jal){
   //reg_l(id_dest->reg)=cpu.pc+4;
   
   if(!(id_src->val&0x100000)){
-    cpu.pc=(id_src->val+cpu.pc)&~1;
+    cpu.pc=(id_src->val+cpu.pc)&(~1);
   }
   else{
     id_src->val=id_src->val | 0xfff00000;
 	int32_t offset = (int32_t)id_src->val;
-	cpu.pc = (cpu.pc + offset)&~1;
+	cpu.pc = (cpu.pc + offset)&(~1);
   }
   
   decinfo_set_jmp(true);
