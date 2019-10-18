@@ -30,7 +30,7 @@ make_EHelper(bq) {
 
 make_EHelper(jr) {
   reg_l(id_dest->reg)=cpu.pc+4;
-  cpu.pc = (reg_l(id_src->reg) + id_src->val)&(~0x1);
+  cpu.pc = (reg_l(id_src->reg) + id_src2->val)&(~0x1);
   decinfo_set_jmp(true);
 
 }
