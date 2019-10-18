@@ -12,7 +12,7 @@ make_EHelper(auipc){
 
 make_EHelper(jal){
   
-  reg_l(id_dest->reg)=cpu.pc+4;
+  if(id_dest->reg != 0) reg_l(id_dest->reg)=cpu.pc+4;
   cpu.pc = (uint32_t)((int32_t)cpu.pc+(((int32_t)id_src->val)<<12>>12));
 
   decinfo_set_jmp(true);
@@ -55,7 +55,7 @@ make_EHelper(bq) {
 }
 
 make_EHelper(jr) {
-  reg_l(id_dest->reg)=cpu.pc+4;
+  if(id_dest->reg != 0) reg_l(id_dest->reg)=cpu.pc+4;
   cpu.pc = (reg_l(id_src->reg) + id_src2->val)&(~0x1);
   decinfo_set_jmp(true);
 
