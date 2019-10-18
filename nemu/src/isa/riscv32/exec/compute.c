@@ -82,6 +82,8 @@ make_EHelper(add){
 make_EHelper(sr) {
   if(decinfo.isa.instr.funct7 == 0) {
     rtl_shr(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  }else if(decinfo.isa.instr.funct7==0x1){
+    rtl_mul_lo(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
   }else{
     rtl_sar(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg)); 
   }
