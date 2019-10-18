@@ -88,9 +88,11 @@ make_EHelper(sr) {
 }
 
 make_EHelper(div) {
+  printf("shjt");
   if(decinfo.isa.instr.funct7 == 0) {
 	rtl_xor(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
   }else{
 	rtl_idiv_q(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
   }
 }
+
