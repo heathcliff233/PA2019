@@ -102,7 +102,9 @@ make_EHelper(rem) {
 }
 
 make_EHelper(sltu) {
-  rtl_sub(&s0,&reg_l(id_src->reg),&reg_l(id_src2->reg));
-  if(s0<0) reg_l(id_dest->reg)=1;
-  else reg_l(id_dest->reg)=0;
+  if((uint32_t)reg_l(id_src->reg) < (uint32_t)reg_l(id_src2->reg)) {
+	  reg_l(id_dest->reg)=1;
+  }else {
+	  reg_l(id_dest->reg)=0;
+  }
 }
