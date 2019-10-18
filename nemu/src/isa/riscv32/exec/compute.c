@@ -27,6 +27,20 @@ make_EHelper(slli){
   rtl_shli(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
 }
 
+make_EHelper(srli){
+  rtl_shri(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
+}
+
+make_EHelper(slti){
+  if(reg_l(id_src->reg) < id_src2->val) reg_l(id_dest->reg)=1;
+  else reg_l(id_dest->reg)=0;
+}
+
+make_EHelper(sltiu){
+  if(reg_l(id_src->reg) < (uint32_t)id_src2->val) reg_l(id_dest->reg)=1;
+  else reg_l(id_dest->reg)=0;
+}
+
 make_EHelper(bq) {
   int sign =(int) (reg_l(id_src->reg) == reg_l(id_src2->reg));
   cpu.pc = cpu.pc+sign*id_dest->val;  
