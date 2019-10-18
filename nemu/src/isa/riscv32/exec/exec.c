@@ -2,7 +2,7 @@
 #include "all-instr.h"
 
 static OpcodeEntry load_table [8] = {
-  EMPTY, EMPTY, EXW(ld, 4), EMPTY, EXW(lbu,4), EMPTY, EMPTY, EMPTY
+  EMPTY, EMPTY, EXW(ld, 4), EMPTY, EXW(ld,4), EMPTY, EMPTY, EMPTY
 };
 
 static make_EHelper(load) {
@@ -11,7 +11,7 @@ static make_EHelper(load) {
 }
 
 static OpcodeEntry store_table [8] = {
-  EXW(sb,4), EMPTY, EXW(st, 4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
+  EXW(st,4), EMPTY, EXW(st, 4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
 };
 
 static OpcodeEntry math_table [8] = {

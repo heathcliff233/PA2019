@@ -23,11 +23,3 @@ make_EHelper(st) {
   }
 }
 
-make_EHelper(lbu) {
-  rtl_lm(&s0, &id_src->addr, decinfo.width);
-  rtl_sr(id_dest->reg, &s0, 1);
-}
-
-make_EHelper(sb) {
-  rtl_sm(&id_src->addr, &id_dest->val, 1);
-}
