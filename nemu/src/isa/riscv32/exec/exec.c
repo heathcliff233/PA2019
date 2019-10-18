@@ -30,7 +30,7 @@ static make_EHelper(math) {
 }
 
 static OpcodeEntry mathi_table [8] = {
-  EXW(addi,4), EXW(slli,4), EXW(slti,4), EXW(sltiu,4), EMPTY, EMPTY, EXW(srli,4), EXW(andi,4)
+  EXW(addi,4), EXW(slli,4), EXW(slti,4), EXW(sltiu,4), EMPTY, EXW(srai,4), EXW(srli,4), EXW(andi,4)
 };
 
 static make_EHelper(mathi) {
