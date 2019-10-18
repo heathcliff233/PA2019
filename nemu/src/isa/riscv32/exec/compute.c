@@ -58,11 +58,10 @@ make_EHelper(math){
 */
 
 make_EHelper(add){
-  //printf("shit");
-  if(decinfo.isa.instr.funct7 == 0){
-	  rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
-  }else{
-	  rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  switch(decinfo.isa.instr.funct7 ){
+	  case 0 : rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+	  case 1 : rtl_mul_lo(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+	  case 32: rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
   }
 }
 
