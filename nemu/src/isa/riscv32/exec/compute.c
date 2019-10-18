@@ -22,24 +22,11 @@ make_EHelper(j){
 */
 
 make_EHelper(jal){
-  //rtl_addi(&reg_l(id_dest->reg), &cpu.pc, 4);
+  
   reg_l(id_dest->reg)=cpu.pc+4;
-
-/*  
-  if(!(id_src->val&0x100000)){
-    cpu.pc=(id_src->val+cpu.pc)&(~1);
-  }
-  else{
-    id_src->val=id_src->val | 0xfff00000;
-	int32_t offset = (int32_t)id_src->val;
-	cpu.pc = (cpu.pc + offset)&(~1);
-  }
-*/  
-  printf("%d",id_src->reg);
-  cpu.pc = (uint32_t)(reg_l(id_src->reg)+(((int32_t)id_src->val)<<20>>20))&(~1);
+  cpu.pc = (uint32_t)((int32_t)cpu.pc+(((int32_t)id_src->val)<<12>>12))&(~1);
 
   decinfo_set_jmp(true);
-  //printf("jump\n");
   print_asm_template3(jal);
 }
 
