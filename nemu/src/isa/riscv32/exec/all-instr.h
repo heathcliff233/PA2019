@@ -13,6 +13,7 @@ make_EHelper(sub);
 make_EHelper(sr);
 make_EHelper(div);
 make_EHelper(rem);
+make_EHelper(slt);
 make_EHelper(sltu);
 
 make_EHelper(auipc);

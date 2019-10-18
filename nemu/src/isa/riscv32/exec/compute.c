@@ -108,3 +108,11 @@ make_EHelper(sltu) {
 	  reg_l(id_dest->reg)=0;
   }
 }
+
+make_EHelper(slt) {
+  if(reg_l(id_src->reg) < reg_l(id_src2->reg)) {
+	  reg_l(id_dest->reg)=1;
+  }else {
+	  reg_l(id_dest->reg)=0;
+  }
+}
