@@ -20,11 +20,11 @@ make_EHelper(jal){
 }
 
 make_EHelper(addi){
-  rtl_addi(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
+  rtl_addi(&reg_l(id_dest->reg),&reg_l(id_src->reg),(((int32_t)id_src2->val)<<20>>20));
 }
 
 make_EHelper(slli){
-  rtl_shli(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
+  rtl_shli(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val&0b000000111111);
 }
 
 make_EHelper(srli){
@@ -42,15 +42,19 @@ make_EHelper(sltiu){
 }
 
 make_EHelper(andi){
-  rtl_andi(&reg_l(id_dest->reg), &reg_l(id_src->reg),id_src2->val);
+  rtl_andi(&reg_l(id_dest->reg), &reg_l(id_src->reg),(((int32_t)id_src2->val)<<20>>20));
 }
 
 make_EHelper(srai){
-  rtl_sari(&reg_l(id_dest->reg),&reg_l(id_src->reg),(id_src2->val&0x11));
+  switch(id_src2->val>>6){
+	  case 0b010000: rtl_sari(&reg_l(id_dest->reg),&reg_l(id_src->reg),(id_src2->val&0b000000111111));break;
+	  case 0b000000: rtl_shri(&reg_l(id_dest->reg),&reg_l(id_src->reg),(id_src2->val&0b000000111111));break;
+	  default: assert(0);
+  }
 }
 
 make_EHelper(xori){
-  rtl_xori(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
+  rtl_xori(&reg_l(id_dest->reg),&reg_l(id_src->reg),(((int32_t)id_src2->val)<<20>>20));
 }
 
 make_EHelper(beq) {
@@ -109,7 +113,7 @@ make_EHelper(bltu) {
 
 make_EHelper(jr) {
   if(id_dest->reg != 0) reg_l(id_dest->reg)=cpu.pc+4;
-  cpu.pc = (reg_l(id_src->reg) + id_src2->val)&(~0x1);
+  cpu.pc = (reg_l(id_src->reg) + (((int32_t)id_src2->val)<<11>>11))&(~0x1);
   decinfo_set_jmp(true);
 
 }
