@@ -32,8 +32,10 @@ make_EHelper(andi);
 make_EHelper(srai);
 make_EHelper(xori);
 
+make_EHelper(beq);
+make_EHelper(bne);
+
 make_EHelper(jr);
-make_EHelper(bq);
 make_EHelper(ec);
 //make_EHelper(math);
 

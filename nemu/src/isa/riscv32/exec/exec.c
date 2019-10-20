@@ -37,6 +37,14 @@ static make_EHelper(mathi) {
   idex(pc, &mathi_table[decinfo.isa.instr.funct3]);
 }
 
+static OpcodeEntry bq_table [8] = {
+  EXW(beq,4), EXW(bne,4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
+};
+
+static make_EHelper(bq) {
+  idex(pc, &bq_table[decinfo.isa.instr.funct3]);
+}
+
 static OpcodeEntry opcode_table [32] = {
   /* b00 */ IDEX(ld, load), EMPTY, EMPTY, EMPTY, IDEX(Mathi,mathi), IDEX(U,auipc), EMPTY, EMPTY,
   /* b01 */ IDEX(st, store), EMPTY, EMPTY, EMPTY, IDEX(Math,math), IDEX(U, lui), EMPTY, EMPTY,
