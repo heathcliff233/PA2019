@@ -13,8 +13,8 @@ make_EHelper(auipc){
 make_EHelper(jal){
   
   if(id_dest->reg != 0) reg_l(id_dest->reg)=cpu.pc+4;
-  cpu.pc = (uint32_t)((int32_t)cpu.pc+(((int32_t)id_src->val)<<12>>12));
-
+  //cpu.pc = (uint32_t)((int32_t)cpu.pc+(((int32_t)id_src->val)<<12>>12));
+  cpu.pc = cpu.pc+id_src->val;
   decinfo_set_jmp(true);
   print_asm_template3(jal);
 }

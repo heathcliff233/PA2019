@@ -48,6 +48,7 @@ make_DHelper(ld) {
 make_DHelper(J){
   decode_op_i(id_src, (decinfo.isa.instr.imm10_1<<1)+(decinfo.isa.instr.imm11_<<11)+(decinfo.isa.instr.imm19_12<<12)+(decinfo.isa.instr.simm20<<20),true);
   decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+  id_src->val = (uint32_t)(((int32_t)id_src->val<<11)>>11);
 }
 
 make_DHelper(st) {
