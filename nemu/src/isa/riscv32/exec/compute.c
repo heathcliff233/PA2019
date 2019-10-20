@@ -32,7 +32,7 @@ make_EHelper(srli){
 }
 
 make_EHelper(slti){
-  if(reg_l(id_src->reg) < id_src2->val) reg_l(id_dest->reg)=1;
+  if((int32_t)reg_l(id_src->reg) < (int32_t)id_src2->val) reg_l(id_dest->reg)=1;
   else reg_l(id_dest->reg)=0;
 }
 
