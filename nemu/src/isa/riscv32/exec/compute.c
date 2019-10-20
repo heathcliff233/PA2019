@@ -66,7 +66,7 @@ make_EHelper(ec){
 
 make_EHelper(add){
   printf("%x,%x\n",reg_l(id_src->reg),reg_l(id_src2->reg));
-  switch(decinfo.isa.instr.funct7 ){
+  switch((int)decinfo.isa.instr.funct7 ){
 	  case 0 : rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
 	  case 1 : rtl_mul_lo(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
 	  case 32: rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
