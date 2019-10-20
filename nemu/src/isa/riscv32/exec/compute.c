@@ -49,6 +49,10 @@ make_EHelper(srai){
   reg_l(id_dest->reg) = reg_l(id_src->reg)>>(id_src2->val&0x11);
 }
 
+make_EHelper(xori){
+  rtl_xori(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
+}
+
 make_EHelper(bq) {
   int sign =(int) (reg_l(id_src->reg) == reg_l(id_src2->reg));
   cpu.pc = cpu.pc+sign*id_dest->val;  
@@ -65,14 +69,12 @@ make_EHelper(ec){
 }
 
 make_EHelper(add){
-  printf("%x,%x,%d\n",reg_l(id_src->reg),reg_l(id_src2->reg),decinfo.isa.instr.funct7);
   switch((int)decinfo.isa.instr.funct7 ){
 	  case 0 : rtl_add(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
 	  case 1 : rtl_mul_lo(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
 	  case 32: rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
       default: assert(0);
   }
-  printf("%d,%d\n",reg_l(id_dest->reg),decinfo.isa.instr.funct7);
 }
 
 make_EHelper(sr) {
