@@ -53,10 +53,16 @@ make_EHelper(xori){
   rtl_xori(&reg_l(id_dest->reg),&reg_l(id_src->reg),id_src2->val);
 }
 
-make_EHelper(bq) {
+make_EHelper(beq) {
   int sign =(int) (reg_l(id_src->reg) == reg_l(id_src2->reg));
   cpu.pc = cpu.pc+sign*id_dest->val;  
 }
+
+make_EHelper(bne) {
+  int sign =(int) (reg_l(id_src->reg) != reg_l(id_src2->reg));
+  cpu.pc = cpu.pc+sign*id_dest->val;  
+}
+
 
 make_EHelper(jr) {
   if(id_dest->reg != 0) reg_l(id_dest->reg)=cpu.pc+4;
@@ -108,7 +114,7 @@ make_EHelper(div) {
 }
 
 make_EHelper(rem) {
-  rtl_div_r(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  rtl_idiv_r(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
 }
 
 make_EHelper(sltu) {
