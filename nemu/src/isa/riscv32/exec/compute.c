@@ -63,6 +63,9 @@ make_EHelper(bne) {
   cpu.pc = cpu.pc+sign*id_dest->val;  
 }
 
+make_EHelper(bge) {
+  if(!(reg_l(id_src->reg)<reg_l(id_src2->reg))) cpu.pc = cpu.pc+id_dest->val;
+}
 
 make_EHelper(jr) {
   if(id_dest->reg != 0) reg_l(id_dest->reg)=cpu.pc+4;
