@@ -71,7 +71,7 @@ make_EHelper(blt) {
   if(reg_l(id_src->reg)<reg_l(id_src2->reg)) cpu.pc = cpu.pc+id_dest->val;
 }
 
-make_EHelper(bgeiu) {
+make_EHelper(bgeu) {
   if(!((uint32_t)reg_l(id_src->reg)<(uint32_t)reg_l(id_src2->reg))) cpu.pc = cpu.pc+id_dest->val;
 }
 
