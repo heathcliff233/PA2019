@@ -55,28 +55,40 @@ make_EHelper(xori){
 
 make_EHelper(beq) {
   int sign =(int) (reg_l(id_src->reg) == reg_l(id_src2->reg));
-  cpu.pc = cpu.pc+sign*id_dest->val;  
+  cpu.pc = cpu.pc+sign*id_dest->val; 
+  decinfo_set_jmp(true); 
 }
 
 make_EHelper(bne) {
   int sign =(int) (reg_l(id_src->reg) != reg_l(id_src2->reg));
   cpu.pc = cpu.pc+sign*id_dest->val;  
+  decinfo_set_jmp(true); 
+
 }
 
 make_EHelper(bge) {
   if(!(reg_l(id_src->reg)<reg_l(id_src2->reg))) cpu.pc = cpu.pc+id_dest->val;
-}
+  decinfo_set_jmp(true); 
+
+} 
+
 
 make_EHelper(blt) {
   if(reg_l(id_src->reg)<reg_l(id_src2->reg)) cpu.pc = cpu.pc+id_dest->val;
+  decinfo_set_jmp(true); 
+
 }
 
 make_EHelper(bgeu) {
   if(!((uint32_t)reg_l(id_src->reg)<(uint32_t)reg_l(id_src2->reg))) cpu.pc = cpu.pc+id_dest->val;
+  decinfo_set_jmp(true); 
+
 }
 
 make_EHelper(bltu) {
   if((uint32_t)reg_l(id_src->reg)<(uint32_t)reg_l(id_src2->reg)) cpu.pc = cpu.pc+id_dest->val;
+  decinfo_set_jmp(true); 
+
 }
 
 
