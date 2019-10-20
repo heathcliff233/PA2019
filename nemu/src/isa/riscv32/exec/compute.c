@@ -72,6 +72,7 @@ make_EHelper(add){
 	  case 32: rtl_sub(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
       //default: assert(0);
   }
+  printf("%d\n",reg_l(id_dest->reg));
 }
 
 make_EHelper(sr) {
