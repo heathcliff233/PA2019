@@ -37,7 +37,7 @@ make_EHelper(slti){
 }
 
 make_EHelper(sltiu){
-  if(reg_l(id_src->reg) < (uint32_t)id_src2->val) reg_l(id_dest->reg)=1;
+  if((uint32_t)reg_l(id_src->reg)<(uint32_t)id_src2->val)reg_l(id_dest->reg)=1;
   else reg_l(id_dest->reg)=0;
 }
 
