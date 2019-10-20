@@ -4,8 +4,8 @@ make_EHelper(ld) {
 /*  rtl_lm(&s0, &id_src->addr, decinfo.width);
   rtl_sr(id_dest->reg, &s0, 4);
 */  
-  rtl_lm(&id_dest->reg, &id_src->addr, decinfo.width);
-  rtl_sr(id_dest->reg, &id_dest->reg, 4);
+  rtl_lm(&reg_l(id_dest->reg), &id_src->addr, decinfo.width);
+  rtl_sr(id_dest->reg, &reg_l(id_dest->reg), 4);
 
 
   switch (decinfo.width) {
