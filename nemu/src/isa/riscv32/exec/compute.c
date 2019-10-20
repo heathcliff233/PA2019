@@ -46,7 +46,7 @@ make_EHelper(andi){
 }
 
 make_EHelper(srai){
-  reg_l(id_dest->reg) = reg_l(id_src->reg)>>(id_src2->val&0x11);
+  reg_l(id_dest->reg) = (int32_t)reg_l(id_src->reg)>>(id_src2->val&0x11);
 }
 
 make_EHelper(xori){
