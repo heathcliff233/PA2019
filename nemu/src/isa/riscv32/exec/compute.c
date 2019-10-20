@@ -77,6 +77,10 @@ make_EHelper(add){
   }
 }
 
+make_EHelper(and) {
+  rtl_and(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+}
+
 make_EHelper(sr) {
   if(decinfo.isa.instr.funct7 == 0) {
     rtl_shr(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));

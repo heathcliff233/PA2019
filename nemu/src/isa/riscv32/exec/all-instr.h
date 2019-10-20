@@ -17,6 +17,7 @@ make_EHelper(div);
 make_EHelper(rem);
 make_EHelper(slt);
 make_EHelper(sltu);
+make_EHelper(and);
 
 make_EHelper(auipc);
 make_EHelper(ret);
