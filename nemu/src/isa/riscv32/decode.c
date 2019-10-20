@@ -70,10 +70,10 @@ make_DHelper(JR) {
 }
 
 make_DHelper(BQ) {
-   decode_op_i(id_dest, (decinfo.isa.instr.imm4_1<<1)+(decinfo.isa.instr.simm11_5<<5)+(decinfo.isa.instr.simm12<<12)+(decinfo.isa.instr.imm11<<11),true);
+   decode_op_i(id_dest, (decinfo.isa.instr.imm4_1<<1)+(decinfo.isa.instr.imm10_5<<5)+(decinfo.isa.instr.simm12<<12)+(decinfo.isa.instr.imm11<<11),true);
   decode_op_r(id_src, decinfo.isa.instr.rs1, true);
   decode_op_r(id_src2,decinfo.isa.instr.rs2, true);
-  id_dest->val = ((int32_t)id_dest->val)<<20>>20;
+  //id_dest->val = ((int32_t)id_dest->val)<<20>>20;
 }   
 
 make_DHelper(EC) {
