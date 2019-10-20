@@ -54,41 +54,56 @@ make_EHelper(xori){
 }
 
 make_EHelper(beq) {
-  int sign =(int) (reg_l(id_src->reg) == reg_l(id_src2->reg));
-  cpu.pc = cpu.pc+sign*id_dest->val; 
-  decinfo_set_jmp(true); 
+  if((int32_t)reg_l(id_src->reg) == (int32_t)reg_l(id_src2->reg)){
+	  int32_t shit = ((int32_t)id_dest->val<<19)>>19;
+      cpu.pc = cpu.pc+shit; 
+      decinfo_set_jmp(true); 
+  }
 }
 
 make_EHelper(bne) {
-  int sign =(int) (reg_l(id_src->reg) != reg_l(id_src2->reg));
-  cpu.pc = cpu.pc+sign*id_dest->val;  
-  decinfo_set_jmp(true); 
-
+  if((int32_t)reg_l(id_src->reg) != (int32_t)reg_l(id_src2->reg)){
+	   int32_t shit = ((int32_t)id_dest->val<<19)>>19;
+      cpu.pc = cpu.pc+shit; 
+      decinfo_set_jmp(true); 
+  }
 }
 
 make_EHelper(bge) {
-  if(!(reg_l(id_src->reg)<reg_l(id_src2->reg))) cpu.pc = cpu.pc+id_dest->val;
-  decinfo_set_jmp(true); 
+  if((int32_t)reg_l(id_src->reg) >= (int32_t)reg_l(id_src2->reg)){
+	  int32_t shit = ((int32_t)id_dest->val<<19)>>19;
+      cpu.pc = cpu.pc+shit; 
+      decinfo_set_jmp(true); 
+  }
 
 } 
 
 
 make_EHelper(blt) {
-  if(reg_l(id_src->reg)<reg_l(id_src2->reg)) cpu.pc = cpu.pc+id_dest->val;
-  decinfo_set_jmp(true); 
+  if((int32_t)reg_l(id_src->reg) < (int32_t)reg_l(id_src2->reg)){
+	  int32_t shit = ((int32_t)id_dest->val<<19)>>19;
+      cpu.pc = cpu.pc+shit; 
+      decinfo_set_jmp(true); 
+  }
 
 }
 
 make_EHelper(bgeu) {
-  if(!((uint32_t)reg_l(id_src->reg)<(uint32_t)reg_l(id_src2->reg))) cpu.pc = cpu.pc+id_dest->val;
-  decinfo_set_jmp(true); 
+  if((uint32_t)reg_l(id_src->reg) >= (uint32_t)reg_l(id_src2->reg)){
+	  int32_t shit = ((int32_t)id_dest->val<<19)>>19;
+      cpu.pc = cpu.pc+shit; 
+      decinfo_set_jmp(true); 
+  }
+
 
 }
 
 make_EHelper(bltu) {
-  if((uint32_t)reg_l(id_src->reg)<(uint32_t)reg_l(id_src2->reg)) cpu.pc = cpu.pc+id_dest->val;
-  decinfo_set_jmp(true); 
-
+  if((uint32_t)reg_l(id_src->reg) < (uint32_t)reg_l(id_src2->reg)){
+	  int32_t shit = ((int32_t)id_dest->val<<19)>>19;
+      cpu.pc = cpu.pc+shit; 
+      decinfo_set_jmp(true); 
+  }
 }
 
 
