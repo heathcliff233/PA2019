@@ -38,7 +38,7 @@ static make_EHelper(mathi) {
 }
 
 static OpcodeEntry bq_table [8] = {
-  EXW(beq,4), EXW(bne,4), EMPTY, EMPTY, EMPTY, EXW(bge,4), EMPTY, EMPTY
+  EXW(beq,4), EXW(bne,4), EMPTY, EMPTY, EXW(blt,4), EXW(bge,4), EMPTY, EMPTY
 };
 
 static make_EHelper(bq) {
