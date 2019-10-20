@@ -169,10 +169,13 @@ make_EHelper(rem) {
 }
 
 make_EHelper(sltu) {
-  if((uint32_t)reg_l(id_src->reg) < (uint32_t)reg_l(id_src2->reg)) {
-	  reg_l(id_dest->reg)=1;
-  }else {
-	  reg_l(id_dest->reg)=0;
+  switch(decinfo.isa.instr.funct7){
+	case 0: 
+	  if((uint32_t)reg_l(id_src->reg) < (uint32_t)reg_l(id_src2->reg)) reg_l(id_dest->reg)=1;
+      else reg_l(id_dest->reg)=0;break;
+	case 1:
+	  rtl_mul_hi(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
+	default: assert(0);
   }
 }
 
