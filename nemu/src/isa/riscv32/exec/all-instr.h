@@ -34,6 +34,7 @@ make_EHelper(xori);
 
 make_EHelper(beq);
 make_EHelper(bne);
+make_EHelper(bge);
 
 make_EHelper(jr);
 make_EHelper(ec);
