@@ -19,8 +19,8 @@ make_EHelper(ld) {
 }
 
 make_EHelper(ldd) {
-  rtl_sext(&id_src->addr, &id_src->addr, decinfo.width);
   rtl_lm(&s0, &id_src->addr, decinfo.width);
+  rtl_sext(&s0, &s0, decinfo.width);
   rtl_sr(id_dest->reg, &s0, 4);
 }
 
