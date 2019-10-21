@@ -141,7 +141,7 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   assert(width==1 || width==2 || width==4);
   switch(width){
     case 1: *dest = (int32_t)(int8_t)((*src1)&0xff);
-	case 2: *dest = (int32_t)(int16_t)((*src1)&0xff);
+	case 2: *dest = (int32_t)(int16_t)((*src1)&0xffff);
 	default : *dest = (int32_t)(*src1);
   }
 }
