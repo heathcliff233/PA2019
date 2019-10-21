@@ -180,7 +180,7 @@ make_EHelper(sltu) {
 }
 
 make_EHelper(slt) {
-  if(reg_l(id_src->reg) < reg_l(id_src2->reg)) {
+  if((int32_t)reg_l(id_src->reg) < (int32_t)reg_l(id_src2->reg)) {
 	  reg_l(id_dest->reg)=1;
   }else {
 	  reg_l(id_dest->reg)=0;
