@@ -135,28 +135,27 @@ make_EHelper(and) {
 }
 
 make_EHelper(sr) {
-  if(decinfo.isa.instr.funct7 == 0) {
-    rtl_shr(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
-  }else if(decinfo.isa.instr.funct7==0x1){
-    rtl_mul_lo(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
-  }else{
-    rtl_sar(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg)); 
+  switch((int)decinfo.isa.instr.funct7){
+	  case 0 : rtl_shr(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
+	  case 1 : rtl_idiv_q(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
+	  case 32:rtl_sar(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
+	  default: assert(0); 
   }
 }
 
 make_EHelper(sl) {
-  if(decinfo.isa.instr.funct7==0){
-	rtl_shl(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
-  }else if(decinfo.isa.instr.funct7==0x1){
-    rtl_imul_hi(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  switch((int)decinfo.isa.instr.funct7){
+	  case 0 : rtl_shl(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
+      case 1 : rtl_imul_hi(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
+      default : assert(0);
   }
 }
 
 make_EHelper(div) {
-  if(decinfo.isa.instr.funct7 == 0) {
-	rtl_xor(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
-  }else{
-	rtl_idiv_q(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));
+  switch((int)decinfo.isa.instr.funct7){
+	  case 0 : rtl_xor(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
+	  case 1 : rtl_div_q(&reg_l(id_dest->reg),&reg_l(id_src->reg),&reg_l(id_src2->reg));break;
+	  default : assert(0);
   }
 }
 
