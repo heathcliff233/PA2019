@@ -6,7 +6,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   int i = 0;
   bool ret = true;
   for(i=0;i<32;i++){
-    if((i>4&&i<10)||(i>11))continue;
+    if((i>4))continue;
 	if(cpu.gpr[i]._32 != ref_r->gpr[i]._32){
 	  printf("nemu get gpr[%4d]=0x%x while it should be 0x%xi\n",i,cpu.gpr[i]._32,ref_r->gpr[i]._32);
 	  ret = false;
