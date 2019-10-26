@@ -2,7 +2,7 @@
 #include <amdev.h>
 #include <nemu.h>
 
-#define RTC_PORT 0x48
+#define RTC_PORT 0xa1000048
 
 static _DEV_TIMER_UPTIME_t boot_time;
 
