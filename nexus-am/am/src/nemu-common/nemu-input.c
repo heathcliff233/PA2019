@@ -11,7 +11,8 @@ size_t __am_input_read(uintptr_t reg, void *buf, size_t size) {
       uint16_t tmp = inw(KBD_ADDR); 
 	  kbd->keydown = tmp & 0x8000 ?1:0;
       kbd->keycode = _KEY_NONE;
-	  kbd->keycode = tmp | 0x8000;
+	  //kbd->keycode = tmp | 0x8000;
+	  kbd->keycode = tmp & 0x7fff;
       return sizeof(_DEV_INPUT_KBD_t);
     }
   }
