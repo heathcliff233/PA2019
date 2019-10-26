@@ -2,6 +2,8 @@
 #include <amdev.h>
 #include <nemu.h>
 
+#define RTC_PORT 0x48
+
 static _DEV_TIMER_UPTIME_t boot_time;
 
 size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
@@ -10,7 +12,7 @@ size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
       _DEV_TIMER_UPTIME_t *uptime = (_DEV_TIMER_UPTIME_t *)buf;
       static uint32_t last_hi=0,last_lo=0;
 	  //uptime->hi = 0;
-      uptime->lo = inl(RTC_ADDR);
+      uptime->lo = inl(RTC_PORT);
       if(uptime->lo < last_lo) ++last_hi;
 	  last_lo = uptime->lo;
 	  uptime->hi = last_hi;
