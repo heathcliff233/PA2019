@@ -8,9 +8,11 @@ size_t __am_input_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_INPUT_KBD: {
       _DEV_INPUT_KBD_t *kbd = (_DEV_INPUT_KBD_t *)buf;
-      uint32_t data=inl(KBD_ADDR);
-	  kbd->keydown = data & KEYDOWN_MASK ? 1 : 0;
-      kbd->keycode = data & ~KEYDOWN_MASK;
+      uint16_t tmp = inw(KBD_ADDR); 
+	  kbd->keydown = tmp & 0x8000 ?1:0;
+      kbd->keycode = _KEY_NONE;
+	  //kbd->keycode = tmp | 0x8000;
+	  kbd->keycode = tmp & 0x7fff;
       return sizeof(_DEV_INPUT_KBD_t);
     }
   }
