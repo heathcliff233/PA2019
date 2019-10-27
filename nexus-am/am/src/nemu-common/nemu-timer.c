@@ -9,7 +9,7 @@ size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
     case _DEVREG_TIMER_UPTIME: {
       _DEV_TIMER_UPTIME_t *uptime = (_DEV_TIMER_UPTIME_t *)buf;
       static uint32_t last_hi=0,last_lo=0;
-      uptime->lo = inl(/*RTC_ADDR*/0xa1000050);
+      uptime->lo = inl(/*RTC_ADDR*/0xa1000052);
       if(uptime->lo < last_lo) ++last_hi;
 	  last_lo = uptime->lo;
 	  uptime->hi = last_hi;
