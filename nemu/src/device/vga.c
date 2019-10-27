@@ -30,12 +30,13 @@ static inline void update_screen() {
 
 static void vga_io_handler(uint32_t offset, int len, bool is_write) {
   // TODO: call `update_screen()` when writing to the sync register
-  TODO();
+  // TODO();
+  
 }
 
 void init_vga() {
   char title[128];
-  sprintf(title, "%s-NEMU", str(__ISA__));
+  sprintf(title, "%s-NEMU-by-Bright", str(__ISA__));
 
   SDL_Init(SDL_INIT_VIDEO);
   SDL_CreateWindowAndRenderer(SCREEN_W * 2, SCREEN_H * 2, 0, &window, &renderer);
