@@ -16,8 +16,9 @@ size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
 	  if(uptime->lo < boot_time.lo) uptime->hi--;
 	  uptime->lo -= boot_time.lo;
 */	  
+	  uint32_t ms = inl(RTC_ADDR)-boo_time;
 	  uptime->hi = 0;
-	  uptime->lo = inl(RTC_ADDR)-boo_time;
+	  uptime->lo = ms;
 	  return sizeof(_DEV_TIMER_UPTIME_t);
     }
     case _DEVREG_TIMER_DATE: {
