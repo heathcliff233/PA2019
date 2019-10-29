@@ -4,7 +4,9 @@
 
 #include <klib.h>
 
-static uint32_t* const fb __attribute__((used))=(uint32_t*)0x40000;
+#define W 400
+#define H 300
+static uint32_t fb[W*H] = {};
 
 size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
@@ -23,12 +25,14 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_FBCTL: {
       _DEV_VIDEO_FBCTL_t *ctl = (_DEV_VIDEO_FBCTL_t *)buf;
-      //int x=ctl->x,y=ctl->y,w=ctl->w,h=ctl->h;
-	  //uint32_t *pixels = ctl->pixels;
-	  int h=ctl->h;
+      int x=ctl->x,y=ctl->y,w=ctl->w,h=ctl->h;
+	  uint32_t *pixels = ctl->pixels;
+	  int cp_bytes;
+	  if(w < W-x) cp_bytes = sizeof(uint32_t)*w;
+	  else cp_bytes = sizeof(uint32_t)*(W-x);
 	  for(int j=0; j<h; j++){
-	    //memcpy(&fb[(y+j)*400+x],pixels,w*sizeof(uint32_t));
-		//pixels += w;
+		memcpy(&fb[(y+j)*W+x],pixels,cp_bytes);
+		pixels += w;
 	  }
 	  if (ctl->sync) {
         outl(SYNC_ADDR, 0);
