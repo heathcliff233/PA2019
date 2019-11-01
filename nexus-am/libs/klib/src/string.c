@@ -3,7 +3,9 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 size_t strlen(const char *s) {
-  return 0;
+  int i = 0;
+  while(s[i] != '\0')++i;
+  return i;
 }
 
 char *strcpy(char* dst,const char* src) {
@@ -14,7 +16,11 @@ char *strcpy(char* dst,const char* src) {
 }
 
 char* strncpy(char* dst, const char* src, size_t n) {
-  return NULL;
+  size_t dest_len = strlen(dst);
+  size_t i = 0;
+  for(i=0 ; i<n && src[i]!='\0'; ++i)dst[dest_len+i]=src[i];
+  dst[dest_len+i]='\0';
+  return dst;
 }
 
 char* strcat(char* dst, const char* src) {
