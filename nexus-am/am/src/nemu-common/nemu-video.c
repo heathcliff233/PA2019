@@ -1,6 +1,7 @@
 #include <am.h>
 #include <amdev.h>
 #include <nemu.h>
+#include <klib.h>
 
 size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
@@ -19,7 +20,8 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_FBCTL: {
       _DEV_VIDEO_FBCTL_t *ctl = (_DEV_VIDEO_FBCTL_t *)buf;
-	  int W = 300*400;
+	  int W = screen_width();
+	  int size = screen_width()*screen_height();
 	  uint32_t *fb=(uint32_t*)(uintptr_t)FB_ADDR;
 	  uint32_t *base = fb +ctl->y*W +ctl->x;
 	  for(int dy=0; dy < ctl->h; ++dy){
