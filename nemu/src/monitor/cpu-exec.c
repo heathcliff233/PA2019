@@ -1,7 +1,7 @@
 #include "nemu.h"
 #include "monitor/monitor.h"
 #include "monitor/watchpoint.h"
-
+WP *check_watchpoint();
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
@@ -57,15 +57,11 @@ void cpu_exec(uint64_t n) {
               "we do not record more instruction trace beyond this point.\n"
               "To capture more trace, you can modify the LOG_MAX macro in %s\n\n", __FILE__);
   }
-
-    /* TODO: check watchpoints here. */
-  
-  WP *wp = scan_wp();
-  if(wp != NULL){
-	printf("Hit watch point NO.%d at address %x with expression %s\n",wp->NO,wp->addr,wp->expr);
-	printf("old value: %d\tnew value: %d\n",wp->old_value,wp->new_value);
-	nemu_state.state = NEMU_STOP;
+  if(check_watchpoint()!=NULL){
+	  printf("watchpoint triggered");
+	  nemu_state.state=NEMU_STOP;
   }
+    /* TODO: check watchpoints here. */
 
 #endif
 

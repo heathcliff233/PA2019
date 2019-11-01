@@ -25,13 +25,14 @@ static inline make_DopHelper(r) {
 make_DHelper(U) {
   decode_op_i(id_src, decinfo.isa.instr.imm31_12 << 12, true);
   decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+
   print_Dop(id_src->str, OP_STR_SIZE, "0x%x", decinfo.isa.instr.imm31_12);
 }
 
-make_DHelper(Mathi) {
-  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
-  decode_op_i(id_src2, decinfo.isa.instr.simm11_0, true);
-  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+make_DHelper(J) {
+   decode_op_i(id_src,(decinfo.isa.instr.imm10_1<<1)+(decinfo.isa.instr.imm11_<<11)+(decinfo.isa.instr.imm19_12<<12)+(decinfo.isa.instr.simm20<<20) , true);
+   decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+   print_Dop(id_src->str, OP_STR_SIZE, "0x%x", decinfo.isa.instr.imm31_12);
 }
 
 make_DHelper(ld) {
@@ -44,12 +45,28 @@ make_DHelper(ld) {
 
   decode_op_r(id_dest, decinfo.isa.instr.rd, false);
 }
+make_DHelper(I) {
+    decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+    decode_op_i(id_src2, decinfo.isa.instr.simm11_0, true);
+  
+    print_Dop(id_src->str, OP_STR_SIZE, "%d(%s)", id_src2->val, reg_name(id_src->reg, 4));
+    decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+  }
 
-make_DHelper(J){
-  decode_op_i(id_src, (decinfo.isa.instr.imm10_1<<1)+(decinfo.isa.instr.imm11_<<11)+(decinfo.isa.instr.imm19_12<<12)+(decinfo.isa.instr.simm20<<20),true);
-  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
-  id_src->val = (uint32_t)(((int32_t)id_src->val<<11)>>11);
+make_DHelper(R) {
+      decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+      decode_op_r(id_src2, decinfo.isa.instr.rs2, true);     
+      print_Dop(id_src->str, OP_STR_SIZE, "%d(%s)", id_src2->val, reg_name(id_src->reg, 4));
+      decode_op_r(id_dest, decinfo.isa.instr.rd, false);
 }
+make_DHelper(B) {
+        decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+        decode_op_i(id_src2, (decinfo.isa.instr.simm12<<12)+(decinfo.isa.instr.imm11<<11)+(decinfo.isa.instr.imm10_5<<5)+(decinfo.isa.instr.imm4_1<<1), true);
+
+        print_Dop(id_src->str, OP_STR_SIZE, "%d(%s)", id_src2->val, reg_name(id_src->reg, 4));
+        decode_op_r(id_dest, decinfo.isa.instr.rs2, true);
+}
+
 
 make_DHelper(st) {
   decode_op_r(id_src, decinfo.isa.instr.rs1, true);
@@ -61,28 +78,4 @@ make_DHelper(st) {
   rtl_add(&id_src->addr, &id_src->val, &id_src2->val);
 
   decode_op_r(id_dest, decinfo.isa.instr.rs2, true);
-}
-
-make_DHelper(JR) {
-  decode_op_i(id_src2, decinfo.isa.instr.simm11_0,true);
-  decode_op_r(id_src,decinfo.isa.instr.rs1,true);  
-  decode_op_r(id_dest,decinfo.isa.instr.rd,false);
-}
-
-make_DHelper(BQ) {
-   decode_op_i(id_dest, (decinfo.isa.instr.imm4_1<<1)+(decinfo.isa.instr.imm10_5<<5)+(decinfo.isa.instr.simm12<<12)+(decinfo.isa.instr.imm11<<11),true);
-  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
-  decode_op_r(id_src2,decinfo.isa.instr.rs2, true);
-  //id_dest->val = ((int32_t)id_dest->val)<<20>>20;
-}   
-
-make_DHelper(EC) {
-  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
-  decode_op_r(id_src, decinfo.isa.instr.rs1, true );
-}
-
-make_DHelper(Math) {
-  decode_op_r(id_src, decinfo.isa.instr.rs1, true );
-  decode_op_r(id_src2,decinfo.isa.instr.rs2, true );
-  decode_op_r(id_dest,decinfo.isa.instr.rd,  false);
 }

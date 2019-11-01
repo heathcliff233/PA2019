@@ -1,7 +1,7 @@
 NAME = nemu
 
 ifneq ($(MAKECMDGOALS),clean) # ignore check for make clean
-ISA ?= x86 
+ISA ?= x86
 ISAS = $(shell ls src/isa/)
 $(info Building $(ISA)-$(NAME))
 
@@ -79,11 +79,6 @@ run: run-env
 gdb: run-env
 	$(call git_commit, "gdb")
 	gdb -s $(BINARY) --args $(NEMU_EXEC)
-
-current_lines := $(shell find . -name "*.c" -or -name "*.h" | xargs grep -Ev "^$$" | wc -l)
-
-count: 
-	@echo In total $(current_lines) lines of code in this branch
 
 clean:
 	-rm -rf $(BUILD_DIR)

@@ -4,96 +4,62 @@
 #include <time.h>
 #include <assert.h>
 #include <string.h>
-
 // this should be enough
 static char buf[65536];
-
 static int idx;
-
-uint32_t choose(uint32_t n){
-	uint32_t ran = rand()%n;
+uint32_t choose(uint32_t n) {	
+   	uint32_t ran=(rand()%n);
 	return ran;
-}
+ }
 
 static inline void gen_num(){
-	extern int idx;
-	int nu = rand()%10;
-	char pu = nu + '0';
-	buf[idx] = pu;
-	idx++;
+    extern int idx;
+   	int n=choose(9);
+	char c=n + '1';
+	buf[idx++]=c;
 }
-
-static inline void gen_nozero(){
+static inline void gen(char c){
 	extern int idx;
-	int nu = rand()%9;
-	char pu = nu + '1';
-	buf[idx] = pu;
-	idx++;
-}
-
-static inline void gen(char sig);
-
-static inline void gen_rand_expr();
-
-static inline void gen_rand_op();
-
-static inline void gen_nozero_expr() {
-//  buf[0] = '\0';
-  extern int idx; 
-  switch(choose(3)){
-	case 0 : gen_nozero(); break;
-	case 1 : gen('('); gen_rand_expr(); gen('+'); gen('1'); gen(')'); break;
-	case 2 : gen_rand_expr(); gen_rand_op();/* gen_rand_expr(); */ break;
-  }
+	buf[idx++]=c;
 }
 
 static inline void gen_rand_op(){
-    extern int idx;
-	int nu = random()%4;
-	char lst[] = {'+','-','*','/'};
-	char pu = lst[nu];
-	buf[idx] = pu;
-	idx++;
-
-	/* evil approach to not generating 0 after \/ */
-
-	if(nu == 3){
-		gen_nozero();
-	}else{
-		gen_rand_expr();
-	}
+   extern int idx;
+   	char c;
+   	switch(choose(4)){
+	   case 0: c='+'; buf[idx++]=c; break;
+	   case 1: c='-'; buf[idx++]=c; break;
+	   case 2: c='*'; buf[idx++]=c; break;
+	   default: c='/'; buf[idx++]=c; break;
+   }
 }
-
-static inline void gen(char sig){
-	extern int idx;
-	buf[idx] = sig;
-	idx++;
-}
-
 static inline void gen_rand_expr() {
-//  buf[0] = '\0';
-  extern int idx; 
-  switch(choose(3)){
-	case 0 : gen_num(); break;
-	case 1 : gen('('); gen_rand_expr(); gen(')'); break;
-	case 2 : gen_rand_expr(); gen_rand_op();/* gen_rand_expr(); */ break;
+	extern int idx;
+	switch(choose(3)){
+		case 0: gen('('); gen_rand_expr(); gen(')'); break;
+		case 1: gen_num(); break;
+		default:{
+				   	gen_rand_expr();
+				   	gen_rand_op();
+				    if(buf[idx-1]=='/'){
+						gen_num(); break;
+					}
+					else{
+                        gen_rand_expr();break;
+					}
+	}
   }
 }
-
 static char code_buf[65536];
 static char *code_format =
 "#include <stdio.h>\n"
-"int main() { "
+" int main() {"
 "  unsigned result = %s; "
 "  printf(\"%%u\", result); "
 "  return 0; "
 "}";
 
-
 int main(int argc, char *argv[]) {
-  extern int idx;
-  extern char buf[];
-  extern char code_buf[];
   int seed = time(0);
   srand(seed);
   int loop = 1;
@@ -102,13 +68,13 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
-	idx = 0;
-	memset(buf, 0, sizeof(buf));
-	memset(code_buf, 0, sizeof(code_buf));
-    gen_rand_expr();
-/*  add an end here  */	
-	buf[idx] = '\0';
-	sprintf(code_buf, code_format, buf);
+    idx=0;
+	memset(buf,0,sizeof(buf));
+    memset(code_buf,0,sizeof(code_buf));
+	gen_rand_expr();
+    buf[idx]='\0';	
+    sprintf(code_buf, code_format, buf);
+
     FILE *fp = fopen("/tmp/.code.c", "w");
     assert(fp != NULL);
     fputs(code_buf, fp);

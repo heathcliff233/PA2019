@@ -1,14 +1,9 @@
 #include "cpu/exec.h"
+#include "rtl/rtl.h"
 
 make_EHelper(ld) {
-
-  rtl_lm(&s0, &id_src->addr, decinfo.width);
-  rtl_sr(id_dest->reg, &s0, 4);
-
-/*	
   rtl_lm(&reg_l(id_dest->reg), &id_src->addr, decinfo.width);
   rtl_sr(id_dest->reg, &reg_l(id_dest->reg), 4);
-*/
 
   switch (decinfo.width) {
     case 4: print_asm_template2(lw); break;
@@ -17,14 +12,10 @@ make_EHelper(ld) {
     default: assert(0);
   }
 }
-
-make_EHelper(ldd) {
-  rtl_lm(&s0, &id_src->addr, decinfo.width);
-  rtl_sext(&s0, &s0, decinfo.width);
-  rtl_sr(id_dest->reg, &s0, 4);
+make_EHelper(lh) {
+     rtl_lm(&reg_l(id_dest->reg), &id_src->addr, decinfo.width);
+     rtl_sext(&reg_l(id_dest->reg), &reg_l(id_dest->reg), decinfo.width); 
 }
-
-
 make_EHelper(st) {
   rtl_sm(&id_src->addr, &id_dest->val, decinfo.width);
 
@@ -35,4 +26,3 @@ make_EHelper(st) {
     default: assert(0);
   }
 }
-
