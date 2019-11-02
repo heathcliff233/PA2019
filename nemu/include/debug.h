@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "monitor/log.h"
-volatile static int mother_fuckerrrr;
+volatile static int dum;
 #define Log(format, ...) \
     _Log("\33[1;34m[%s,%d,%s] " format "\33[0m\n", \
         __FILE__, __LINE__, __func__, ## __VA_ARGS__)
