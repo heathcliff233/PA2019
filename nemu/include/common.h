@@ -12,7 +12,7 @@
 
 /* You will define this macro in PA2 */
 #define HAS_IOE
-volatile static int dum;
+volatile static int dumm;
 #include <stdint.h>
 #include <assert.h>
 #include <string.h>
