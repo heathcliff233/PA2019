@@ -79,3 +79,9 @@ make_DHelper(st) {
 
   decode_op_r(id_dest, decinfo.isa.instr.rs2, true);
 }
+
+void raise_intr(uint32_t NO, vaddr_t epc);
+make_DHelper(EC){
+  raise_intr(0, cpu.pc);
+  decode_op_i(id_src, decinfo.isa.instr.simm11_0, true);
+}

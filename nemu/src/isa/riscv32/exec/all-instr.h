@@ -30,4 +30,4 @@ make_EHelper(sltu);
 make_EHelper(bltu);
 make_EHelper(ori);
 make_EHelper(slti);
-
+make_EHelper(ec);

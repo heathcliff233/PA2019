@@ -11,6 +11,11 @@ typedef struct {
   } gpr[32];
 
   vaddr_t pc;
+  
+  // CSR declaration
+  vaddr_t sepc;
+  vaddr_t scause;
+  vaddr_t stvec;
 
 } CPU_state;
 
