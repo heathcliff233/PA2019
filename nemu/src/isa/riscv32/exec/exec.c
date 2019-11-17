@@ -53,6 +53,15 @@ static make_EHelper(jmp) {
   idex(pc, &jmp_table[decinfo.isa.instr.funct3]);
 }
 
+static OpcodeEntry ec_table [8] = {
+  EX(ecb), EX(csrrw), EX(csrrs), EX(csrrc), EMPTY, EX(csrrwi), EX(csrrsi), EX(csrrci)
+};
+
+static make_EHelper(ec) {
+  decinfo.width = jmp_table[decinfo.isa.instr.funct3].width;
+  idex(pc, &ec_table[decinfo.isa.instr.funct3]);
+}
+
 static OpcodeEntry opcode_table [32] = {
   /* b00 */ IDEX(ld, load), EMPTY, EMPTY, EMPTY, IDEX(I,adim), IDEX(U,auipc), EMPTY, EMPTY,
   /* b01 */ IDEX(st, store), EMPTY, EMPTY, EMPTY, IDEX(R,ad), IDEX(U, lui), EMPTY, EMPTY,

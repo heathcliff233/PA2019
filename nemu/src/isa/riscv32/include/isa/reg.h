@@ -16,6 +16,7 @@ typedef struct {
   rtlreg_t sepc;
   rtlreg_t scause;
   rtlreg_t stvec;
+  rtlreg_t sstatus;
 
 } CPU_state;
 

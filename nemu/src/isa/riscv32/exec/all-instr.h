@@ -30,4 +30,14 @@ make_EHelper(sltu);
 make_EHelper(bltu);
 make_EHelper(ori);
 make_EHelper(slti);
-make_EHelper(ec);
+make_EHelper(ecb);
+make_EHelper(csrrc);
+make_EHelper(csrrs);
+make_EHelper(csrrw);
+make_EHelper(csrrci);
+make_EHelper(csrrsi);
+make_EHelper(csrrwi);
+
+
+
+
