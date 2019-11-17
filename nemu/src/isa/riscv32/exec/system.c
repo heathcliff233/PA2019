@@ -73,11 +73,11 @@ make_EHelper(csrrw){
 				   reg_l(id_dest->reg) = t;
 				   break;
        case 0x141: t = cpu.sepc; 
-				   cpu.sepc = 0;//reg_l(id_src->reg);
+				   cpu.sepc = reg_l(id_src->reg);
 				   reg_l(id_dest->reg) = t;
 				   break;
        case 0x105: t = cpu.stvec; 
-				   cpu.stvec = 0;//reg_l(id_src->reg);
+				   cpu.stvec = reg_l(id_src->reg);
 				   reg_l(id_dest->reg) = t;
 				   break;
        case 0x0  : break;
