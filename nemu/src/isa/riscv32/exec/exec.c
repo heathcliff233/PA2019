@@ -53,14 +53,8 @@ static make_EHelper(jmp) {
   idex(pc, &jmp_table[decinfo.isa.instr.funct3]);
 }
 
-
-/*
 static OpcodeEntry ec_table [8] = {
   EX(ecb), EX(csrrw), EX(csrrs), EX(csrrc), EMPTY, EX(csrrwi), EX(csrrsi), EX(csrrci)
-};
-*/
-static OpcodeEntry ec_table [8] = {
-  EX(ecb), EX(csrrw), EX(csrrs), EX(csrrc), EMPTY, EMPTY, EX(csrrsi), EX(csrrci)
 };
 
 static make_EHelper(ec) {
