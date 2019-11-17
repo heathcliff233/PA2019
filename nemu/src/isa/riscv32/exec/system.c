@@ -61,8 +61,6 @@ make_EHelper(csrrs){
   raise_intr(cpu.scause, cpu.pc);
 }
 
-/*
-
 make_EHelper(csrrw){
   uint32_t t;
   switch(id_src2->val){
@@ -87,7 +85,6 @@ make_EHelper(csrrw){
   if(id_dest->reg == 0) reg_l(0) = 0;
   raise_intr(cpu.scause, cpu.pc);
 }
-*/
 
 make_EHelper(csrrci){
   uint32_t t;
