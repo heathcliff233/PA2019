@@ -83,5 +83,5 @@ make_DHelper(st) {
 void raise_intr(uint32_t NO, vaddr_t epc);
 make_DHelper(EC){
   decode_op_i(id_src, decinfo.isa.instr.simm11_0, true);
-  raise_intr(id_src->val, cpu.gpr[2]._32);
+  raise_intr(id_src->val, cpu.pc);
 }
