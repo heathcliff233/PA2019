@@ -40,6 +40,6 @@ make_EHelper(csrrsi);
 make_EHelper(csrrwi);
 */
 make_EHelper(csrrs);
-
+make_EHelper(csrrsi);
 
 

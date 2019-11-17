@@ -60,7 +60,7 @@ static OpcodeEntry ec_table [8] = {
 };
 */
 static OpcodeEntry ec_table [8] = {
-  EX(ecb), EMPTY, EX(csrrs), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
+  EX(ecb), EMPTY, EX(csrrs), EMPTY, EMPTY, EMPTY, EX(csrrsi), EMPTY
 };
 
 static make_EHelper(ec) {
