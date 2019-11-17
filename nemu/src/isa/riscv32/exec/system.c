@@ -3,7 +3,7 @@
 
 void raise_intr(uint32_t NO, vaddr_t epc);
 
-make_EHelper(ec){
+make_EHelper(ecb){
 //  cpu.scause = instr_fetch(pc-4, 4);
   decinfo_set_jmp(true); 
   raise_intr(0,cpu.pc); 
