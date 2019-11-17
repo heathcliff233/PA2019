@@ -7,7 +7,6 @@ void raise_intr(uint32_t NO, vaddr_t epc) {
   rtl_li(&cpu.sepc, epc);
   rtl_li(&cpu.scause, NO);
   vaddr_t addr = cpu.stvec;
-  printf("%x\n",addr);
   cpu.pc = addr;
 }
 
