@@ -13,9 +13,9 @@ typedef struct {
   vaddr_t pc;
   
   // CSR declaration
-  vaddr_t sepc;
-  vaddr_t scause;
-  vaddr_t stvec;
+  rtlreg_t sepc;
+  rtlreg_t scause;
+  rtlreg_t stvec;
 
 } CPU_state;
 
