@@ -76,7 +76,8 @@ make_EHelper(csrrw){
 				   cpu.sepc = reg_l(id_src->reg);
 				   reg_l(id_dest->reg) = t;
 				   break;
-       case 0x105: t = cpu.stvec; 
+       case 0x105: t = cpu.stvec;
+				   printf("ass"); 
 				   cpu.stvec = reg_l(id_src->reg);
 				   printf("shit");
 				   reg_l(id_dest->reg) = t;
