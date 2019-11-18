@@ -45,7 +45,7 @@ make_EHelper(csrrc){
        case 0x0  : break;
   }
   if(id_dest->reg == 0) reg_l(0) = 0;
-  raise_intr(cpu.scause, cpu.pc);
+  //raise_intr(cpu.scause, cpu.pc);
 }
 
 
@@ -97,7 +97,7 @@ make_EHelper(csrrw){
        case 0x0  : break;
   }
   if(id_dest->reg == 0) reg_l(0) = 0;
-  raise_intr(cpu.scause, cpu.pc);
+  //raise_intr(cpu.scause, cpu.pc);
 }
 
 make_EHelper(csrrci){
@@ -122,7 +122,7 @@ make_EHelper(csrrci){
        case 0x0  : break;
   }
   if(id_dest->reg == 0) reg_l(0) = 0;
-  raise_intr(cpu.scause, cpu.pc);
+  //raise_intr(cpu.scause, cpu.pc);
 }
 
 
@@ -148,7 +148,7 @@ make_EHelper(csrrsi){
        case 0x0  : break;
   }
   if(id_dest->reg == 0) reg_l(0) = 0;
-  raise_intr(cpu.scause, cpu.pc);
+  //raise_intr(cpu.scause, cpu.pc);
 }
 
 make_EHelper(csrrwi){
@@ -173,6 +173,6 @@ make_EHelper(csrrwi){
        case 0x0  : break;
   }
   if(id_dest->reg == 0) reg_l(0) = 0;
-  raise_intr(cpu.scause, cpu.pc);
+  //raise_intr(cpu.scause, cpu.pc);
 }
 
