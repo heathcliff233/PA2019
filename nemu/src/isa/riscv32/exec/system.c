@@ -9,7 +9,7 @@ make_EHelper(ecb){
   if(id_src2->val == 0){
   	raise_intr(0,cpu.pc); 
   }
-  else if(id_src2->val == 2){
+  else if(id_src2->val == 0x102){
     /*	
 	uint32_t sipe = 0;
 	sipe = cpu.sstatus;
