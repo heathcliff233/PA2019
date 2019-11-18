@@ -16,7 +16,7 @@ make_EHelper(ecb){
 	cpu.sstatus |= 0x20;
 	cpu.sstatus &= 0xfffffeff;
 	*/
-	cpu.pc = cpu.sepc+4;
+	cpu.pc = cpu.sepc;
   }
   else{
     TODO();
