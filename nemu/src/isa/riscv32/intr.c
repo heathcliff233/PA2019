@@ -7,8 +7,8 @@ void raise_intr(uint32_t NO, vaddr_t epc) {
   rtl_li(&cpu.sepc, epc);
   rtl_li(&cpu.scause, NO);
   rtlreg_t addr = cpu.stvec;
-  //rtl_jr(&addr);
-  cpu.pc = addr;
+  rtl_jr(&addr);
+  //cpu.pc = addr;
 }
 
 bool isa_query_intr(void) {
