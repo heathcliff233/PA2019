@@ -9,8 +9,7 @@ _Context* __am_irq_handle(_Context *c) {
   printf("%d\n",c->cause);
   if (user_handler) {
     _Event ev = {0};
-    switch (c->cause) {
-		
+    switch (c->cause) {	
 		case 0x0: 
 			ev.event = _EVENT_YIELD;break;
 		case 0x80:
