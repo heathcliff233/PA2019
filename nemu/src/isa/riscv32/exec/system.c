@@ -7,6 +7,7 @@ make_EHelper(ecb){
 //  cpu.scause = instr_fetch(pc-4, 4);
 //  decinfo_set_jmp(true); 
   if(id_src2->val == 0){
+	TODO();
   	raise_intr(0,cpu.pc); 
   }
   else if(id_src2->val == 0x102){
