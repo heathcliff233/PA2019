@@ -8,18 +8,18 @@ make_EHelper(ecb){
 //  decinfo_set_jmp(true); 
   if(id_src2->val == 0){
   	raise_intr(0,cpu.pc); 
-  }/*
+  }
   else if(id_src2->val == 2){
-    	
+    /*	
 	uint32_t sipe = 0;
 	sipe = cpu.sstatus;
 	sipe = sipe<<26>>31<<1;
 	cpu.sstatus |= sipe;
 	cpu.sstatus |= 0x20;
 	cpu.sstatus &= 0xfffffeff;
-	
+	*/
 	cpu.pc = cpu.sepc;
-  }*/
+  }
   else{
     TODO();
   }
