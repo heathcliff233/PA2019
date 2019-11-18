@@ -4,10 +4,8 @@
 void raise_intr(uint32_t NO, vaddr_t epc);
 
 make_EHelper(ecb){
-//  cpu.scause = instr_fetch(pc-4, 4);
-//  decinfo_set_jmp(true); 
   if(id_src2->val == 0){
-  	//raise_intr(0,cpu.pc); 
+  	raise_intr(0,cpu.pc); 
   }
   else if(id_src2->val == 0x102){
     /*	
@@ -57,19 +55,19 @@ make_EHelper(csrrs){
   uint32_t t;
   switch(id_src2->val){
        case 0x142: t = cpu.scause; 
-				   cpu.scause |= reg_l(id_src->reg);
+				   cpu.scause = (t|reg_l(id_src->reg));
 				   reg_l(id_dest->reg) = t;
 				   break;
        case 0x100: t = cpu.sstatus;
-				   cpu.sstatus |= reg_l(id_src->reg);
+				   cpu.sstatus = (t|reg_l(id_src->reg));
 				   reg_l(id_dest->reg) = t;
 				   break;
        case 0x141: t = cpu.sepc; 
-				   cpu.sepc |= reg_l(id_src->reg);
+				   cpu.sepc = (t|reg_l(id_src->reg));
 				   reg_l(id_dest->reg) = t;
 				   break;
        case 0x105: t = cpu.stvec; 
-				   cpu.stvec |= reg_l(id_src->reg);
+				   cpu.stvec = (t|reg_l(id_src->reg));
 				   reg_l(id_dest->reg) = t;
 				   break;
        case 0x0  : break;
