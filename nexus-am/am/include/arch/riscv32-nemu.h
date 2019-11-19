@@ -3,7 +3,7 @@
 
 struct _Context {
   //struct _AddressSpace *as;
-  uintptr_t cause, status, epc, gpr[32];
+  uintptr_t gpr[32], cause, status, epc;
   struct _AddressSpace *as;
 };
 
