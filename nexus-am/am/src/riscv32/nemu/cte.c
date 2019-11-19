@@ -6,7 +6,7 @@ static _Context* (*user_handler)(_Event, _Context*) = NULL;
 
 _Context* __am_irq_handle(_Context *c) {
   _Context *next = c;
-  //printf("%d\n",c->cause);
+  printf("%d\n",c->cause);
   if (user_handler) {
     _Event ev = {0};
     switch (c->cause) {	
