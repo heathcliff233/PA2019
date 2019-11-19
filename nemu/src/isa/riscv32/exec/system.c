@@ -17,6 +17,7 @@ make_EHelper(ecb){
 	cpu.sstatus &= 0xfffffeff;
 	*/
 	cpu.pc = cpu.sepc+4;
+	decinfo_set_jmp(true);
   }
   else{
     TODO();
