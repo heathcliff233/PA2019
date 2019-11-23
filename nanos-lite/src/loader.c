@@ -21,8 +21,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   fs_read(file_no, (void*)RAM_ENTRY, size);
   return RAM_ENTRY;
   */
-  ramdisk_read((void*)RAM_ENTRY, 0, 0x497f);
-  ramdisk_read((void*)(RAM_ENTRY+0x5000), 0x5000, 0x83c);
+  //ramdisk_read((void*)RAM_ENTRY, 0, 0x497f);
+  //ramdisk_read((void*)(RAM_ENTRY+0x5000), 0x5000, 0x83c);
   //ramdisk_write((void*)(RAM_ENTRY+0x583c))
   return RAM_ENTRY;
 }
