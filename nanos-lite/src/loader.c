@@ -13,8 +13,8 @@
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  printf("fuckkkkkk\n");
   int file_no = fs_open(filename, 0, 0);
+  printf("fuckkkkkkkkkkkkkkk");
   size_t size = fs_size(file_no);
   printf("wtf???\n");
   fs_read(file_no, (void*)RAM_ENTRY, size);
