@@ -23,3 +23,5 @@ extern PCB *current;
 int fs_open(const char*, int, size_t);
 size_t fs_size(int);
 size_t fs_read(int, void*, size_t);
+
+void naive_uload(PCB*, const char*);
