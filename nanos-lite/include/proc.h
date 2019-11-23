@@ -19,3 +19,7 @@ typedef union {
 extern PCB *current;
 
 #endif
+
+int fs_open(const char*, int, size_t);
+size_t fs_size(int);
+size_t fs_read(int, void*, size_t);

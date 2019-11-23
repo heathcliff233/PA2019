@@ -9,9 +9,14 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 
+#define RAM_ENTRY 0x83000000
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
-  return 0;
+  //TODO();
+  int file_no = fs_open(filename, 0, 0);
+  size_t size = fs_size(file_no);
+  fs_read(file_no, (void*)RAM_ENTRY, size);
+  return RAM_ENTRY;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
