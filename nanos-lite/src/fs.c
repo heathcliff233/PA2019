@@ -38,26 +38,3 @@ void init_fs() {
   // TODO: initialize the size of /dev/fb
 }
 
-int fs_open(const char* pathname, int flag, int type){
-  for(int i=0; i<NR_FILES; ++i){
-    if(strcmp(file_table[i].name, pathname)) {
-		file_table[i].open_offset = 0;
-		return i;
-	}
-  }
-  printf("no such file !\n");
-  return 1;
-}
-
-size_t fs_read(int no, void *buf, size_t len){
-  ReadFn read = file_table[no].read==NULL ? (ReadFn)ramdisk_read : file_table[no].read;
-  if(file_table[no].open_offset+len > file_table[no].size) len=file_table[no].size-file_table[no].open_offset;
-  int ret = read(buf, file_table[no].open_offset+file_table[no].disk_offset, len);
-  file_table[no].open_offset += len;
-  return ret;
-
-}
-
-size_t fs_size(int no){
-  return file_table[no].size;
-}

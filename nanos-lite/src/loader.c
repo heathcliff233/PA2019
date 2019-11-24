@@ -13,18 +13,26 @@
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  /*
-  int file_no = fs_open(filename, 0, 0);
-  printf("fuckkkkkkkkkkkkkkk");
-  size_t size = fs_size(file_no);
-  printf("wtf???\n");
-  fs_read(file_no, (void*)RAM_ENTRY, size);
-  return RAM_ENTRY;
-  */
-  //ramdisk_read((void*)RAM_ENTRY, 0, 0x497f);
-  //ramdisk_read((void*)(RAM_ENTRY+0x5000), 0x5000, 0x83c);
-  //ramdisk_write((void*)(RAM_ENTRY+0x583c))
-  return RAM_ENTRY;
+  Elf_Ehdr elf;
+  ramdisk_read(&elf, 0, sizeof(elf));
+
+  Elf_Phdr segment[elf.e_phnum];
+  ramdisk_read(&segment, elf.e_phoff, elf.e_phentsize * elf.e_phnum);
+  
+  for(int i=0; i<elf.e_phnum; i++){
+    if(segment[i].p_type == PT_LOAD){
+	  size_t content[segment[i].p_filesz];
+	  ramdisk_read(content, segment[i].p_offset, segment[i].p_filesz);
+      uint32_t *anch1 = (uint32_t*)segment[i].p_vaddr;
+	  memcpy(anch1, content, segment[i].p_filesz);
+
+	  if(segment[i].p_memsz > segment[i].p_filesz){
+	    char* anch2 = (char*)(segment[i].p_vaddr + segment[i].p_filesz);
+		memset(anch2, 0, segment[i].p_memsz - segment[i].p_filesz);
+	  }
+	}
+  }
+  return elf.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
