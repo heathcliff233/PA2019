@@ -8,7 +8,7 @@ _Context* __am_irq_handle(_Context *c) {
   _Context *next = c;
   printf("cause %x\nstatus %x\nepc %x\n",c->cause,c->status,c->epc);
   printf("a21 %x\n",c->gpr[1]);
-  printf("%x\n",c->as);
+  //printf("%x\n",c->as);
   if (user_handler) {
     _Event ev = {0};
     switch (c->cause) {	
