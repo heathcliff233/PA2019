@@ -14,7 +14,7 @@ struct _Context {
   
 };
 
-#define GPR1 gpr[16]
+#define GPR1 cause
 #define GPR2 gpr[0]
 #define GPR3 gpr[0]
 #define GPR4 gpr[0]
