@@ -9,10 +9,11 @@ struct _Context {
   */
 
   struct _AddressSpace *as;
-  uintptr_t epc;
+  //uintptr_t epc;
   uintptr_t status; 
   uintptr_t cause;
-  uintptr_t gpr[31];
+  uintptr_t gpr[30];
+  uintptr_t epc;
   //struct _AddressSpace *as;
   
   
