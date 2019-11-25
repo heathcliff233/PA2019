@@ -3,7 +3,7 @@
 
 struct _Context {
   
-  uintptr_t gpr[30];
+  uintptr_t gpr[31];
   struct _AddressSpace *as;
   uintptr_t cause, status, epc;
   
