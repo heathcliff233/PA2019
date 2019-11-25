@@ -11,6 +11,7 @@ _Context* do_syscall(_Context *c) {
   switch (a[0]) {
 	  case SYS_exit :
 		  sys_exit(c);
+		  printf("exit successfully\n");
 		  break;
 	  case SYS_yield :
 		  sys_yield(c);
