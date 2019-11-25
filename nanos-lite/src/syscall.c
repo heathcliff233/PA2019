@@ -11,9 +11,21 @@ _Context* do_syscall(_Context *c) {
 		  break;
 	  case SYS_yield :
 		  _yield();
+		  printf("goooood\n");
+		  c->GPRx = 0;
+		  break;
+	  case SYS_brk :
+		  c->GPRx = 0;
 		  break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
   return NULL;
+}
+void sys_exit(_Context *c){
+  _halt(0);
+}
+
+void sys_yield(_Context *c){
+  _yield();
 }
