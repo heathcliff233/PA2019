@@ -6,7 +6,7 @@ static _Context* do_event(_Event e, _Context* c) {
 	case _EVENT_YIELD :
 	  printf("shit!!!\n");break;
     case _EVENT_SYSCALL :
-      printf("wrongwrongwrong!!");
+      printf("system call, generate luminate element!!\n");
 	  do_syscall(c); break;	   
     default: panic("Unhandled event ID = %d", e.event);
   }
