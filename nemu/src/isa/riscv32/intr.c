@@ -6,7 +6,7 @@ void raise_intr(uint32_t NO, vaddr_t epc) {
    */
   rtl_li(&cpu.sepc, epc);
   if(NO == -1){
-    rtl_li(&cpu.scause, 0);
+    rtl_li(&cpu.scause, -1);
   }else{
     rtl_li(&cpu.scause, 1);
   }
