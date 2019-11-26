@@ -11,6 +11,7 @@ make_EHelper(auipc){
 	int32_t se=(int32_t)id_src->val;
 	printf("se: %d\n",se);
 	reg_l(id_dest->reg)= cpu.pc+se;
+	printf("ra: %x\n",cpu.gpr[1]._32);
 	print_asm_template2(auipc);
 }
 make_EHelper(jal){
