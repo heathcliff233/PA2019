@@ -9,6 +9,7 @@ make_EHelper(lui) {
 }
 make_EHelper(auipc){
 	int32_t se=(int32_t)id_src->val;
+	printf("se: %d\n",se);
 	reg_l(id_dest->reg)= cpu.pc+se;
 	print_asm_template2(auipc);
 }
@@ -35,7 +36,7 @@ make_EHelper(jalr){
 	reg_l(id_dest->reg)=cpu.pc+4;
 	}
 	id_src2->val=id_src2->val<<11;
-	int32_t of=(int32_t)id_src2->val>>11; printf("of %d\n",of);
+	int32_t of=(int32_t)id_src2->val>>11;
 	cpu.pc=reg_l(id_src->reg)+of;
 	cpu.pc=cpu.pc&(~1);
 	decinfo_set_jmp(true);
