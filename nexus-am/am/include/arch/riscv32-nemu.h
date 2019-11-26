@@ -3,9 +3,9 @@
 
 struct _Context {
 
-  struct _AddressSpace *as;
-  uintptr_t gpr[31];
   //struct _AddressSpace *as;
+  uintptr_t gpr[31];
+  struct _AddressSpace *as;
   uintptr_t cause; 
   uintptr_t status;
   uintptr_t epc;
