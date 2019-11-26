@@ -31,6 +31,7 @@ void sys_exit(_Context *c){
 void sys_yield(_Context *c){
   _yield();
   c->GPRx = 0;
+  do_syscall(c);
 }
 
 void sys_brk(_Context *c){
