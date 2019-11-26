@@ -11,7 +11,6 @@ _Context* do_syscall(_Context *c) {
   switch (a[0]) {
 	  case SYS_exit :
 		  sys_exit(c);
-		  printf("exit successfully\n");
 		  break;
 	  case SYS_yield :
 		  sys_yield(c);
@@ -31,6 +30,8 @@ void sys_exit(_Context *c){
 void sys_yield(_Context *c){
   _yield();
   c->GPRx = 0;
+  c->GPR1 = 0;
+  do_syscall(c);
 }
 
 void sys_brk(_Context *c){
