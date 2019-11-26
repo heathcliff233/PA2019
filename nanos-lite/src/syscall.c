@@ -31,7 +31,7 @@ _Context* do_syscall(_Context *c) {
   return NULL;
 }
 void sys_exit(_Context *c){
-  _halt(0);
+  _halt(c->GPR2);
 }
 
 void sys_yield(_Context *c){
