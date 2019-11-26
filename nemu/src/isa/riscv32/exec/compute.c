@@ -38,8 +38,8 @@ make_EHelper(jalr){
 	}
 	id_src2->val=id_src2->val<<11;
 	int32_t of=(int32_t)id_src2->val>>11;
+	printf("regid:%d\n",id_src->reg);
 	cpu.pc=reg_l(id_src->reg)+of;
-	printf("pc jalr:%x\n",cpu.pc);
 	cpu.pc=cpu.pc&(~1);
 	decinfo_set_jmp(true);
 	print_asm_template3(jal);
