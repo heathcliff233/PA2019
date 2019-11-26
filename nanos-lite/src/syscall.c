@@ -10,15 +10,19 @@ _Context* do_syscall(_Context *c) {
 
   switch (a[0]) {
 	  case SYS_exit :
+		  printf("sys_exit\n");
 		  sys_exit(c);
 		  break;
 	  case SYS_yield :
+		  printf("sys_yield\n");
 		  sys_yield(c);
 		  break;
 	  case SYS_brk :
+		  printf("sys_brk\n");
 		  sys_brk(c);
 		  break;
 	  case SYS_write :
+		  printf("sys_write\n");
 		  sys_write(c);
 		  break;
     default: panic("Unhandled syscall ID = %d", a[0]);
@@ -47,12 +51,14 @@ void sys_write(_Context *c){
   char *ptr = (char*)(c->GPR3);
   uint32_t count = c->GPR4;
   if(fd == 1 || fd == 2){
-    for(int i=0; i<count; i++){
+    int i=0;
+	for(i=0; i<count; i++){
 	  _putc(ptr[i]);
-	  c->GPRx = i;
 	}
+  	c->GPRx = i;
   }else{
     c->GPRx = -1;
-	return;
   }
+  return;
+  
 }
