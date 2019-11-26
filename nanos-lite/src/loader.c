@@ -9,8 +9,6 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 
-#define RAM_ENTRY 0x83000000
-
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   Elf_Ehdr elf;
