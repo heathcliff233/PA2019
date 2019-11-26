@@ -11,7 +11,7 @@ _Context* __am_irq_handle(_Context *c) {
   printf("%x\n",c->as);
   if (user_handler) {
     _Event ev = {0};
-    switch (c->cause) {	
+    switch (c->gpr[17]/*c->cause*/) {	
 		case -1: 
 			ev.event = _EVENT_YIELD;break;
 		case 1:
