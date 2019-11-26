@@ -63,7 +63,15 @@ int _write(int fd, void *buf, size_t count) {
   return 0;
 }
 
+extern char _end;
+intptr_t p_break = &_end;
 void *_sbrk(intptr_t increment) {
+  intptr_t old_break = p_break;
+  p_break = old_break + increment;
+  if (_syscall_(SYS_brk, p_break, 0, 0) == 0)
+  {
+    return (void *)old_break;
+  }
   return (void *)-1;
 }
 
