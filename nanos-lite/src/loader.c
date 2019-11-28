@@ -1,5 +1,6 @@
 #include "proc.h"
 #include <elf.h>
+#include "fs.h"
 
 #ifdef __ISA_AM_NATIVE__
 # define Elf_Ehdr Elf64_Ehdr
@@ -10,18 +11,27 @@
 #endif
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  //TODO();
   Elf_Ehdr elf;
-  ramdisk_read(&elf, 0, sizeof(elf));
+  
+  //ramdisk_read(&elf, 0, sizeof(elf));
+  int fd = fs_open(filename, 0, 0);
+  fs_read(fd, &elf, sizeof(elf));
 
   Elf_Phdr segment[elf.e_phnum];
-  ramdisk_read(&segment, elf.e_phoff, elf.e_phentsize * elf.e_phnum);
   
+  //ramdisk_read(&segment, elf.e_phoff, elf.e_phentsize * elf.e_phnum);
+  fs_lseek(fd, elf.e_phoff, SEEK_SET);
+  fs_read(fd, &segment, elf.e_phnum * elf.e_phentsize);
+
   for(int i=0; i<elf.e_phnum; i++){
     if(segment[i].p_type == PT_LOAD){
 	  size_t content[segment[i].p_filesz];
-	  ramdisk_read(content, segment[i].p_offset, segment[i].p_filesz);
-      uint32_t *anch1 = (uint32_t*)segment[i].p_vaddr;
+	  
+	  //ramdisk_read(content, segment[i].p_offset, segment[i].p_filesz);
+      fs_lseek(fd, segment[i].p_offset, SEEK_SET);
+	  fs_read(fd, content, segment[i].p_filesz);
+
+	  uint32_t *anch1 = (uint32_t*)segment[i].p_vaddr;
 	  memcpy(anch1, content, segment[i].p_filesz);
 
 	  if(segment[i].p_memsz > segment[i].p_filesz){
