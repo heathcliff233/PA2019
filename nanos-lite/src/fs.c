@@ -91,11 +91,13 @@ size_t fs_write(int fd, void *buf, size_t len){
   //if (file_table[fd].write == NULL){
     size_t count = file_table[fd].open_offset + len >= file_table[fd].size ? file_table[fd].size - file_table[fd].open_offset : len;
 	ramdisk_write(buf, file_table[fd].open_offset + file_table[fd].disk_offset, count);
+	/*
 	if(fd == 1 || fd == 2){
 	  for(int i=0; i<count; i++){
 	    _putc(*(char*)(buf+i));
 	  }
 	}
+	*/
     file_table[fd].open_offset += count;
     return count;
   //}
