@@ -4,7 +4,7 @@
 int main() {
 
   printf("before open\n");
-
+  assert(0);
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
   assert(0); 
