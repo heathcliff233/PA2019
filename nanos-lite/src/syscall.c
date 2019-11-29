@@ -69,7 +69,7 @@ void sys_brk(_Context *c){
   c->GPRx = 0;
   return;
 }
-
+*/
 void sys_write(_Context *c){
   int fd = c->GPR2;
   char *ptr = (char*)(c->GPR3);
@@ -81,18 +81,18 @@ void sys_write(_Context *c){
 	}
   	c->GPRx = i;
   }else{
-    c->GPRx = -1;
+    c->GPRx = fs_write(c->GPR2, (char*)c->GPR3, c->GPR4);
   }
   return;
   
 }
-*/
 
+/*
 void sys_write(_Context* c){
   c->GPRx = fs_write(c->GPR2, (char*)c->GPR3, c->GPR4);
   return;
 }
-
+*/
 void sys_brk(_Context* c){
   c->GPRx = 0;
   return;
