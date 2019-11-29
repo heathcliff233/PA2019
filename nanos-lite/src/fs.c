@@ -54,11 +54,13 @@ int fs_open(const char *pathname, int flags, int mode){
 }
 
 int fs_close(int fd){
+  printf("fsclose\n");
   return 0;
 }
 
 size_t fs_read(int fd, void *buf, size_t len){
-
+  printf("fsread\n");
+  
   if (file_table[fd].read){
     return file_table[fd].read(buf, file_table[fd].disk_offset, len);
   }else{
@@ -67,12 +69,32 @@ size_t fs_read(int fd, void *buf, size_t len){
     file_table[fd].open_offset += count;
     return count;
   }
+  
+  /*
+  size_t fs_size = file_table[fd].size;
+  if(file_table[fd].open_offset+len > fs_size){
+    len = fs_size - file_table[fd].open_offset;
+  }
+  if(file_table[fd].read == NULL){
+    ramdisk_read(buf, file_table[fd].disk_offset+file_table[fd].open_offset, len);
+  }else{
+    len = file_table[fd].read(buf, file_table[fd].disk_offset+file_table[fd].open_offset, len);
+    file_table[fd].open_offset += len;
+	return len;
+  }
+  */
 }
 
 size_t fs_write(int fd, void *buf, size_t len){
   if (file_table[fd].write == NULL){
     size_t count = file_table[fd].open_offset + len >= file_table[fd].size ? file_table[fd].size - file_table[fd].open_offset : len;
-    ramdisk_write(buf, file_table[fd].open_offset + file_table[fd].disk_offset, count);
+    if(fd != FD_STDOUT && fd != FD_STDERR){
+	  ramdisk_write(buf, file_table[fd].open_offset + file_table[fd].disk_offset, count);
+	}else{
+	  for(int i=0; i<count; i++){
+	    //_putc(*buf[i]);
+	  }
+	}
     file_table[fd].open_offset += count;
     return count;
   }
