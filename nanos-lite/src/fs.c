@@ -88,7 +88,7 @@ size_t fs_read(int fd, void *buf, size_t len){
 }
 
 size_t fs_write(int fd, void *buf, size_t len){
-  if (file_table[fd].write == NULL){
+  //if (file_table[fd].write == NULL){
     size_t count = file_table[fd].open_offset + len >= file_table[fd].size ? file_table[fd].size - file_table[fd].open_offset : len;
 	ramdisk_write(buf, file_table[fd].open_offset + file_table[fd].disk_offset, count);
 	if(fd == 1 || fd == 2){
@@ -98,12 +98,14 @@ size_t fs_write(int fd, void *buf, size_t len){
 	}
     file_table[fd].open_offset += count;
     return count;
-  }
+  //}
+  /*
   else{
     size_t ret =  file_table[fd].write(buf, file_table[fd].disk_offset+file_table[fd].open_offset, len);
 	file_table[fd].open_offset += ret;
 	return ret;
   }
+  */
 }
 
 size_t fs_lseek(int fd, size_t offset, int whence){
