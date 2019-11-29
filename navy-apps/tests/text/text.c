@@ -7,7 +7,7 @@ int main() {
 
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
-  
+  assert(0); 
   printf("in text\n");
 
   fseek(fp, 0, SEEK_END);
