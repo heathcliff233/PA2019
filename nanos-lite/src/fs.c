@@ -2,6 +2,12 @@
 
 size_t ramdisk_read(const void *buf, size_t offset, size_t len);
 size_t ramdisk_write(void *buf, size_t offset, size_t len);
+size_t serial_write(const void *buf, size_t offset, size_t len);
+size_t events_read(void *buf, size_t offset, size_t len);
+size_t fb_write(const void *buf, size_t offset, size_t len);
+size_t fbsync_write(const void *buf, size_t offset, size_t len);
+size_t dispinfo_read(void *buf, size_t offset, size_t len);
+
 
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
@@ -27,15 +33,15 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
   return 0;
 }
 
-size_t serial_write(const void *buf, size_t offset, size_t len);
-size_t events_read(void *buf, size_t offset, size_t len);
-
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0, 0, invalid_read, invalid_write},
   {"stdout", 0, 0, invalid_read, serial_write},
   {"stderr", 0, 0, invalid_read, serial_write},
   {"/dev/events", 0, 0, events_read, invalid_write},
+  {"/dev/fb", 0, 0, invalid_read, fb_write},
+  {"/dev/fbsync", 0, 0, invalid_read, fbsync_write},
+  {"/proc/dispinfo", 128, 0, dispinfo_read, invalid_write},
 #include "files.h"
 };
 
@@ -43,6 +49,10 @@ static Finfo file_table[] __attribute__((used)) = {
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
+  int screen_height();
+  int screen_width();
+  file_table[4].size = screen_width() * screen_height() * 4;
+  return;
 }
 
 int fs_open(const char *pathname, int flags, int mode){
