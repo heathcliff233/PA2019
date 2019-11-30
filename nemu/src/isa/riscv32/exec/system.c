@@ -5,7 +5,7 @@ void raise_intr(uint32_t NO, vaddr_t epc);
 
 make_EHelper(ecb){
   if(id_src2->val == 0){
-  	printf("ecalllll\n");
+  	//printf("ecalllll\n");
 	raise_intr(cpu.gpr[17]._32,cpu.pc); 
   }
   

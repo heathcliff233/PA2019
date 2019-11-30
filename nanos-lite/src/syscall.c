@@ -17,35 +17,35 @@ _Context* do_syscall(_Context *c) {
 
   switch (a[0]) {
 	  case SYS_exit :
-		  printf("sys_exit\n");
+		  //printf("sys_exit\n");
 		  sys_exit(c);
 		  break;
 	  case SYS_yield :
-		  printf("sys_yield\n");
+		  //printf("sys_yield\n");
 		  sys_yield(c);
 		  break;
 	  case SYS_open :
-		  printf("sys_open\n");
+		  //printf("sys_open\n");
 		  sys_open(c);
 		  break;
 	  case SYS_close :
-		  printf("sys_close\n");
+		  //printf("sys_close\n");
 		  sys_close(c);
 		  break;
 	  case SYS_write :
-		  printf("sys_write\n");
+		  //printf("sys_write\n");
 		  sys_write(c);
 		  break;
 	  case SYS_read :
-		  printf("sys_read\n");
+		  //printf("sys_read\n");
 		  sys_read(c);
 		  break;
 	  case SYS_lseek :
-		  printf("sys_lseek\n");
+		  //printf("sys_lseek\n");
 		  sys_lseek(c);
 		  break;
 	  case SYS_brk :
-		  printf("sys_break\n");
+		  //printf("sys_break\n");
 		  sys_brk(c);
 		  break;
     default: panic("Unhandled syscall ID = %d", a[0]);

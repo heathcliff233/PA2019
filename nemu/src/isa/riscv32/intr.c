@@ -12,7 +12,7 @@ void raise_intr(uint32_t NO, vaddr_t epc) {
   }
   rtlreg_t addr = cpu.stvec;
   rtl_jr(&addr);
-  printf("scause %x \n",cpu.scause);
+  //printf("scause %x \n",cpu.scause);
   //cpu.pc = addr;
 }
 
