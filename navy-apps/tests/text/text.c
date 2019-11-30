@@ -4,10 +4,8 @@
 int main() {
 
   printf("before open\n");
-  assert(0);
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
-  assert(0); 
   printf("in text\n");
 
   fseek(fp, 0, SEEK_END);
