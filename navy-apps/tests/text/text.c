@@ -3,16 +3,16 @@
 
 int main() {
 
-  printf("before open\n");
+  //printf("before open\n");
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
-  printf("in text\n");
+  //printf("in text\n");
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
   assert(size == 5000);
 
-  printf("seedend good\n");
+  //printf("seedend good\n");
 
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
@@ -37,7 +37,7 @@ int main() {
     assert(n == i + 1 + 1000);
   }
 
-  printf("seekset good\n");
+  //printf("seekset good\n");
 
   fclose(fp);
 
