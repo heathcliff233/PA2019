@@ -10,6 +10,9 @@ void sys_open(_Context *c);
 void sys_close(_Context *c);
 void sys_read(_Context *c);
 void sys_lseek(_Context *c);
+void sys_execve(_Context *c);
+
+void naive_uload(void*, const char*);
 
 _Context* do_syscall(_Context *c) {
   uintptr_t a[4];
@@ -48,13 +51,17 @@ _Context* do_syscall(_Context *c) {
 		  //printf("sys_break\n");
 		  sys_brk(c);
 		  break;
+	  case SYS_execve :
+		  sys_execve(c);
+		  break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
   return NULL;
 }
 void sys_exit(_Context *c){
-  _halt(c->GPR2);
+  //_halt(c->GPR2);
+  naive_uload(NULL, "/bin/init");
 }
 
 void sys_yield(_Context *c){
@@ -112,4 +119,8 @@ void sys_read(_Context* c){
 
 void sys_lseek(_Context* c){
   c->GPRx = fs_lseek(c->GPR2, c->GPR3, c->GPR4);
+}
+
+void sys_execve(_Context* c){
+  naive_uload(NULL, (char*)c->GPR2);
 }
