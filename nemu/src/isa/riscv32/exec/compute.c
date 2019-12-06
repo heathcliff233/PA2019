@@ -45,6 +45,7 @@ make_EHelper(jalr){
 	cpu.pc=cpu.pc&(~1);
 	if(id_dest->reg!=0)reg_l(id_dest->reg)=reg_l(5);
 	decinfo_set_jmp(true);
+	difftest_skip_dut(1,2);
 	print_asm_template3(jal);
 }
 
