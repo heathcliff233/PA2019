@@ -75,6 +75,7 @@ make_EHelper(csrrs){
        case 0x0  : break;
   }
   if(id_dest->reg == 0) reg_l(0) = 0;
+  difftest_skip_ref();
   //raise_intr(cpu.scause, cpu.pc);
 }
 
