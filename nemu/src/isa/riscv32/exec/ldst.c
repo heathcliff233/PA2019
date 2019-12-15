@@ -16,7 +16,7 @@ make_EHelper(ld) {
 make_EHelper(lh) {
      rtl_lm(&reg_l(id_dest->reg), &id_src->addr, decinfo.width);
      rtl_sext(&reg_l(id_dest->reg), &reg_l(id_dest->reg), decinfo.width); 
-	 printf("%x\n",cpu.gpr[1]._32);
+	 printf("ra: %x\n\n",cpu.gpr[1]._32);
 
 }
 make_EHelper(st) {
