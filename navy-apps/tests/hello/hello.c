@@ -1,14 +1,13 @@
 #include <unistd.h>
 #include <stdio.h>
-
+#define SYS_write 4
 int main() {
-	int test= 0x12345;
-  write(1, "Hello World!\n", 13);
+ write(1, "Hello World!\n", 13);
   int i = 2;
   volatile int j = 0;
   while (1) {
     j ++;
-    if (j == 10000) {
+    if (j == 100) {
       printf("Hello World from Navy-apps for the %dth time!\n", i ++);
       j = 0;
     }
