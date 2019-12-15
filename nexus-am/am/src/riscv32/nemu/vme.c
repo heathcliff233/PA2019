@@ -86,5 +86,8 @@ int _map(_AddressSpace *as, void *va, void *pa, int prot) {
 }
 
 _Context *_ucontext(_AddressSpace *as, _Area ustack, _Area kstack, void *entry, void *args) {
-  return NULL;
+    _Context *c=(_Context*)(ustack.end)-1;
+  *(_Context**)(ustack.start)=c;
+  c->GPRx=(uintptr_t)entry;
+  return c;
 }

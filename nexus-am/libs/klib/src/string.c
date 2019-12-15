@@ -3,9 +3,10 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 size_t strlen(const char *s) {
-  int i = 0;
-  while(s[i] != '\0')++i;
-  return i;
+  const char *p = s;
+  while(*p++);
+
+  return (size_t)(p - s - 1);
 }
 
 char *strcpy(char* dst,const char* src) {
@@ -16,10 +17,11 @@ char *strcpy(char* dst,const char* src) {
 }
 
 char* strncpy(char* dst, const char* src, size_t n) {
-  size_t dest_len = strlen(dst);
-  size_t i = 0;
-  for(i=0 ; i<n && src[i]!='\0'; ++i)dst[dest_len+i]=src[i];
-  dst[dest_len+i]='\0';
+  assert(dst != NULL && src != NULL);
+  char* ret = dst;
+  while(n){
+	  if((*ret++=*src++)) n--;
+  }
   return dst;
 }
 
@@ -47,13 +49,14 @@ int strncmp(const char* s1, const char* s2, size_t n) {
   return 0;
 }
 void* memset(void* v,int c,size_t n) {
-  for(int i=0;i<n;i++){
-	  ((char*)v)[i]=(char)c;
-  }
+  if(v==NULL || n<0) return NULL;
+  char* tmp = v;
+  while(n-- > 0)*tmp++ = c;
   return v;
 }
 
 void* memcpy(void* out, const void* in, size_t n) {
+	if(in==NULL || out==NULL ||n<0) return NULL;
     for(int i=0;i<n;i++){
 		((char*)out)[i]=((char*)in)[i];
 	}

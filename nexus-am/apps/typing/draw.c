@@ -25,7 +25,9 @@ void init_screen(void) {
       canvas[y][x] = BACKGROUND_COLOR;
 
   assert(screen_width() >= W);
+ // printf("scw()<W\n");
   assert(screen_height() >= H);
+  //printf("sch<H\n");
   x_adjust = (screen_width() - W) / 2;
   y_adjust = (screen_height() - H) / 2;
   draw_rect_adjust(&canvas[0][0], 0, 0, W, H);
@@ -57,7 +59,7 @@ static inline void draw_character(char ch, int x, int y, int color) {
         buf[i][j] = canvas[y + i][x + j];
       }
     }
-
+  //printf("x+j<W  y+i<H\n");
   draw_rect_adjust(&buf[0][0], x, y, 8, 8);
   last_draw[last_draw_idx ++] = (struct draw_info_t){ .x = x, .y = y };
 }

@@ -1,5 +1,4 @@
-/*
-#include "klib.h"
+/*#include "klib.h"
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
@@ -170,10 +169,7 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   return 0;
 }
 
-#endif
-*/
-
-
+#endif*/
 #include "klib.h"
 #include <stdarg.h>
 
@@ -308,7 +304,7 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap){
                         d /= 10;
                     }
                     break;
-*/  
+*/
 				case 's':
                     for (sval = va_arg(ap, char * ); *sval != '\0'; ++sval) {
                         output(*sval);
@@ -331,5 +327,4 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap){
 #undef output
 }
 #endif
-
 

@@ -1,25 +1,19 @@
 #include <am.h>
 #include <riscv32.h>
-#include <klib.h>
-
+#include<klib.h>
 static _Context* (*user_handler)(_Event, _Context*) = NULL;
 
 _Context* __am_irq_handle(_Context *c) {
   _Context *next = c;
-  //printf("cause %x\nstatus %x\nepc %x\n",c->cause,c->status,c->epc);
-  //printf("cause %x\n",c->gpr[17]);
-  //printf("%x\n",c->as);
+//  printf("cause %x\n", c->cause);
+//  printf("status %x\n", c->status);
+//  printf("epc %x\n", c->epc);
   if (user_handler) {
     _Event ev = {0};
-    switch (c->cause) {	
-		case -1: 
-			ev.event = _EVENT_YIELD;break;
-		/*
-		case 1:
-			ev.event = _EVENT_SYSCALL;break;
-		*/
-		default: 
-			ev.event = _EVENT_SYSCALL; break;
+    switch (c->cause) {
+	  case -1: ev.event=_EVENT_YIELD;/* printf("%x\n",c->cause)*/; break;
+	 // case 1: ev.event=_EVENT_SYSCALL; break;
+      default: ev.event = _EVENT_SYSCALL; break;
     }
 
     next = user_handler(ev, c);
@@ -36,7 +30,7 @@ extern void __am_asm_trap(void);
 int _cte_init(_Context*(*handler)(_Event, _Context*)) {
   // initialize exception entry
   asm volatile("csrw stvec, %0" : : "r"(__am_asm_trap));
-
+  //printf("%d\n",cpu.stvec);
   // register event handler
   user_handler = handler;
 
@@ -44,9 +38,9 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-  _Context *c = (_Context*)(stack.end)-1;
+  _Context *c=(_Context*)(stack.end)-1;
   *(_Context**)(stack.start)=c;
-  c->GPRx = (uintptr_t)entry;
+  c->gpr[1]=(uint32_t)entry;
   return c;
 }
 
