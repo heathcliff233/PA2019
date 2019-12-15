@@ -23,3 +23,5 @@ extern PCB *current;
 size_t ramdisk_read(void*, size_t, size_t);
 
 void naive_uload(PCB*, const char*);
+void context_kload(PCB*, void*);
+void context_uload(PCB*, const char *);
