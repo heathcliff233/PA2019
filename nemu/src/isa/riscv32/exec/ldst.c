@@ -11,7 +11,6 @@ make_EHelper(ld) {
     case 1: print_asm_template2(lbu); break;
     default: assert(0);
   }
-  printf("%x\n",cpu.gpr[1]._32);
 }
 make_EHelper(lh) {
      rtl_lm(&reg_l(id_dest->reg), &id_src->addr, decinfo.width);
