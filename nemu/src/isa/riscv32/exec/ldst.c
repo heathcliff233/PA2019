@@ -15,7 +15,7 @@ make_EHelper(ld) {
 make_EHelper(lh) {
      rtl_lm(&reg_l(id_dest->reg), &id_src->addr, decinfo.width);
      rtl_sext(&reg_l(id_dest->reg), &reg_l(id_dest->reg), decinfo.width); 
-	 printf("ra: %x\n dest: %d\n",cpu.gpr[1]._32,id_dest->reg);
+	 printf("lw ra: %x\n dest: %d\n",cpu.gpr[1]._32,id_dest->reg);
 
 }
 make_EHelper(st) {
@@ -27,4 +27,7 @@ make_EHelper(st) {
     case 1: print_asm_template2(sb); break;
     default: assert(0);
   }
+  printf("sw ra: %x\n dest: %d\n",cpu.gpr[1]._32,id_dest->reg);
+
+
 }
