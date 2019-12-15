@@ -33,17 +33,14 @@ make_EHelper(jal){
 	print_asm_template3(jal);
 }
 make_EHelper(jalr){
-	if(id_dest->reg!=0){
-	  //reg_l(id_dest->reg)=cpu.pc+4;
-	  reg_l(5) = cpu.pc+4;
-	}
-	id_src2->val=id_src2->val<<11;
-	int32_t of=(int32_t)id_src2->val>>11;
+	uint32_t shit = cpu.pc+4;
+	
+	int32_t of=(int32_t)id_src2->val<<11>>11;
 	//printf("regid:%d,val:%x\n",id_src->reg,reg_l(id_src->reg));
 	//printf("ra: %x\n",cpu.gpr[1]._32);
 	cpu.pc=reg_l(id_src->reg)+of;
 	cpu.pc=cpu.pc&(~1);
-	if(id_dest->reg!=0)reg_l(id_dest->reg)=reg_l(5);
+	if(id_dest->reg!=0)reg_l(id_dest->reg)=shit;
 	decinfo_set_jmp(true);
 	difftest_skip_dut(1,2);
 	print_asm_template3(jal);
