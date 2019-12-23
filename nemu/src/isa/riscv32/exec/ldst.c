@@ -30,7 +30,7 @@ make_EHelper(st) {
     case 1: print_asm_template2(sb); break;
     default: assert(0);
   }
-  printf("sw ra: %x\n dest: %d\n",cpu.gpr[1]._32,id_dest->reg);
-  printf("pc %x\n",cpu.pc);
+  //printf("sw ra: %x\n dest: %d\n",cpu.gpr[1]._32,id_dest->reg);
+  //printf("pc %x\n",cpu.pc);
 
 }
