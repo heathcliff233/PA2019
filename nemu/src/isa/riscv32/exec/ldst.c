@@ -13,8 +13,8 @@ make_EHelper(ld) {
   }
 }
 make_EHelper(lh) {
-	 printf("lw ra: %x\n dest: %d\n",cpu.gpr[1]._32,id_dest->reg);
-	 printf("pc %x\n",cpu.pc);
+	 //printf("lw ra: %x\n dest: %d\n",cpu.gpr[1]._32,id_dest->reg);
+	 //printf("pc %x\n",cpu.pc);
 
      rtl_lm(&reg_l(id_dest->reg), &id_src->addr, decinfo.width);
      rtl_sext(&reg_l(id_dest->reg), &reg_l(id_dest->reg), decinfo.width); 
