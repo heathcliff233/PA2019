@@ -23,23 +23,32 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   fs_lseek(fd, elf.e_phoff, SEEK_SET);
   fs_read(fd, &segment, elf.e_phnum * elf.e_phentsize);
 
+  char buf[10000];
   for(int i=0; i<elf.e_phnum; i++){
-    if(segment[i].p_type == PT_LOAD){
-	  size_t content[segment[i].p_filesz];
-	  
+    if(segment[i].p_type != PT_LOAD) continue;
+	  //size_t content[segment[i].p_filesz];
+	  //size_t buf[10000];
+
 	  //ramdisk_read(content, segment[i].p_offset, segment[i].p_filesz);
-      fs_lseek(fd, segment[i].p_offset, SEEK_SET);
-	  fs_read(fd, content, segment[i].p_filesz);
+    fs_lseek(fd, segment[i].p_offset, SEEK_SET);
+	  
+	int rem = segment[i].p_filesz;
+	while(rem>0){
+	  if(rem>=10000){
+		fs_read(fd, buf, 10000);
+		memcpy((void*)(segment[i].p_vaddr+segment[i].p_filesz-rem),buf,10000);
+		rem -= 10000;
+	  }else{
 
-	  uint32_t *anch1 = (uint32_t*)segment[i].p_vaddr;
-	  memcpy(anch1, content, segment[i].p_filesz);
-
-	  if(segment[i].p_memsz > segment[i].p_filesz){
-	    char* anch2 = (char*)(segment[i].p_vaddr + segment[i].p_filesz);
-		memset(anch2, 0, segment[i].p_memsz - segment[i].p_filesz);
+		fs_read(fd, buf, rem);
+		memcpy((void*)(segment[i].p_vaddr+segment[i].p_filesz-rem),buf,rem);
+		rem -= rem;
 	  }
 	}
+	memset((void*)(segment[i].p_vaddr+segment[i].p_filesz), 0, segment[i].p_memsz - segment[i].p_filesz);
+	
   }
+  fs_close(fd);
   return elf.e_entry;
 }
 
