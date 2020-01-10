@@ -23,7 +23,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   fs_lseek(fd, elf.e_phoff, SEEK_SET);
   fs_read(fd, &segment, elf.e_phnum * elf.e_phentsize);
 
-  char buf[10000];
+  char buf[4096];
   for(int i=0; i<elf.e_phnum; i++){
     if(segment[i].p_type != PT_LOAD) continue;
 	  //size_t content[segment[i].p_filesz];
@@ -34,10 +34,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 	  
 	int rem = segment[i].p_filesz;
 	while(rem>0){
-	  if(rem>=10000){
-		fs_read(fd, buf, 10000);
-		memcpy((void*)(segment[i].p_vaddr+segment[i].p_filesz-rem),buf,10000);
-		rem -= 10000;
+	  if(rem>=4096){
+		fs_read(fd, buf, 4096);
+		memcpy((void*)(segment[i].p_vaddr+segment[i].p_filesz-rem),buf,4096);
+		rem -= 4096;
 	  }else{
 
 		fs_read(fd, buf, rem);
