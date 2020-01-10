@@ -38,7 +38,7 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
-  _Context *c=(_Context*)(stack.end)-1;
+  _Context *c=(_Context*)(stack.end)-sizeof(_Context);
   *(_Context**)(stack.start)=c;
   c->gpr[1]=(uint32_t)entry;
   return c;
