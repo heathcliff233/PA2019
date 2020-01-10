@@ -98,7 +98,11 @@ make_EHelper(csrrw){
 				   cpu.stvec = reg_l(id_src->reg);
 				   reg_l(id_dest->reg) = t;
 				   break;
-       case 0x0  : break;
+       case 0x170: t = cpu.satp;
+				   cpu.stvec = reg_l(id_src->reg);
+				   reg_l(id_dest->reg) = t;
+				   break;
+ case 0x0  : break;
   }
   if(id_dest->reg == 0) reg_l(0) = 0;
   //raise_intr(cpu.scause, cpu.pc);
