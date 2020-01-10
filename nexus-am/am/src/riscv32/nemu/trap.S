@@ -42,7 +42,7 @@ __am_asm_trap:
   lw t2, OFFSET_EPC(sp)
   csrw sstatus, t1
   csrw sepc, t2
-  //mv sp,a0 //added by pa4
+  mv sp,a0 //added by pa4
   MAP(REGS, POP)
 
   addi sp, sp, CONTEXT_SIZE
