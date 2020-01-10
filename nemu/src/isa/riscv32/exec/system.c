@@ -98,7 +98,7 @@ make_EHelper(csrrw){
 				   cpu.stvec = reg_l(id_src->reg);
 				   reg_l(id_dest->reg) = t;
 				   break;
-       case 0x170: t = cpu.satp;
+       case 0x180: t = cpu.satp;
 				   cpu.stvec = reg_l(id_src->reg);
 				   reg_l(id_dest->reg) = t;
 				   break;
